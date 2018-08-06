@@ -1,50 +1,34 @@
-const puppeteer = require('../../');
-
-const { sleep } = require('../helper.js');
+const autoChrome = require('../../');
+const { sleep, signale } = autoChrome.helper
 
 /**
  * @param {*} device 用户配置目录名称
  */
-async function run(device = 'Default') {
+async function run() {
 
-   let browser = await puppeteer.launch({
+   let chrome = await autoChrome({
+      executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
+      userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
+      args: ['--start-maximized'],
+      ignoreHTTPSErrors: true, //忽略https错误
+      devtools: true,
       headless: false,
-      // devtools: true,
-      args: [`--profile-directory=${device}`]
    })
-
-   // dialog滞后于alert，测试不可用
-   browser.on('targetcreated', async function (target) {
-      let page
-      try {
-         page = await target.page()
-      } catch (err) {
-         console.log("浏览器异常关闭")
-      }
-      if (page) {
-         page.on('dialog', async dialog => {
-            console.log(999)
-            await dialog.dismiss()
-         });
-      }
-   })
-
-   let [page] = await browser.pages()
 
    await sleep(1000)
 
-   await page.goto('D:/Nodejs/git-project/puppeteer-modify/test/dialog/index.html')
+   await chrome.page.goto('D:/Nodejs/git-project/auto-chrome/test/dialog/index.html')
 
-   await page.mouse.move(300, 300)
+   // await chrome.mouse.move(300, 300)
 
-   await page.evaluate(async function () {
+   // await page.evaluate(async function () {
 
-   })
+   // })
 
-   // 触发isTrusted:true click
-   let element = await page.$('#link3')
+   // // 触发isTrusted:true click
+   // let element = await page.$('#link3')
 
-   await element.click()
+   // await element.click()
 
 }
 
