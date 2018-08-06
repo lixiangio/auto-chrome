@@ -12,11 +12,13 @@ npm install auto-chrome
 
 ### 特性
 
-* 自动切换标签，根据当前活跃标签自动聚焦，通过chrome.page获取当前处于激活状态的标签。这在实际应用中避免了多标签切换带来的苦恼，同时减少错误率。
+* 自动切换标签，根据当前活跃标签自动聚焦，通过chrome.page获取当前处于激活状态的标签。这在实际应用中避免了多标签切换带来的苦恼，同时减少手动切换标签导致的混乱。
 
 * 隐藏了taget的概念，只需要直观的面对浏览器和标签和网页即可。
 
-* 简化了错误处理机制，尽可能确保线程不出现持久性阻塞，即使任务出现异常依然会继续运行。
+* 简化的错误处理机制，即使任务出现异常依然能继续运行，尽可能保障线程不出现持久性阻塞。
+
+* 更高的仿真度，支持鼠标移动轨迹和touch手势操作。
 
 ### chrome devtools中的作用域
 
@@ -37,7 +39,7 @@ npm install auto-chrome
 
 ### class: Page
 
-#### page.touchScroll(x, y, options) 新增
+#### page.touchScroll(x, y, options)
 
 通过touch滚动页面至指定的可视坐标
 
@@ -48,7 +50,7 @@ npm install auto-chrome
 * options `Object`
    * interval `Number` 连续滑动的时间间隔，默认2000，单位ms
 
-#### page.$touchScroll(selector, options) 新增
+#### page.$touchScroll(selector, options)
 
 通过touch方式，滚动页面至指定元素可视区
 
@@ -59,7 +61,7 @@ npm install auto-chrome
    * interval `Number` 连续滑动的时间间隔，默认2000，单位ms
 
 
-#### page.scroll(x, y) 新增
+#### page.scroll(x, y)
 
 滚动页面，使指定元素位于可视区
 
@@ -68,7 +70,7 @@ npm install auto-chrome
 * y `Number` 相对于浏览器窗口y坐标
 
 
-#### page.$scroll(selector) 新增
+#### page.$scroll(selector)
 
 滚动页面，使指定元素位于可视区
 
@@ -78,7 +80,7 @@ npm install auto-chrome
 
 ### class: Mouse
 
-#### mouse.click(x, y, options) 增强，兼容原版
+#### mouse.click(x, y, options)
 
 新增模拟鼠标移动轨迹，原click可能出于效率考虑，只会触发一次mousemoved
 
@@ -88,7 +90,7 @@ click操作中已经包含了move，多数情况下不再需要单独模拟move�
    * steps `Number` mousemoved事件的触发次数，默认20
 
 
-#### mouse.move(x, y, options) 增强，兼容原版
+#### mouse.move(x, y, options)
 
 将steps默认值改为20，原值为1，即只触发一次。移动距离相同时，触发次数越少，对应的移动速度越快
 
@@ -97,7 +99,7 @@ click操作中已经包含了move，多数情况下不再需要单独模拟move�
 
 
 
-#### mouse.scroll(x, y, step) 新增
+#### mouse.scroll(x, y, step)
 
 滚动至指定坐标，目前仅支持纵向滚动
 
@@ -112,7 +114,7 @@ click操作中已经包含了move，多数情况下不再需要单独模拟move�
 
 ### class: Touchscreen
 
-#### touchscreen.slide({start, end, steps}) 新增
+#### touchscreen.slide({start, end, steps})
 
 模拟touch单点滑动手势
 
