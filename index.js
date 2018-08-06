@@ -1,9 +1,8 @@
 const childProcess = require('child_process')
-const axios = require('axios');
-const WebSocket = require('ws');
-const Chrome = require('./lib/Chrome');
-// const Input = require('./lib/Input');
-const helper = require('./lib/helper');
+const axios = require('axios')
+const WebSocket = require('ws')
+const Chrome = require('./lib/Chrome')
+const helper = require('./lib/helper')
 
 async function index(options) {
 
