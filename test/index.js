@@ -7,16 +7,16 @@ async function run() {
       executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
       args: ['--start-maximized'],
-      ignoreHTTPSErrors: true, //忽略https错误
-      devtools: true,
-      headless: false,
+      devtools: false,
       // slowMo: 20, // 减速
    })
 
    await chrome.getVersion()
 
-   await sleep(1000)
+   await chrome.page.goto('https://www.szhkch.com/')
 
+   await sleep(1000)
+   
    let page1 = await chrome.newPage('https://www.so.com/')
 
    await sleep(1000)
@@ -25,7 +25,7 @@ async function run() {
 
    await sleep(2000)
 
-   await chrome.page.goto('http://www.runoob.com/')
+   await chrome.page.goto('https://www.szhkch.com/')
 
    await sleep(2000)
 
@@ -33,11 +33,11 @@ async function run() {
 
    await sleep(1000)
 
-   await page1.close()
+   await page2.close()
 
    await sleep(2000)
 
-   await page2.close()
+   await page1.close()
 
    await sleep(3000)
 
@@ -46,4 +46,3 @@ async function run() {
 }
 
 run()
-

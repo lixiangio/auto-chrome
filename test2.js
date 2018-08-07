@@ -1,11 +1,15 @@
-let m = new Map()
-
-m.set(1, 12)
-
-m.set(9, 666)
-
-console.log()
-
-for (let [key ,value] of m) {
-   console.log(key ,value)
+async function a(){
+   await b()
 }
+
+async function b(){
+   await c()
+}
+
+async function c(){
+   this.xxx.sss
+}
+
+a()
+
+console.log(9999)

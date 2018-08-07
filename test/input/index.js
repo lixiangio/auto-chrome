@@ -25,7 +25,7 @@ module.exports = async function (device = 'Default') {
 
    await sleep(1000)
 
-   await page.goto('D:/Nodejs/git-project/puppeteer-modify/test/input/index.html')
+   await page.goto('D:/Nodejs/git-project/auto-chrome/test/input/index.html')
 
    await page.type('#kw', "qi'che", { delay: 50 });
 

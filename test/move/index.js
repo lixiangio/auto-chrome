@@ -23,7 +23,7 @@ async function run(device = 'Default') {
       height: 0,
    })
 
-   await page.goto('D:/Nodejs/git-project/puppeteer-modify/test/move/index.html')
+   await page.goto('D:/Nodejs/git-project/auto-chrome/test/move/index.html')
 
    await sleep(1500)
 

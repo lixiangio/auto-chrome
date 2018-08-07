@@ -21,7 +21,7 @@ async function run() {
 
    await page.emulate(iPhone6)
 
-   await page.goto('D:/Nodejs/git-project/puppeteer-modify/test/touch/index.html')
+   await page.goto('D:/Nodejs/git-project/auto-chrome/test/touch/index.html')
 
    await page.evaluate(async function () {
 

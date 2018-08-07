@@ -6,7 +6,7 @@ const helper = require('./lib/helper')
 
 async function index(options) {
 
-   let { executablePath, args = [], headless, userDataDir } = options
+   let { executablePath, args = [], headless, userDataDir, ignoreHTTPSErrors } = options
 
    args.push("--remote-debugging-port=9222")
 
@@ -43,7 +43,7 @@ async function index(options) {
 
    let ws = new WebSocket(webSocketDebuggerUrl, { perMessageDeflate: false });
 
-   let chrome = new Chrome(ws)
+   let chrome = new Chrome(ws, ignoreHTTPSErrors)
 
    await chrome.run()
 

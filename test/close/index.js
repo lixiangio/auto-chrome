@@ -22,7 +22,7 @@ async function run(device = 'Default') {
 
    let [page] = await browser.pages()
 
-   await page.goto('D:/Nodejs/git-project/puppeteer-modify/test/close/index.html')
+   await page.goto('D:/Nodejs/git-project/auto-chrome/test/close/index.html')
 
    let pages = await browser.pages()
    

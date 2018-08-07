@@ -1,47 +1,45 @@
-const puppeteer = require('../../');
-
-const { sleep } = require('../helper.js');
+const autoChrome = require('../../')
+const { sleep, signale } = autoChrome.helper
 
 async function run() {
 
-   let browser = await puppeteer.launch({
-      headless: false,
-      // devtools: true,
-      args: [`--profile-directory=Default`, '--start-maximized'],
-      userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/"
+   let chrome = await autoChrome({
+      executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
+      userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
+      args: ['--start-maximized'],
+      devtools: false,
+      // slowMo: 20, // 减速
    })
 
-   let [page] = await browser.pages()
+   await chrome.getVersion()
 
    await sleep(1000)
 
-   await page.goto('https://www.sohu.com/a/218915569_161207')
+   let page1 = await chrome.newPage('https://www.so.com/')
 
-   let info = await page.$$eval("body a", async function (elements) {
+   await sleep(1000)
 
-      let key = Math.round(Math.random() * (elements.length * 0.3))
+   let page2 = await chrome.newPage('https://www.baidu.com/')
 
-      let element = tagetElement = elements[key]
+   await sleep(2000)
 
-      // 迭代到根节点
-      while (element) {
-         element = element.parentNode
-         if (element && element.style) {
-            element.style.display = "block"
-         }
-      }
+   await chrome.page.goto('https://www.sohu.com/a/218915569_161207')
 
-      let { x, y, width, height } = await window.scrollByElement(tagetElement)
+   await sleep(2000)
 
-      let { innerText, href } = tagetElement
+   await chrome.mouse.scroll(0, 500)
 
-      return { x, y, width, height, innerText, href };
+   await sleep(1000)
 
-   })
+   await page2.close()
 
-   console.log(info)
+   await sleep(2000)
 
-   await page.click('.hot-article .pic-txt')
+   await page1.close()
+
+   await sleep(3000)
+
+   await chrome.close()
 
 }
 

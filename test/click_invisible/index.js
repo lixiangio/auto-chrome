@@ -23,7 +23,7 @@ async function run() {
 
    await sleep(1000)
 
-   await page.goto('D:/Nodejs/git-project/puppeteer-modify/test/click/index.html')
+   await page.goto('D:/Nodejs/git-project/auto-chrome/test/click/index.html')
 
    // 触发isTrusted:false click
    // await page.$eval('#button', element => {

@@ -1,47 +1,50 @@
-const puppeteer = require('../../');
-
-const { sleep } = require('../helper.js');
+const autoChrome = require('../../')
+const { sleep, signale } = autoChrome.helper
 
 /**
  * @param {*} device 用户配置目录名称
  */
-async function run(device = 'Default') {
+async function run() {
 
-   let browser = await puppeteer.launch({
-      headless: false,
-      // devtools: true,
-      args: [`--profile-directory=${device}`, '--start-maximized'],
-      // executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
-      // userDataDir: "C:/Users/Xiang/AppData/Local/Google/Chrome Aoto/User Data/"
+   let chrome = await autoChrome({
+      executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
+      userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
+      args: ['--start-maximized'],
+      devtools: false,
+      // slowMo: 20, // 减速
    })
 
-   let [page] = await browser.pages()
+   // await sleep(1000)
 
-   await page.setViewport({ width: 0, height: 0 })
-
-   await page.goto('D:/Nodejs/git-project/puppeteer-modify/test/scroll/index.html')
+   await chrome.page.goto('D:/Nodejs/git-project/auto-chrome/test/scroll/index.html')
 
    await sleep(1000)
-
-   await browser.close()
-
-   return
 
    // await page.scroll(0, 520)
 
-   await page.mouse.move(300, 300)
+   await chrome.mouse.move(300, 300)
 
    await sleep(1000)
 
-   await page.mouse.scroll(0, 200)
+   await chrome.mouse.scroll(0, 500)
 
    await sleep(1000)
+
+   await chrome.mouse.scroll(0, 300)
+
+   await sleep(1000)
+
+   await chrome.mouse.scroll(0, 700)
+
+   // await sleep(1000)
    
-   await page.$scroll('#i2')
+   // await page.$scroll('#i2')
 
-   await sleep(1000)
+   // await sleep(1000)
 
-   await page.$scroll('#i1')
+   // await page.$scroll('#i1')
+
+   // await chrome.close()
 
 }
 
