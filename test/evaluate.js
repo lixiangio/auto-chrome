@@ -11,31 +11,16 @@ async function run() {
       // slowMo: 20, // 减速
    })
 
-   let page1 = await chrome.newPage('https://www.so.com/')
-
-   await sleep(1000)
-
-   let page2 = await chrome.newPage('https://www.baidu.com/')
-
-   await sleep(2000)
-
-   await chrome.page.goto('https://www.szhkch.com/')
-
-   await sleep(2000)
-
-   await chrome.mouse.scroll(0, 500)
-
-   await sleep(1000)
-
-   await page2.close()
-
-   await sleep(2000)
-
-   await page1.close()
+   await chrome.page.goto('https://www.so.com/')
 
    await sleep(3000)
 
-   await chrome.close()
+   let value = await chrome.page.evaluate(function (selector) {
+      let innerText = document.querySelector(selector).innerText
+      return innerText
+   }, '.login')
+
+   console.log(value)
 
 }
 

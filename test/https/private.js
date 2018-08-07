@@ -11,10 +11,6 @@ async function run() {
       // slowMo: 20, // 减速
    })
 
-   await chrome.getVersion()
-
-   await sleep(1000)
-
    let page1 = await chrome.newPage('https://www.so.com/')
 
    await sleep(1000)

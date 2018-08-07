@@ -11,17 +11,9 @@ async function run() {
       // slowMo: 20, // 减速
    })
 
-   await chrome.getVersion()
-
-   await sleep(1000)
-
    let page1 = await chrome.newPage('https://www.so.com/')
 
    await sleep(1000)
-
-   let page2 = await chrome.newPage('https://www.baidu.com/')
-
-   await sleep(2000)
 
    await chrome.page.goto('https://www.sohu.com/a/218915569_161207')
 

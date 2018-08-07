@@ -20,15 +20,23 @@
 </head>
 
 <body>
-   <div id="app">
-      <a href="http://www.baidu.com" target="_blank">百度</a>
-      <a href="http://www.ty7che.com/" target="_blank">汽车托运</a>
-      <a href="file:///D:/Nodejs/git-project/auto-chrome/test/dialog/alert.html">alert</a>
+   <div>
+      <button onclick="func('onclick')">alert</button>
    </div>
 
 </body>
 
 <script>
+
+   function func(info) {
+      console.log(info)
+      alert(info)
+   }
+
+   document.addEventListener('beforeunload', function () {
+      alert('beforeunload')
+   })
+
 </script>
 
 </html>

@@ -15,8 +15,6 @@ async function run() {
       headless: false,
    })
 
-   await sleep(1000)
-
    await chrome.page.goto('D:/Nodejs/git-project/auto-chrome/test/dialog/index.html')
 
    // await chrome.mouse.move(300, 300)

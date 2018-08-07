@@ -31,11 +31,13 @@ npm install auto-chrome
 
 * `Target` 表示标签中的网页，单个Page中允许包含多个Target，同一个时间点上始终只有一个Target处于激活状态。Target区分page、iframe及其它类型
 
+* `Session` session机制允许创建多个会话，可以为每个Target绑定独立的session，也可以让多个Target共享同一个session。
+
 * `Frame` 表示网页中的框架，单个Target中允许包含多个Frame，Frame中可以包含子Frame
 
 * `Runtime` JavaScript运行时，通过向网页注入js代码实现对dom的操作
 
-* `Session` session机制允许创建多个会话，可以为每个Target绑定独立的session，也可以让多个Target共享同一个session。
+* `Context` JavaScript代码中的上下文
 
 
 ## API
