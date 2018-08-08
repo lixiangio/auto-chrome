@@ -6,21 +6,25 @@ const helper = require('./lib/helper')
 
 async function index(options) {
 
-   let { executablePath, args = [], headless, userDataDir, ignoreHTTPSErrors } = options
+   let { executablePath, args = [], ignoreHTTPSErrors } = options
 
    args.push("--remote-debugging-port=9222")
 
-   if (userDataDir) {
-      args.push(`--user-data-dir=${userDataDir}`)
+   if (options.userDataDir) {
+      args.push(`--user-data-dir=${options.userDataDir}`)
    }
 
-   if (headless) {
+   if (options.headless) {
       args.push(
          '--headless',
          '--disable-gpu',
          '--hide-scrollbars',
          '--mute-audio'
       );
+   }
+
+   if (options.devtools) {
+      args.push('--auto-open-devtools-for-tabs');
    }
 
    // 异步启动浏览器

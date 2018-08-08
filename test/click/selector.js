@@ -1,4 +1,4 @@
-const autoChrome = require('..')
+const autoChrome = require('../../')
 const { sleep, signale } = autoChrome.helper
 
 async function run() {
@@ -13,7 +13,7 @@ async function run() {
 
    await chrome.page.goto('https://www.so.com/')
 
-   // await sleep(3000)
+   await sleep(3000)
 
    let value = await chrome.page.$('.login')
 

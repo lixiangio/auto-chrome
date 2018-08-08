@@ -11,7 +11,6 @@ npm install auto-chrome
 借鉴于puppeteer，选择重写是因为在实际应用中puppeteer存在各种奇怪的bug，导致线程阻塞且难以被修复。另外，puppeteer并没有完整的支持chrome devtools协议，又缺乏可扩展性、灵活性和易用性，一些实现细节也并不符合预期。
 
 
-
 ### 特性
 
 * 自动切换标签，根据当前活跃标签自动聚焦，通过chrome.page获取当前处于激活状态的标签。这在实际应用中避免了多标签切换带来的苦恼，同时减少手动切换标签导致的混乱。
@@ -23,21 +22,28 @@ npm install auto-chrome
 * 更高的仿真度，支持鼠标移动轨迹和touch手势操作。
 
 
+### chromium安装和使用
+
+由于网络环境因素，auto-chrome并没有像puppeteer那样直接将chromium作为npm依赖进行安装。因此你需要手动下载chromium，并在launch.executablePath配置项中指定安装路径。
+
+推荐源：https://npm.taobao.org/mirrors/chromium-browser-snapshots/
+
+
 ### chrome devtools中的作用域
 
 * `Chrome` 表示单个浏览器实例
 
-* `Page` 表示浏览器标签，单个Chrome中允许包含多个Page，同一个时间点上始终只有一个Page处于激活状态。
-
-* `Target` 表示标签中的网页，单个Page中允许包含多个Target，同一个时间点上始终只有一个Target处于激活状态。Target区分page、iframe及其它类型
-
 * `Session` session机制允许创建多个会话，可以为每个Target绑定独立的session，也可以让多个Target共享同一个session。
 
-* `Frame` 表示网页中的框架，单个Target中允许包含多个Frame，Frame中可以包含子Frame
+* `Page` 表示浏览器标签，单个Chrome中允许包含多个Page，同一个时间点上始终只有一个Page处于激活状态。
+
+* `Target` 表示标签中的网页，可分为page、iframe、other类型，单个Page中允许包含多个Target，同一个时间点上始终只有一个Target处于激活状态。
+
+* `Frame` 表示Target中的框架，主Frame中允许包含多个子Frame
+
+* `Context` 为了区分同一个Page中多个不同的网页、域名、框架，因此需要为这些对象分配唯一上下文。同一个域下的网页contextId从1开始递增，切换域时contextId初始化重新从1开始计数。
 
 * `Runtime` JavaScript运行时，通过向网页注入js代码实现对dom的操作
-
-* `Context` JavaScript代码中的上下文
 
 
 ## API
@@ -80,7 +86,6 @@ npm install auto-chrome
 滚动页面，使指定元素位于可视区
 
 * selector `String` CSS选择器字符串
-
 
 
 ### class: Mouse
