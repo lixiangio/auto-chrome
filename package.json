@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
     "debug": "^3.1.0",
     "signale": "^1.2.1",
     "ws": "^6.0.0"

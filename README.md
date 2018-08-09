@@ -10,16 +10,22 @@ npm install auto-chrome
 
 借鉴于puppeteer，选择重写是因为在实际应用中puppeteer存在各种奇怪的bug，导致线程阻塞且难以被修复。另外，puppeteer并没有完整的支持chrome devtools协议，又缺乏可扩展性、灵活性和易用性，一些实现细节也并不符合预期。
 
+chrome devtools协议api过于原始，对开发者而言显得非常繁琐。puppeteer api在设计上大量延用了chrome devtools协议的原始风格，虽然在功能丰富，但是易用性却很糟糕。
+
+auto-chrome以简洁和易用为设计原则，重点简化常见应用场景，只提供基础性功能，通过扩展的方式满足定制化需求。
+
 
 ### 特性
 
 * 自动切换标签，根据当前活跃标签自动聚焦，通过chrome.page获取当前处于激活状态的标签。这在实际应用中避免了多标签切换带来的苦恼，同时减少手动切换标签导致的混乱。
 
-* 隐藏了taget的概念，只需要直观的面对浏览器和标签和网页即可。
+* 解除鼠标、键盘、触控输入设备与页面的绑定，避免在多个页面间频繁切换设备。
+
+* 支持高仿真输入，模拟鼠标移动轨迹和Touch手势。
 
 * 简化的错误处理机制，即使任务出现异常依然能继续运行，尽可能保障线程不出现持久性阻塞。
 
-* 更高的仿真度，支持鼠标移动轨迹和touch手势操作。
+* 隐藏了taget的概念，只需要直观的面对浏览器和标签和网页即可。
 
 
 ### chromium安装和使用
@@ -29,19 +35,19 @@ npm install auto-chrome
 推荐源：https://npm.taobao.org/mirrors/chromium-browser-snapshots/
 
 
-### chrome devtools中的作用域
+### chrome devtools术语
 
-* `Chrome` 表示单个浏览器实例
+* `Chrome` 表示浏览器实例
 
-* `Session` session机制允许创建多个会话，可以为每个Target绑定独立的session，也可以让多个Target共享同一个session。
+* `Session` session机制用于创建多个会话，可以为每个Target绑定独立的session，也可以让多个Target共享同一个session。
 
 * `Page` 表示浏览器标签，单个Chrome中允许包含多个Page，同一个时间点上始终只有一个Page处于激活状态。
 
-* `Target` 表示标签中的网页，可分为page、iframe、other类型，单个Page中允许包含多个Target，同一个时间点上始终只有一个Target处于激活状态。
+* `Target` target可分为browser、page、iframe、other类型，单个Page中允许包含多个Target，同一个时间点上始终只有一个Target处于激活状态。
 
 * `Frame` 表示Target中的框架，主Frame中允许包含多个子Frame
 
-* `Context` 为了区分同一个Page中多个不同的网页、域名、框架，因此需要为这些对象分配唯一上下文。同一个域下的网页contextId从1开始递增，切换域时contextId初始化重新从1开始计数。
+* `Context` 为了区分同一个Page中多个不同的网页、域名、框架，因此需要为这些对象分配唯一上下文。同一个域下的网页contextId从1开始递增，切换域时contextId初始化重新从1开始计数
 
 * `Runtime` JavaScript运行时，通过向网页注入js代码实现对dom的操作
 

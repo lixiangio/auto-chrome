@@ -1,8 +1,9 @@
 const childProcess = require('child_process')
-const axios = require('axios')
+const readline = require('readline');
 const WebSocket = require('ws')
 const Chrome = require('./lib/Chrome')
 const helper = require('./lib/helper')
+const { signale, promise } = helper
 
 async function index(options) {
 
@@ -38,14 +39,35 @@ async function index(options) {
       console.log("message", message);
    });
 
-   // 等待浏览器准备就绪
-   await helper.sleep(3000)
+   const rl = readline.createInterface({ input: chromeProcess.stderr });
 
-   let { data } = await axios.get('http://localhost:9222/json')
+   let linePromise = promise(30000)
 
-   let [{ webSocketDebuggerUrl }] = data
+   rl.on('line', function (data) {
+      if (data) {
+         data = data.replace('DevTools listening on ', '')
+         linePromise.resolve(data)
+      }
+   })
+
+   let webSocketDebuggerUrl = await linePromise.catch(function (error) {
+      throw error
+   })
 
    let ws = new WebSocket(webSocketDebuggerUrl, { perMessageDeflate: false });
+
+   let awaitOpen = promise()
+
+   ws.on('open', awaitOpen.resolve);
+
+   ws.on('error', awaitOpen.reject);
+
+   await awaitOpen.then(function () {
+      signale.success('WebSocket连接成功');
+   }).catch(function (error) {
+      signale.error('WebSocket连接失败');
+      throw error
+   })
 
    let chrome = new Chrome(ws, ignoreHTTPSErrors)
 

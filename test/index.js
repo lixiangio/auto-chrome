@@ -19,6 +19,10 @@ async function run() {
 
    await chrome.page.type('hellow word')
 
+   await sleep(500)
+
+   await chrome.keyboard.press("Enter")
+
 }
 
 run()
