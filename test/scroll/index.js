@@ -14,13 +14,9 @@ async function run() {
       // slowMo: 20, // 减速
    })
 
-   // await sleep(1000)
-
    await chrome.page.goto('D:/Nodejs/git-project/auto-chrome/test/scroll/index.html')
 
    await sleep(1000)
-
-   // await page.scroll(0, 520)
 
    await chrome.mouse.move(300, 300)
 
@@ -36,16 +32,20 @@ async function run() {
 
    await chrome.mouse.scroll(0, 700)
 
-   // await sleep(1000)
-   
-   // await page.$scroll('#i2')
+   await sleep(1000)
 
-   // await sleep(1000)
+   await chrome.page.scroll('#i2')
 
-   // await page.$scroll('#i1')
+   await sleep(1000)
+
+   await chrome.page.scroll('#i1')
 
    // await chrome.close()
 
 }
 
-run()
+
+
+run().catch(function (error) {
+   console.error(error)
+})

@@ -1,8 +1,8 @@
-const puppeteer = require('../../');
+const autoChrome = require('../../')
 const devices = require('../../DeviceDescriptors');
 const iPhone6 = devices['iPhone 6'];
 
-const { sleep } = require('../helper.js');
+const { sleep, signale } = autoChrome.helper
 
 /**
  * 
@@ -10,14 +10,15 @@ const { sleep } = require('../helper.js');
  */
 async function run() {
 
-   let browser = await puppeteer.launch({
-      headless: false,
-      devtools: true,
-      args: [`--profile-directory=Default`, '--start-maximized'],
-      userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/"
+   let chrome = await autoChrome({
+      executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
+      userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
+      args: ['--start-maximized'],
+      devtools: false,
+      // slowMo: 20, // 减速
    })
 
-   let [page] = await browser.pages()
+   let page = await chrome.page
 
    await page.emulate(iPhone6)
 
@@ -48,10 +49,10 @@ async function run() {
    await sleep(2000)
 
    // 横向
-   // await page.touchscreen.slide({ start: { x: 700, y: 100 }, end: { x: 50, y: 100 }, steps: 20 })
+   // await page.touch.slide({ start: { x: 700, y: 100 }, end: { x: 50, y: 100 }, steps: 20 })
 
    // 纵向
-   // await page.touchscreen.slide({ start: { x: 250, y: 500 }, end: { x: 250, y: 100 }, steps: 50 })
+   // await page.touch.slide({ start: { x: 250, y: 500 }, end: { x: 250, y: 100 }, steps: 50 })
 
    // await page.$touchScroll('#taget', { steps: 50 })
 

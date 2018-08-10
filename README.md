@@ -28,7 +28,7 @@ auto-chrome以简洁和易用为设计原则，重点简化常见应用场景，
 * 隐藏了taget的概念，只需要直观的面对浏览器和标签和网页即可。
 
 
-## chromium安装和使用
+## chromium安装
 
 由于网络环境因素，auto-chrome并没有像puppeteer那样直接将chromium作为npm依赖进行安装。因此你需要手动下载chromium，并在launch.executablePath配置项中指定安装路径。
 
@@ -64,13 +64,13 @@ auto-chrome以简洁和易用为设计原则，重点简化常见应用场景，
 
 鼠标操作，page.keyboard的快捷引用
 
-#### chrome.touchscreen
+#### chrome.touch
 
-触控设备操作，page.touchscreen的快捷引用
+触控设备操作，page.touch的快捷引用
 
 #### chrome.pages
 
-包含所有打开状态的Map对象
+包含所有打开page的Map对象
 
 #### chrome.page
 
@@ -108,9 +108,31 @@ auto-chrome以简洁和易用为设计原则，重点简化常见应用场景，
 
 键盘
 
-#### page.touchscreen
+#### page.touch
 
 触控设备
+
+#### page.emulate(options)
+
+设备仿真
+
+* options `Object` 选项
+
+    * mobile `Boolean` 移动设备
+
+    * hasTouch `Boolean` 启用触控
+
+    * width `Number` 屏幕宽度
+
+    * width `Number` 屏幕高度
+
+    * geolocation `Object` 地理位置
+
+        * longitude `Number` 经度
+
+        * latitude `Number` 纬度
+
+        * accuracy `Number` 精准度
 
 #### page.goto(url)
 
@@ -154,6 +176,11 @@ auto-chrome以简洁和易用为设计原则，重点简化常见应用场景，
 
 * options.delay `Number` 输入间隔时间，ms
 
+### page.scroll(selector)
+
+滚动至指定元素可视区域，会尽量沿Y轴居中
+
+* selector `String` CSS选择器
 
 #### page.send(method, params)
 
@@ -163,47 +190,23 @@ auto-chrome以简洁和易用为设计原则，重点简化常见应用场景，
 
 * params `Object` 参数
 
-#### page.close()
 
-关闭标签
-
-
-<!-- #### page.touchScroll(x, y, options)
-
-通过touch滚动页面至指定的可视坐标
-
-* x `Number` 目标x坐标
-
-* y `Number` 目标y坐标
-
-* options `Object`
-   * interval `Number` 连续滑动的时间间隔，默认2000，单位ms
-
-#### page.$touchScroll(selector, options)
+#### page.touchScroll(selector, options)
 
 通过touch方式，滚动页面至指定元素可视区
 
 * selector `String` CSS选择器字符串
 
-* options `Object`
+* options `Object` 选项
+
    * steps `Number` touchmove的触发次数，默认50
+
    * interval `Number` 连续滑动的时间间隔，默认2000，单位ms
 
+#### page.close()
 
-#### page.scroll(x, y)
+关闭标签
 
-滚动页面，使指定元素位于可视区
-
-* x `Number` 相对于浏览器窗口x坐标
-
-* y `Number` 相对于浏览器窗口y坐标
-
-
-#### page.$scroll(selector)
-
-滚动页面，使指定元素位于可视区
-
-* selector `String` CSS选择器字符串 -->
 
 
 
@@ -216,6 +219,7 @@ auto-chrome以简洁和易用为设计原则，重点简化常见应用场景，
 click操作中已经包含了move，多数情况下不再需要单独模拟move操作，除非只移动鼠标而不需要点击
 
 * options `Object`
+
    * steps `Number` mousemoved事件的触发次数，默认20
 
 
@@ -223,9 +227,9 @@ click操作中已经包含了move，多数情况下不再需要单独模拟move�
 
 将steps默认值改为20，原值为1，即只触发一次。移动距离相同时，触发次数越少，对应的移动速度越快
 
-* options `Object`
-   * steps `Number` 触发mousemoved事件的次数，默认值20
+* options `Object` 选项
 
+   * steps `Number` 触发mousemoved事件的次数，默认值20
 
 
 #### mouse.scroll(x, y, step)
@@ -240,17 +244,37 @@ click操作中已经包含了move，多数情况下不再需要单独模拟move�
 
 
 
-### class: Touchscreen
+### class: Touch
 
-#### touchscreen.slide({start, end, steps})
+#### touch.slide({start, end, steps})
 
 模拟touch单点滑动手势
 
-* start `Object`
+* start `Object` 起始坐标
+
    * x `Number touchstart` x坐标
+
    * y `Number touchstart` y坐标
-* end `Object`
+
+* end `Object` 结束坐标
+
    * x `Number touchend` x坐标
+
    * y `Number touchend` y坐标
+
 * steps `Number` touchmove的触发次数
+
 * delay `Number` 触点释放前的停留时间，用于滑动惯性控制
+
+
+#### touch.scroll(x, y, options)
+
+通过touch滚动页面至指定的可视坐标
+
+* x `Number` 目标x坐标
+
+* y `Number` 目标y坐标
+
+* options `Object`
+
+   * interval `Number` 连续滑动的时间间隔，默认2000，单位ms
