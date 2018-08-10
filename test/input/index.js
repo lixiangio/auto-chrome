@@ -1,42 +1,26 @@
-const puppeteer = require('../../');
+const autoChrome = require('../../')
+const { sleep, signale } = autoChrome.helper
 
-const { sleep } = require('../helper.js');
+async function run() {
 
-/**
- * 
- * @param {*} device 用户配置目录名称
- */
-module.exports = async function (device = 'Default') {
-
-   let browser = await puppeteer.launch({
-      headless: false,
-      devtools: true,
-      args: [`--profile-directory=${device}`, ' --start-maximized'],
-      // executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
-      // userDataDir: "C:/Users/Xiang/AppData/Local/Google/Chrome Aoto/User Data/"
+   let chrome = await autoChrome({
+      executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
+      userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
+      args: ['--start-maximized'],
+      // devtools: true,
+      // slowMo: 20, // 减速
    })
 
-   let [page] = await browser.pages()
+   await chrome.page.goto('https://www.so.com/')
 
-   await page.setViewport({
-      width: 0,
-      height: 0,
-   })
+   await sleep(3000)
 
-   await sleep(1000)
+   await chrome.page.type('#input', 'hellow word')
 
-   await page.goto('D:/Nodejs/git-project/auto-chrome/test/input/index.html')
+   await sleep(500)
 
-   await page.type('#kw', "qi'che", { delay: 50 });
-
-   await sleep(100)
-
-   await page.$eval('#kw', (element, keyword) => {
-      element.value = keyword;
-   }, "汽车");
-
-   // let keyboard = await page.keyboard
-
-   // await keyboard.type('汽车');
+   await chrome.keyboard.press("Enter")
 
 }
+
+run()

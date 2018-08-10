@@ -21,10 +21,6 @@ async function run() {
 
    await chrome.mouse.scroll(0, 500)
 
-   await sleep(1000)
-
-   await page2.close()
-
    await sleep(2000)
 
    await page1.close()

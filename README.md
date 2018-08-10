@@ -1,6 +1,6 @@
 # auto-chrome
 
-### Install
+## Install
 
 ```
 npm install auto-chrome
@@ -15,7 +15,7 @@ chrome devtools协议api过于原始，对开发者而言显得非常繁琐。pu
 auto-chrome以简洁和易用为设计原则，重点简化常见应用场景，只提供基础功能，通过扩展的方式满足定制化需求。
 
 
-### 特性
+## 特性
 
 * 自动切换标签，根据当前活跃标签自动聚焦，通过chrome.page获取当前处于激活状态的标签。这在实际应用中避免了多标签切换带来的苦恼，同时减少手动切换标签导致的混乱。
 
@@ -28,22 +28,22 @@ auto-chrome以简洁和易用为设计原则，重点简化常见应用场景，
 * 隐藏了taget的概念，只需要直观的面对浏览器和标签和网页即可。
 
 
-### chromium安装和使用
+## chromium安装和使用
 
 由于网络环境因素，auto-chrome并没有像puppeteer那样直接将chromium作为npm依赖进行安装。因此你需要手动下载chromium，并在launch.executablePath配置项中指定安装路径。
 
 推荐源：https://npm.taobao.org/mirrors/chromium-browser-snapshots/
 
 
-### chrome devtools术语
+## chrome devtools术语
 
 * `Chrome` 表示浏览器实例
 
 * `Session` session机制用于创建多个会话，可以为每个Target绑定独立的session，也可以让多个Target共享同一个session。
 
-* `Page` 表示浏览器标签，单个Chrome中允许包含多个Page，同一个时间点上始终只有一个Page处于激活状态。
-
 * `Target` target可分为browser、page、iframe、other类型，单个Page中允许包含多个Target，同一个时间点上始终只有一个Target处于激活状态。
+
+* `Page` 表示浏览器标签，单个Chrome中允许包含多个Page，同一个时间点上始终只有一个Page处于激活状态。
 
 * `Frame` 表示Target中的框架，主Frame中允许包含多个子Frame
 
@@ -54,9 +54,121 @@ auto-chrome以简洁和易用为设计原则，重点简化常见应用场景，
 
 ## API
 
+### class: Chrome
+
+#### chrome.mouse
+
+鼠标操作，page.mouse的快捷引用
+
+#### chrome.keyboard
+
+鼠标操作，page.keyboard的快捷引用
+
+#### chrome.touchscreen
+
+触控设备操作，page.touchscreen的快捷引用
+
+#### chrome.pages
+
+包含所有打开状态的Map对象
+
+#### chrome.page
+
+当前激活状态的page
+
+#### chrome.newPage(url)
+
+* url `String` 打开网页地址，缺省时打开空白网页
+
+#### chrome.closePage(pageId)
+
+* pageId `String` 要删除page的id
+
+#### chrome.send(method, params)
+
+发送原始的chrome devtools协议消息
+
+* method `String` 方法名
+
+* params `Object` 参数
+
+#### chrome.close()
+
+关闭浏览器
+
+
+
 ### class: Page
 
-#### page.touchScroll(x, y, options)
+#### page.mouse
+
+鼠标
+
+#### page.keyboard
+
+键盘
+
+#### page.touchscreen
+
+触控设备
+
+#### page.goto(url)
+
+在标签内打开新网页
+
+### page.evaluate(pageFunction, arg, arg, ...)
+
+向页面注入js函数，获取执行后的返回值
+
+* pageFunction `Function` 注入函数
+
+* arg `*` 可序列化参数，不支持函数
+
+### page.focus(selector)
+
+通过CSS选择器聚焦元素
+
+* selector `String` CSS选择器
+
+### page.getBoundingRect(selector)
+
+通过CSS选择器获取元素坐标，值由getBoundingClientRect()函数获取
+
+* selector `String` CSS选择器
+
+### page.click(selector)
+
+通过CSS选择器点击元素
+
+* selector `String` CSS选择器
+
+### page.type(selector, text, options)
+
+通过CSS选择器聚焦input，输入文本
+
+* selector `String` CSS选择器
+
+* text `String` 输入文本
+
+* options `Object` 配置信息
+
+* options.delay `Number` 输入间隔时间，ms
+
+
+#### page.send(method, params)
+
+发送包含session的原始chrome devtools协议消息
+
+* method `String` 方法名
+
+* params `Object` 参数
+
+#### page.close()
+
+关闭标签
+
+
+<!-- #### page.touchScroll(x, y, options)
 
 通过touch滚动页面至指定的可视坐标
 
@@ -91,7 +203,8 @@ auto-chrome以简洁和易用为设计原则，重点简化常见应用场景，
 
 滚动页面，使指定元素位于可视区
 
-* selector `String` CSS选择器字符串
+* selector `String` CSS选择器字符串 -->
+
 
 
 ### class: Mouse
@@ -124,7 +237,6 @@ click操作中已经包含了move，多数情况下不再需要单独模拟move�
 * y `Number` 纵向坐标
 
 * step `Number` 步长
-
 
 
 

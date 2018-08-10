@@ -32,7 +32,7 @@ async function index(options) {
    let chromeProcess = childProcess.spawn(executablePath, args)
 
    chromeProcess.once('exit', () => {
-      console.log('浏览器关闭');
+      signale.success('浏览器关闭');
    });
 
    chromeProcess.once('message', (message) => {

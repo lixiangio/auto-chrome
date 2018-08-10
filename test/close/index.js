@@ -1,50 +1,41 @@
-const puppeteer = require('../../');
+const autoChrome = require('../../')
+const { sleep, signale } = autoChrome.helper
 
-const { sleep } = require('../helper.js');
+async function run() {
 
-/**
- * 
- * @param {*} device 用户配置目录名称
- */
-async function run(device = 'Default') {
-
-   let browser = await puppeteer.launch({
-      headless: false,
-      // devtools: true,
-      // ignoreHTTPSErrors: true,
-      args: [`--profile-directory=${device}`]
+   let chrome = await autoChrome({
+      executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
+      userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
+      args: ['--start-maximized'],
+      devtools: false,
+      // slowMo: 20, // 减速
    })
 
-   // browser.on('targetcreated', async function (target) {
-   //    // let page = await target.page()
-   //    console.log(await target.type(), 666)
-   // })
-
-   let [page] = await browser.pages()
-
-   await page.goto('D:/Nodejs/git-project/auto-chrome/test/close/index.html')
-
-   let pages = await browser.pages()
-   
-   console.log(pages.length)
-
-   try {
-      await page.click('#link')
-   } catch (err) {
-      console.log("网页加载超时，等待时间超过30s！")
-   }
-
-   await sleep(3000)
-
-   pages = await browser.pages()
-   
-   console.log(pages.length)
-
-   await page.click('.xxx')
+   let page1 = await chrome.newPage('https://www.so.com/')
 
    await sleep(1000)
 
-   browser.close()
+   let page2 = await chrome.newPage('https://www.baidu.com/')
+
+   await sleep(2000)
+
+   await chrome.mouse.scroll(0, 500)
+
+   await sleep(1000)
+
+   await page2.close()
+
+   await sleep(4000)
+
+   await chrome.page.goto('https://www.szhkch.com/')
+
+   await sleep(2000)
+
+   await page1.close()
+
+   await sleep(3000)
+
+   await chrome.close()
 
 }
 

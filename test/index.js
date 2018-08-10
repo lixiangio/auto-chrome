@@ -15,9 +15,7 @@ async function run() {
 
    await sleep(3000)
 
-   await chrome.page.focus('.search-desktop .placeholder')
-
-   await chrome.page.type('hellow word')
+   await chrome.page.type('.search-desktop .placeholder', 'hellow word')
 
    await sleep(500)
 
