@@ -20,8 +20,20 @@ module.exports = [
     'userAgent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36',
     'viewport': {
       'width': 1440,
-      'height': 900,
+      'height': 600,
       'hasTouch': true
+    }
+  },
+  {
+    'name': 'iPad Pro',
+    'userAgent': 'Mozilla/5.0 (iPad; CPU OS 11_0 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) Version/11.0 Mobile/15A5341f Safari/604.1',
+    'viewport': {
+      'width': 1024,
+      'height': 1366,
+      'deviceScaleFactor': 1,
+      'mobile': true,
+      'hasTouch': true,
+      'isLandscape': false
     }
   },
   {
@@ -31,21 +43,9 @@ module.exports = [
       'width': 600,
       'height': 1024,
       'deviceScaleFactor': 1,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
-    }
-  },
-  {
-    'name': 'Blackberry PlayBook landscape',
-    'userAgent': 'Mozilla/5.0 (PlayBook; U; RIM Tablet OS 2.1.0; en-US) AppleWebKit/536.2+ (KHTML like Gecko) Version/7.2.1.0 Safari/536.2+',
-    'viewport': {
-      'width': 1024,
-      'height': 600,
-      'deviceScaleFactor': 1,
-      'isMobile': true,
-      'hasTouch': true,
-      'isLandscape': true
     }
   },
   {
@@ -55,7 +55,7 @@ module.exports = [
       'width': 360,
       'height': 640,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -67,7 +67,7 @@ module.exports = [
       'width': 640,
       'height': 360,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -79,7 +79,7 @@ module.exports = [
       'width': 360,
       'height': 640,
       'deviceScaleFactor': 3,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -91,7 +91,7 @@ module.exports = [
       'width': 640,
       'height': 360,
       'deviceScaleFactor': 3,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -103,7 +103,7 @@ module.exports = [
       'width': 360,
       'height': 640,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -115,7 +115,7 @@ module.exports = [
       'width': 640,
       'height': 360,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -127,7 +127,7 @@ module.exports = [
       'width': 360,
       'height': 640,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -139,7 +139,7 @@ module.exports = [
       'width': 640,
       'height': 360,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -151,7 +151,7 @@ module.exports = [
       'width': 360,
       'height': 640,
       'deviceScaleFactor': 3,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -163,7 +163,7 @@ module.exports = [
       'width': 640,
       'height': 360,
       'deviceScaleFactor': 3,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -175,7 +175,7 @@ module.exports = [
       'width': 768,
       'height': 1024,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -187,7 +187,7 @@ module.exports = [
       'width': 1024,
       'height': 768,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -199,7 +199,7 @@ module.exports = [
       'width': 768,
       'height': 1024,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -211,21 +211,9 @@ module.exports = [
       'width': 1024,
       'height': 768,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
-    }
-  },
-  {
-    'name': 'iPad Pro',
-    'userAgent': 'Mozilla/5.0 (iPad; CPU OS 11_0 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) Version/11.0 Mobile/15A5341f Safari/604.1',
-    'viewport': {
-      'width': 1024,
-      'height': 1366,
-      'deviceScaleFactor': 2,
-      'isMobile': true,
-      'hasTouch': true,
-      'isLandscape': false
     }
   },
   {
@@ -235,7 +223,7 @@ module.exports = [
       'width': 1366,
       'height': 1024,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -247,7 +235,7 @@ module.exports = [
       'width': 320,
       'height': 480,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -259,7 +247,7 @@ module.exports = [
       'width': 480,
       'height': 320,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -271,7 +259,7 @@ module.exports = [
       'width': 320,
       'height': 568,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -283,7 +271,7 @@ module.exports = [
       'width': 568,
       'height': 320,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -295,7 +283,7 @@ module.exports = [
       'width': 375,
       'height': 667,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -307,7 +295,7 @@ module.exports = [
       'width': 667,
       'height': 375,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -319,7 +307,7 @@ module.exports = [
       'width': 414,
       'height': 736,
       'deviceScaleFactor': 3,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -331,7 +319,7 @@ module.exports = [
       'width': 736,
       'height': 414,
       'deviceScaleFactor': 3,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -343,7 +331,7 @@ module.exports = [
       'width': 375,
       'height': 667,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -355,7 +343,7 @@ module.exports = [
       'width': 667,
       'height': 375,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -367,7 +355,7 @@ module.exports = [
       'width': 414,
       'height': 736,
       'deviceScaleFactor': 3,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -379,7 +367,7 @@ module.exports = [
       'width': 736,
       'height': 414,
       'deviceScaleFactor': 3,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -391,7 +379,7 @@ module.exports = [
       'width': 375,
       'height': 667,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -403,7 +391,7 @@ module.exports = [
       'width': 667,
       'height': 375,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -415,7 +403,7 @@ module.exports = [
       'width': 414,
       'height': 736,
       'deviceScaleFactor': 3,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -427,7 +415,7 @@ module.exports = [
       'width': 736,
       'height': 414,
       'deviceScaleFactor': 3,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -439,7 +427,7 @@ module.exports = [
       'width': 320,
       'height': 568,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -451,7 +439,7 @@ module.exports = [
       'width': 568,
       'height': 320,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -463,7 +451,7 @@ module.exports = [
       'width': 375,
       'height': 812,
       'deviceScaleFactor': 3,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -475,7 +463,7 @@ module.exports = [
       'width': 812,
       'height': 375,
       'deviceScaleFactor': 3,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -487,7 +475,7 @@ module.exports = [
       'width': 800,
       'height': 1280,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -499,7 +487,7 @@ module.exports = [
       'width': 1280,
       'height': 800,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -511,7 +499,7 @@ module.exports = [
       'width': 384,
       'height': 640,
       'deviceScaleFactor': 1.25,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -523,7 +511,7 @@ module.exports = [
       'width': 640,
       'height': 384,
       'deviceScaleFactor': 1.25,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -535,7 +523,7 @@ module.exports = [
       'width': 640,
       'height': 360,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -547,7 +535,7 @@ module.exports = [
       'width': 360,
       'height': 640,
       'deviceScaleFactor': 4,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -559,7 +547,7 @@ module.exports = [
       'width': 640,
       'height': 360,
       'deviceScaleFactor': 4,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -571,7 +559,7 @@ module.exports = [
       'width': 800,
       'height': 1280,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -583,7 +571,7 @@ module.exports = [
       'width': 1280,
       'height': 800,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -595,7 +583,7 @@ module.exports = [
       'width': 384,
       'height': 640,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -607,7 +595,7 @@ module.exports = [
       'width': 640,
       'height': 384,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -619,7 +607,7 @@ module.exports = [
       'width': 360,
       'height': 640,
       'deviceScaleFactor': 3,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -631,7 +619,7 @@ module.exports = [
       'width': 640,
       'height': 360,
       'deviceScaleFactor': 3,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -643,7 +631,7 @@ module.exports = [
       'width': 412,
       'height': 732,
       'deviceScaleFactor': 2.625,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -655,7 +643,7 @@ module.exports = [
       'width': 732,
       'height': 412,
       'deviceScaleFactor': 2.625,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -667,7 +655,7 @@ module.exports = [
       'width': 412,
       'height': 732,
       'deviceScaleFactor': 3.5,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -679,7 +667,7 @@ module.exports = [
       'width': 732,
       'height': 412,
       'deviceScaleFactor': 3.5,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -691,7 +679,7 @@ module.exports = [
       'width': 412,
       'height': 732,
       'deviceScaleFactor': 3.5,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -703,7 +691,7 @@ module.exports = [
       'width': 732,
       'height': 412,
       'deviceScaleFactor': 3.5,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -715,7 +703,7 @@ module.exports = [
       'width': 600,
       'height': 960,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -727,7 +715,7 @@ module.exports = [
       'width': 960,
       'height': 600,
       'deviceScaleFactor': 2,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -739,7 +727,7 @@ module.exports = [
       'width': 320,
       'height': 533,
       'deviceScaleFactor': 1.5,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -751,7 +739,7 @@ module.exports = [
       'width': 533,
       'height': 320,
       'deviceScaleFactor': 1.5,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -763,7 +751,7 @@ module.exports = [
       'width': 480,
       'height': 854,
       'deviceScaleFactor': 1,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -775,7 +763,7 @@ module.exports = [
       'width': 854,
       'height': 480,
       'deviceScaleFactor': 1,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -787,7 +775,7 @@ module.exports = [
       'width': 411,
       'height': 731,
       'deviceScaleFactor': 2.625,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -799,7 +787,7 @@ module.exports = [
       'width': 731,
       'height': 411,
       'deviceScaleFactor': 2.625,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }
@@ -811,7 +799,7 @@ module.exports = [
       'width': 411,
       'height': 823,
       'deviceScaleFactor': 3.5,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': false
     }
@@ -823,7 +811,7 @@ module.exports = [
       'width': 823,
       'height': 411,
       'deviceScaleFactor': 3.5,
-      'isMobile': true,
+      'mobile': true,
       'hasTouch': true,
       'isLandscape': true
     }

@@ -7,7 +7,7 @@ const { signale, promise } = helper
 
 async function index(options) {
 
-   let { executablePath, args = [], ignoreHTTPSErrors } = options
+   let { executablePath, args = [], ignoreHTTPSErrors, emulate } = options
 
    args.push("--remote-debugging-port=9222")
 
@@ -69,7 +69,7 @@ async function index(options) {
       throw error
    })
 
-   let chrome = new Chrome(ws, ignoreHTTPSErrors)
+   let chrome = new Chrome(ws, ignoreHTTPSErrors, emulate)
 
    await chrome.run()
 
