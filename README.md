@@ -1,11 +1,5 @@
 # auto-chrome
 
-## Install
-
-```
-npm install auto-chrome
-```
-
 使用Node.js自动化控制Chrome或Chromium，基于[chrome devtools](https://chromedevtools.github.io/devtools-protocol/)协议的高仿真用户行为模拟器。
 
 借鉴于puppeteer，选择重写是因为在实际应用中puppeteer存在各种奇怪的bug，导致线程阻塞且难以被修复。另外，puppeteer不会支持所有chrome devtools协议，同时又缺乏可扩展性和易用性，一些实现细节也不符合预期。
@@ -15,6 +9,7 @@ chrome devtools协议api过于原始，对开发者而言并不友好。puppetee
 auto-chrome以简洁和易用为设计原则，重点简化常见应用场景，只提供常用功能，通过扩展的方式满足定制化需求。
 
 项目中部分引用了puppeteer源码，目前依然处于初级阶段，很多功能并不完善。
+
 
 ## 特性
 
@@ -27,6 +22,13 @@ auto-chrome以简洁和易用为设计原则，重点简化常见应用场景，
 * 简化的错误处理机制，即使任务出现异常依然能继续运行，尽可能保障线程不出现持久性阻塞。
 
 * 隐藏了taget的概念，只需要直观的面对浏览器和标签和网页即可。
+
+
+## Install
+
+```
+npm install auto-chrome
+```
 
 
 ## chromium安装

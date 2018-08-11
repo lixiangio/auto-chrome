@@ -8,8 +8,6 @@ const { width, height } = viewport
 
 console.log(userAgent)
 
-console.log(viewport)
-
 async function run() {
 
    let chrome = await autoChrome({
@@ -22,12 +20,19 @@ async function run() {
          // `--window-position=0,0`,
          // `--window-size=${width}, ${height}`
       ],
-      emulate: viewport,
+      emulate: {
+         geolocation: {
+            longitude: 114.2916402075,
+            latitude: 22.6088954693,
+            accuracy: 14
+         },
+         ...viewport
+      },
       // devtools: true,
       // slowMo: 20, // 减速
    })
 
-   await chrome.newPage('https://ie.icoa.cn/')
+   await chrome.newPage('https://map.baidu.com/mobile/webapp/index/index/')
 
 }
 

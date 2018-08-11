@@ -1,8 +1,11 @@
 const autoChrome = require('../../')
-const devices = require('../../DeviceDescriptors');
-const iPhone6 = devices['iPhone 6'];
-
+const devices = require('../../device')
 const { sleep, signale } = autoChrome.helper
+
+let { userAgent, viewport } = devices['iPhone 6'];
+
+const { width, height } = viewport
+
 
 /**
  * 
@@ -13,18 +16,23 @@ async function run() {
    let chrome = await autoChrome({
       executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
-      args: ['--start-maximized'],
-      devtools: false,
+      args: [
+         // `--profile-directory=Default`, 
+         `--user-agent=${userAgent}`,
+         '--start-maximized',
+         // `--window-position=0,0`,
+         // `--window-size=${width}, ${height}`
+      ],
+      emulate: viewport,
+      // devtools: true,
       // slowMo: 20, // 减速
    })
 
-   let page = await chrome.page
+   await chrome.newPage('D:/Nodejs/git-project/auto-chrome/test/touch/index.html')
 
-   await page.emulate(iPhone6)
+   await sleep(2000)
 
-   await page.goto('D:/Nodejs/git-project/auto-chrome/test/touch/index.html')
-
-   await page.evaluate(async function () {
+   await chrome.page.evaluate(async function () {
 
       window.addEventListener('touchstart', function (ev) {
          let { localName, style } = ev.target
@@ -56,13 +64,13 @@ async function run() {
 
    // await page.$touchScroll('#taget', { steps: 50 })
 
-   let { left, top } = await page.evaluate(async element => {
-      let taget = document.getElementById('taget')
-      let { top, left } = taget.getBoundingClientRect()
-      return { left, top }
-   });
+   // let { left, top } = await page.evaluate(async element => {
+   //    let taget = document.getElementById('taget')
+   //    let { top, left } = taget.getBoundingClientRect()
+   //    return { left, top }
+   // });
 
-   await page.touchScroll(left, top)
+   await chrome.page.touchScroll('#taget')
 
 }
 
