@@ -57,21 +57,23 @@ async function run() {
    await sleep(2000)
 
    // 横向
-   // await page.touch.slide({ start: { x: 700, y: 100 }, end: { x: 50, y: 100 }, steps: 20 })
+   // await page.touch.slide({
+   //    start: { x: 700, y: 100 },
+   //    end: { x: 50, y: 100 },
+   //    steps: 20
+   // })
 
    // 纵向
-   // await page.touch.slide({ start: { x: 250, y: 500 }, end: { x: 250, y: 100 }, steps: 50 })
-
-   // await page.$touchScroll('#taget', { steps: 50 })
-
-   // let { left, top } = await page.evaluate(async element => {
-   //    let taget = document.getElementById('taget')
-   //    let { top, left } = taget.getBoundingClientRect()
-   //    return { left, top }
-   // });
+   // await page.touch.slide({
+   //    start: { x: 250, y: 500 },
+   //    end: { x: 250, y: 100 },
+   //    steps: 50
+   // })
 
    await chrome.page.touchScroll('#taget')
 
 }
 
-run()
+run().catch(function(error){
+   console.error(error)
+})

@@ -44,15 +44,19 @@ npm install auto-chrome
 
 * `Session` session机制用于创建多个会话，可以为每个Target绑定独立的session，也可以让多个Target共享同一个session。
 
-* `Target` 表示浏览器中的不同对象，包含browser、page、iframe、other类型。devtools为每个target生成targetId，用于区分不同的目标。
+* `Target` 表示浏览器中的不同对象，包含browser、page、iframe、other资源类型。devtools为每个target生成targetId，用于区分不同的目标。
 
 * `Page` 表示浏览器标签，单个Chrome中允许包含多个Page，同一个时间点上始终只有一个Page处于激活状态。
 
-* `Frame` 表示Target中的框架，主Frame中允许包含多个子Frame
+* `Runtime` JavaScript运行时，用于向网页注入JS代码实现对DOM的操作。
 
-* `Context` 为了区分同一个Page中多个不同的网页、域名、框架，因此需要为这些对象分配唯一上下文。同一个域下的网页contextId从1开始递增，切换域时contextId初始化重新从1开始计数
+* `Frame` 表示Target中的框架，主Frame中允许包含多个子Frame。
 
-* `Runtime` JavaScript运行时，通过向网页注入js代码实现对dom的操作
+* `Context` JavaScript运行时所处的的上下文，由于页面内可能包含Frame，每个Frame拥有独立的运行时，因此需要生成唯一contextId来区分它们。
+
+<!-- 为了区分同一个Page中多个不同的网页、域名、框架，因此需要为这些对象分配唯一上下文。同一个域下的网页contextId从1开始递增，切换域时contextId初始化重新从1开始计数 -->
+
+
 
 
 ## API

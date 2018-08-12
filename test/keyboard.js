@@ -11,7 +11,15 @@ async function run() {
       // slowMo: 20, // 减速
    })
 
-   await chrome.newPage('http://www.baidu.com/')
+   await chrome.page.goto('http://www.runoob.com/')
+
+   await sleep(3000)
+
+   await chrome.page.type('.search-desktop .placeholder', 'hellow word')
+
+   await sleep(500)
+
+   await chrome.keyboard.press("Enter")
 
 }
 

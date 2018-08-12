@@ -39,4 +39,6 @@ async function run() {
 
 }
 
-run()
+run().catch(function(error){
+   console.error(error)
+})

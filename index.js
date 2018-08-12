@@ -7,7 +7,7 @@ const { signale, promise } = helper
 
 async function index(options) {
 
-   let { executablePath, args = [], ignoreHTTPSErrors, emulate } = options
+   let { args = [], executablePath, ignoreHTTPSErrors, emulate } = options
 
    args.push("--remote-debugging-port=9222")
 
@@ -50,6 +50,7 @@ async function index(options) {
       }
    })
 
+   // 获取webSocket连接地址
    let webSocketDebuggerUrl = await linePromise.catch(function (error) {
       throw error
    })
