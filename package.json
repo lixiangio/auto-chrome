@@ -4,7 +4,8 @@
   "description": "使用Node.js操作Chrome或Chromium，高仿真的用户行为模拟器",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node test/",
+    "test": "set debut=chrome:message:other & node test"
   },
   "author": "",
   "license": "ISC",

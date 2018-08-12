@@ -38,24 +38,20 @@ npm install auto-chrome
 推荐源：https://npm.taobao.org/mirrors/chromium-browser-snapshots/
 
 
+
 ## chrome devtools术语
-
-* `Chrome` 表示浏览器实例
-
-* `Session` session机制用于创建多个会话，可以为每个Target绑定独立的session，也可以让多个Target共享同一个session。
 
 * `Target` 表示浏览器中的不同对象，包含browser、page、iframe、other资源类型。devtools为每个target生成targetId，用于区分不同的目标。
 
-* `Page` 表示浏览器标签，单个Chrome中允许包含多个Page，同一个时间点上始终只有一个Page处于激活状态。
+* `Session` session机制用于创建多个会话，可以为每个Target绑定独立的session，也可以让多个Target共享同一个session。
+
+* `Page` 浏览器标签，Chrome中允许打开多个Page，但始终只有一个Page处于激活状态。
 
 * `Runtime` JavaScript运行时，用于向网页注入JS代码实现对DOM的操作。
 
-* `Frame` 表示Target中的框架，主Frame中允许包含多个子Frame。
+* `Frame` 网页中的框架，主Frame中允许包含多个子Frame。
 
 * `Context` JavaScript运行时所处的的上下文，由于页面内可能包含Frame，每个Frame拥有独立的运行时，因此需要生成唯一contextId来区分它们。
-
-<!-- 为了区分同一个Page中多个不同的网页、域名、框架，因此需要为这些对象分配唯一上下文。同一个域下的网页contextId从1开始递增，切换域时contextId初始化重新从1开始计数 -->
-
 
 
 
@@ -63,39 +59,39 @@ npm install auto-chrome
 
 ### class: autoChrome(options)
 
-* options `Object` 全局实例配置选项，优先级低于page
+* `options` *Object* 全局实例配置选项，优先级低于page
 
-    * executablePath `String` Chrome程序执行路径
+    * `executablePath` *String* Chrome程序执行路径
 
-    * args[ars, ...] `Array` Chrome启动参数数组
+    * `args[ars, ...]` *Array* Chrome启动参数数组
 
-        * ars `String` Chrome启动参数
+        * `ars` *String* Chrome启动参数
 
-    * userDataDir `String` 用户配置文件路径
+    * `userDataDir` *String* 用户配置文件路径
 
-    * emulate `Object` 设备仿真，该配置对于初始标签不太凑效，可能由于初始targetCreated事件并没有被捕获。
+    * `emulate` *Object* 设备仿真，该配置对于初始标签不太凑效，可能由于初始targetCreated事件并没有被捕获。
 
-        * mobile `Boolean` 移动设备，默认false
+        * `mobile` *Boolean* 移动设备，默认false
 
-        * hasTouch `Boolean` 启用触控，默认false
+        * `hasTouch` *Boolean* 启用触控，默认false
 
-        * width `Number` 屏幕宽度，默认自适应屏幕宽度
+        * `width` *Number* 屏幕宽度，默认自适应屏幕宽度
 
-        * width `Number` 屏幕高度，默认自适应屏幕高度
+        * `width` *Number* 屏幕高度，默认自适应屏幕高度
 
-        * geolocation `Object` 地理位置
+        * `geolocation` *Object* 地理位置，使用Google地图坐标
 
-            * longitude `Number` 经度
+            * `longitude` *Number* 经度
 
-            * latitude `Number` 纬度
+            * `latitude` *Number* 纬度
 
-            * accuracy `Number` 精准度
+            * `accuracy` *Number* 精准度
 
-     * headless `Boolean` 隐藏执行模式，默认false
+     * `headless` *Boolean* 隐藏执行模式，默认false
 
-     * devtools `Boolean` 为每个page自动打开devtools，默认false
+     * `devtools` *Boolean* 为每个page自动打开devtools，默认false
 
-     * ignoreHTTPSErrors `Boolean` 忽略https错误，默认true
+     * `ignoreHTTPSErrors` *Boolean* 忽略https错误，默认true
 
 #### chrome.mouse
 
@@ -119,19 +115,19 @@ npm install auto-chrome
 
 #### chrome.newPage(url)
 
-* url `String` 打开网页地址，缺省时打开空白网页
+* `url` *String* 打开网页地址，缺省时打开空白网页
 
 #### chrome.closePage(pageId)
 
-* pageId `String` 要删除page的id
+* `pageId` *String* 要删除page的id
 
 #### chrome.send(method, params)
 
 发送原始的chrome devtools协议消息
 
-* method `String` 方法名
+* `method` *String* 方法名
 
-* params `Object` 参数
+* `params` *Object* 参数
 
 #### chrome.close()
 
@@ -143,37 +139,37 @@ npm install auto-chrome
 
 #### page.mouse
 
-鼠标
+鼠标实例
 
 #### page.keyboard
 
-键盘
+键盘实例
 
 #### page.touch
 
-触控设备
+触控设备实例
 
 #### page.emulate(options)
 
 设备仿真，直接调用该方法可能导致混乱，正常应该由事件驱动在创建标签执行page.emulate()，手动调用会存在延时覆盖问题。
 
-* options `Object` 选项
+* `options` *Object* 选项
 
-    * mobile `Boolean` 移动设备
+    * `mobile` *Boolean* 移动设备
 
-    * hasTouch `Boolean` 启用触控
+    * `hasTouch` *Boolean* 启用触控
 
-    * width `Number` 屏幕宽度
+    * `width` *Number* 屏幕宽度
 
-    * width `Number` 屏幕高度
+    * `width` *Number* 屏幕高度
 
-    * geolocation `Object` 地理位置
+    * `geolocation` *Object* 地理位置
 
-        * longitude `Number` 经度
+        * `longitude` *Number* 经度
 
-        * latitude `Number` 纬度
+        * `latitude` *Number* 纬度
 
-        * accuracy `Number` 精准度
+        * `accuracy` *Number* 精准度
 
 #### page.goto(url)
 
@@ -183,66 +179,66 @@ npm install auto-chrome
 
 向页面注入js函数，获取执行后的返回值
 
-* pageFunction `Function` 注入函数
+* `pageFunction` *Function* 注入函数
 
-* arg `*` 可序列化参数，不支持函数
+* `arg` *\** 可序列化参数，不支持函数
 
 ### page.focus(selector)
 
 通过CSS选择器聚焦元素
 
-* selector `String` CSS选择器
+* `selector` *String* CSS选择器
 
 ### page.getBoundingRect(selector)
 
 通过CSS选择器获取元素坐标，值由getBoundingClientRect()函数获取
 
-* selector `String` CSS选择器
+* `selector` *String* CSS选择器
 
 ### page.click(selector)
 
 通过CSS选择器点击元素
 
-* selector `String` CSS选择器
+* `selector` *String* CSS选择器
 
 ### page.type(selector, text, options)
 
 通过CSS选择器聚焦input，输入文本
 
-* selector `String` CSS选择器
+* `selector` *String* CSS选择器
 
-* text `String` 输入文本
+* `text` *String* 输入文本
 
-* options `Object` 配置信息
+* `options` *Object* 配置信息
 
-* options.delay `Number` 输入间隔时间，ms
+* `options.delay` *Number* 输入间隔时间，ms
 
 ### page.scroll(selector)
 
 滚动至指定元素可视区域，会尽量沿Y轴居中
 
-* selector `String` CSS选择器
+* `selector` *String* CSS选择器
 
 #### page.send(method, params)
 
 发送包含session的原始chrome devtools协议消息
 
-* method `String` 方法名
+* `method` *String* 方法名
 
-* params `Object` 参数
+* `params` *Object* 参数
 
 
 #### page.touchScroll(selector, options)
 
 通过touch方式，滚动页面至指定元素可视区
 
-* selector `String` CSS选择器字符串
+* `selector` *String* CSS选择器字符串
 
-* options `Object` 选项
+* `options` *Object* 选项
 
-   * steps `Number` touchmove的触发次数，默认50
+   * `steps` *Number* touchmove的触发次数，默认50
 
-   * interval `Number` 连续滑动的时间间隔，默认2000，单位ms
+   * `interval` *Number* 连续滑动的时间间隔，默认2000，单位ms
 
 #### page.close()
 
@@ -259,29 +255,29 @@ npm install auto-chrome
 
 click操作中已经包含了move，多数情况下不再需要单独模拟move操作，除非只移动鼠标而不需要点击
 
-* options `Object`
+* `options` *Object*
 
-   * steps `Number` mousemoved事件的触发次数，默认20
+   * `steps` *Number* mousemoved事件的触发次数，默认20
 
 
 #### mouse.move(x, y, options)
 
 将steps默认值改为20，原值为1，即只触发一次。移动距离相同时，触发次数越少，对应的移动速度越快
 
-* options `Object` 选项
+* `options` *Object* 选项
 
-   * steps `Number` 触发mousemoved事件的次数，默认值20
+   * `steps` *Number* 触发mousemoved事件的次数，默认值20
 
 
 #### mouse.scroll(x, y, step)
 
 滚动至指定坐标，目前仅支持纵向滚动
 
-* x `Number` 横向坐标，0
+* `x` *Number* 横向坐标，0
 
-* y `Number` 纵向坐标
+* `y` *Number* 纵向坐标
 
-* step `Number` 步长
+* `step` *Number* 步长
 
 
 
@@ -291,31 +287,31 @@ click操作中已经包含了move，多数情况下不再需要单独模拟move�
 
 模拟touch单点滑动手势
 
-* start `Object` 起始坐标
+* `start` *Object* 起始坐标
 
-   * x `Number` touchstart x坐标
+   * `x` *Number* touchstart x坐标
 
-   * y `Number` touchstart y坐标
+   * `y` *Number* touchstart y坐标
 
-* end `Object` 结束坐标
+* `end` *Object* 结束坐标
 
-   * x `Number` touchend x坐标
+   * `x` *Number* touchend x坐标
 
-   * y `Number` touchend y坐标
+   * `y` *Number* touchend y坐标
 
-* steps `Number` touchmove的触发次数
+* `steps` *Number* touchmove的触发次数
 
-* delay `Number` 触点释放前的停留时间，用于滑动惯性控制
+* `delay` *Number* 触点释放前的停留时间，用于滑动惯性控制
 
 
 #### touch.scroll(x, y, options)
 
 通过touch滚动页面至指定的可视坐标
 
-* x `Number` 目标x坐标
+* `x` *Number* 目标x坐标
 
-* y `Number` 目标y坐标
+* `y` *Number* 目标y坐标
 
-* options `Object`
+* `options` *Object*
 
-   * interval `Number` 连续滑动的时间间隔，默认2000，单位ms
+   * `interval` *Number* 连续滑动的时间间隔，默认2000，单位ms
