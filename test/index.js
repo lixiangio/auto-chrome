@@ -11,7 +11,9 @@ async function run() {
       // slowMo: 20, // 减速
    })
 
-   await chrome.newPage('http://www.baidu.com/')
+   await chrome.newPage('http://v.baidu.com/')
+
+   console.log(333)
 
 }
 

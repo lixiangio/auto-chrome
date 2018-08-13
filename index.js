@@ -3,7 +3,7 @@ const readline = require('readline');
 const WebSocket = require('ws')
 const Chrome = require('./lib/Chrome')
 const helper = require('./lib/helper')
-const { signale, promise } = helper
+const { signale, newPromise } = helper
 
 async function index(options) {
 
@@ -41,7 +41,7 @@ async function index(options) {
 
    const rl = readline.createInterface({ input: chromeProcess.stderr });
 
-   let linePromise = promise(30000)
+   let linePromise = newPromise(30000)
 
    rl.on('line', function (data) {
       if (data) {
@@ -57,7 +57,7 @@ async function index(options) {
 
    let ws = new WebSocket(webSocketDebuggerUrl, { perMessageDeflate: false });
 
-   let awaitOpen = promise()
+   let awaitOpen = newPromise()
 
    ws.on('open', awaitOpen.resolve);
 
