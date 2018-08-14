@@ -39,7 +39,7 @@ npm install auto-chrome
 
 ## chrome devtools术语
 
-* `Target` 表示浏览器中的不同对象，包含browser、page、iframe、other资源类型。devtools为每个target生成targetId，用于区分不同的目标。
+* `Target` 表示浏览器中的多种对象，可以是browser、page、iframe、other类型其中之一。当type为page类型时，targetId对应于主框架的frame id。
 
 * `Session` session机制用于创建多个会话，可以为每个Target绑定独立的session，也可以让多个Target共享同一个session。
 
