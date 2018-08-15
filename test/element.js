@@ -1,4 +1,4 @@
-const autoChrome = require('../../')
+const autoChrome = require('..')
 const { sleep, signale } = autoChrome.helper
 
 async function run() {
@@ -7,7 +7,7 @@ async function run() {
       executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
       args: ['--start-maximized'],
-      // devtools: true,
+      devtools: false,
       // slowMo: 20, // 减速
    })
 
@@ -15,13 +15,15 @@ async function run() {
 
    await sleep(3000)
 
-   await chrome.page.focus('#input')
+   let element = await chrome.page.$('.login')
 
-   await chrome.page.type('hellow word')
+   if (element) {
 
-   await sleep(500)
+      let bounding = await element.getBoundingRect()
 
-   await chrome.keyboard.press("Enter")
+      console.log(bounding)
+      
+   }
 
 }
 

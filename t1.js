@@ -1,23 +1,11 @@
-const zPromise = require('zpromise')
-
-let promise = new zPromise()
-
-promise.catch(info => {
-   console.error(info)
-})
-
-async function run() {
-
-   await promise.catch(info => {
-      console.error(info)
-   })
-
-   console.log(9999)
-
+class a {
+   static a1(){
+      console.log(this.a2)
+      // this.a2()
+   }
+   a2(){
+      console.log(666)
+   }
 }
 
-setTimeout(() => {
-   promise.reject(666)
-}, 1000);
-
-run()
+a.a1()
