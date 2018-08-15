@@ -11,9 +11,11 @@ async function run() {
       // slowMo: 20, // 减速
    })
 
-   await chrome.newPage('http://v.baidu.com/')
+   let page = await chrome.newPage('http://v.baidu.com/')
 
-   console.log(333)
+   let [key1, key2] = chrome.pages.keys()
+
+   console.log(key1)
 
 }
 

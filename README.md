@@ -258,6 +258,26 @@ npm install auto-chrome
 
 选择元素，并生成远程引用对象
 
+#### elment.get(name)
+
+* `name` *String* 
+
+获取elment中指定的属性值
+
+#### elment.set(name, value)
+
+* `name` *String* 属性名称
+
+* `value` * 属性值
+
+设置elment中指定的属性值
+
+#### elment.value(value)
+
+* `value` *String* 赋值
+
+获取或设置值，仅适用于表单元素
+
 #### elment.focus()
 
 聚焦元素
