@@ -244,6 +244,30 @@ npm install auto-chrome
 
 
 
+### class: Element
+
+用于实现可追溯的远程elment，实际上是devtools保存了注入函数的执行结果并生成查询id，通过状态追踪就可以在已有远程结果基于上做增量操作，避免了代码的重复提交和重复执行。
+
+对于大的对象或者DOM对象，直接返回它们的代价非常高的，而且由于数据的动态性和实时性，这使得缓存策略并不好使。
+
+#### elment.$(selector)
+
+* `selector` *String* 
+
+* `return` *Object* Elment实例
+
+选择元素，并生成远程引用对象
+
+#### elment.focus()
+
+聚焦元素
+
+#### elment.getBoundingRect()
+
+通过getBoundingClientRect函数获取元素大小、坐标信息
+
+
+
 
 ### class: Mouse
 

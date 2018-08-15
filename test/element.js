@@ -15,14 +15,18 @@ async function run() {
 
    await sleep(3000)
 
-   let element = await chrome.page.$('.login')
+   let element = await chrome.page.$('body')
+   
+   element = await element.$('#header')
+
+   element = await element.$('.login')
 
    if (element) {
 
       let bounding = await element.getBoundingRect()
 
       console.log(bounding)
-      
+
    }
 
 }
