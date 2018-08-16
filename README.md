@@ -173,7 +173,7 @@ npm install auto-chrome
 
 在标签内打开新网页
 
-### page.evaluate(pageFunction, arg, arg, ...)
+#### page.evaluate(pageFunction, arg, arg, ...)
 
 向页面注入js函数，获取执行后的返回值
 
@@ -181,7 +181,7 @@ npm install auto-chrome
 
 * `arg` *\** 可序列化参数，不支持函数
 
-### page.$(selector)
+#### page.$(selector)
 
 选择单个元素
 
@@ -189,7 +189,7 @@ npm install auto-chrome
 
 * `return` *Object* 单个Elment实例
 
-### page.$$(selector)
+#### page.$$(selector)
 
 选择多个元素
 
@@ -198,25 +198,25 @@ npm install auto-chrome
 * `return` *Array* 多个Elment实例数组
 
 
-### page.focus(selector)
+#### page.focus(selector)
 
 通过CSS选择器聚焦元素
 
 * `selector` *String* CSS选择器
 
-### page.getBoundingRect(selector)
+#### page.getBoundingRect(selector)
 
 通过CSS选择器获取元素坐标，值由getBoundingClientRect()函数获取
 
 * `selector` *String* CSS选择器
 
-### page.click(selector)
+#### page.click(selector)
 
 通过CSS选择器点击元素
 
 * `selector` *String* CSS选择器
 
-### page.type(selector, text, options)
+#### page.type(selector, text, options)
 
 通过CSS选择器聚焦input，输入文本
 
@@ -228,7 +228,7 @@ npm install auto-chrome
 
 * `options.delay` *Number* 输入间隔时间，ms
 
-### page.scroll(selector)
+#### page.scroll(selector)
 
 滚动至指定元素可视区域，会尽量沿Y轴居中
 
