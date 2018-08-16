@@ -181,6 +181,23 @@ npm install auto-chrome
 
 * `arg` *\** 可序列化参数，不支持函数
 
+### page.$(selector)
+
+选择单个元素
+
+* `selector` *String* CSS选择器
+
+* `return` *Object* 单个Elment实例
+
+### page.$$(selector)
+
+选择多个元素
+
+* `selector` *String* CSS选择器
+
+* `return` *Array* 多个Elment实例数组
+
+
 ### page.focus(selector)
 
 通过CSS选择器聚焦元素
@@ -256,7 +273,15 @@ npm install auto-chrome
 
 * `return` *Object* Elment实例
 
-选择元素，并生成远程引用对象
+选择单个元素，并生成远程引用对象
+
+#### elment.$$(selector)
+
+* `selector` *String* 
+
+* `return` *Array* 多个Elment实例数组
+
+选择多个元素，并生成远程引用对象
 
 #### elment.get(name)
 

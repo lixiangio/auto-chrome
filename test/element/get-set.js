@@ -1,4 +1,4 @@
-const autoChrome = require('..')
+const autoChrome = require('../..')
 const { sleep, signale } = autoChrome.helper
 
 async function run() {
@@ -21,11 +21,11 @@ async function run() {
 
    element = await element.$('.setting a')
 
-   let get = await element.get('innerHTML')
+   let get = await element.get('innerText')
 
    console.log(get)
 
-   let set = await element.set('innerHTML', '设定')
+   let set = await element.set('innerText', '设定')
 
    console.log(set)
 

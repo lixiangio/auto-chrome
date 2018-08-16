@@ -1,4 +1,4 @@
-const autoChrome = require('..')
+const autoChrome = require('../..')
 const { sleep, signale } = autoChrome.helper
 
 async function run() {
@@ -15,12 +15,19 @@ async function run() {
 
    await sleep(3000)
 
-   let value = await chrome.page.evaluate(function (selector) {
-      let innerText = document.querySelector(selector).innerText
-      return innerText
-   }, '.login')
+   // let body = await chrome.page.$('body')
 
-   console.log(value)
+   // let header = await body.$('#header')
+
+   // let nav = await header.$$('nav > a')
+
+   let nav = await chrome.page.$$('#header nav > a')
+
+   let [, , element] = nav
+
+   let innerText = await element.get('innerText')
+
+   console.log(innerText)
 
 }
 

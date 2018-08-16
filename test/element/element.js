@@ -11,15 +11,11 @@ async function run() {
       // slowMo: 20, // 减速
    })
 
-   await chrome.page.goto('http://www.runoob.com/')
+   let page = await chrome.newPage('http://v.baidu.com/')
 
-   await sleep(3000)
+   let [key1, key2] = chrome.pages.keys()
 
-   await chrome.page.type('.search-desktop .placeholder', 'hellow word')
-
-   await sleep(500)
-
-   await chrome.keyboard.press("Enter")
+   console.log(key1)
 
 }
 
