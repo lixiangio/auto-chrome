@@ -11,16 +11,24 @@ async function run() {
       // slowMo: 20, // 减速
    })
 
-   await chrome.page.goto('http://www.runoob.com/')
+   let page = chrome.page
 
-   await sleep(3000)
+   await page.goto('http://www.runoob.com/')
 
-   await chrome.page.type('.search-desktop .placeholder', 'hellow word')
+   await sleep(1000)
+
+   let input = await page.$('.search-desktop .placeholder')
+
+   await input.focus()
+
+   await input.type('hellow word')
 
    await sleep(500)
 
-   await chrome.keyboard.press("Enter")
+   await page.keyboard.press("Enter")
 
 }
 
-run()
+run().catch(function (error) {
+   console.log(error)
+})

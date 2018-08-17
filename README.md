@@ -197,19 +197,6 @@ npm install auto-chrome
 
 * `return` *Array* 多个Elment实例数组
 
-
-#### page.focus(selector)
-
-通过CSS选择器聚焦元素
-
-* `selector` *String* CSS选择器
-
-#### page.getBoundingRect(selector)
-
-通过CSS选择器获取元素坐标，值由getBoundingClientRect()函数获取
-
-* `selector` *String* CSS选择器
-
 #### page.click(selector)
 
 通过CSS选择器点击元素
@@ -226,7 +213,7 @@ npm install auto-chrome
 
 * `options` *Object* 配置信息
 
-* `options.delay` *Number* 输入间隔时间，ms
+    * `delay` *Number* 输入间隔时间，ms
 
 #### page.scroll(selector)
 
@@ -255,6 +242,18 @@ npm install auto-chrome
 
    * `interval` *Number* 连续滑动的时间间隔，默认2000，单位ms
 
+#### page.focus(selector)
+
+通过CSS选择器聚焦元素
+
+* `selector` *String* CSS选择器
+
+#### page.getBoundingRect(selector)
+
+通过CSS选择器获取元素坐标，值由getBoundingClientRect()函数获取
+
+* `selector` *String* CSS选择器
+
 #### page.close()
 
 关闭标签
@@ -265,7 +264,7 @@ npm install auto-chrome
 
 用于实现可追溯的远程elment，避免代码重复提交和重复执行。
 
-对于大的对象或DOM对象，直接返回它们并不现实，因此需要一种远程操作的增量机制。devtools通过保存注入函数的执行结果并生成查询id，实现状态追踪，这样就可以在已有远程结果基于上做增量操作。
+对于大的对象或DOM对象，直接返回它们并不现实，因此需要一种远程操作的增量机制。devtools通过保存注入函数的执行结果并返回引用id，实现状态追踪，这样就可以在已有远程结果基于上做增量操作。
 
 #### elment.$(selector)
 

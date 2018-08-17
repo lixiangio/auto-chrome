@@ -25,9 +25,7 @@ async function run() {
 
    console.log(get)
 
-   let set = await element.set('innerText', '设定')
-
-   console.log(set)
+   await element.set('innerText', '设定')
 
    if (element) {
 

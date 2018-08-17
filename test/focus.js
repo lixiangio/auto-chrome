@@ -11,12 +11,20 @@ async function run() {
       // slowMo: 20, // 减速
    })
 
-   let page = await chrome.newPage('http://v.baidu.com/')
+   await chrome.page.goto('http://www.runoob.com/')
 
-   let [key1, key2] = chrome.pages.keys()
+   // await sleep(3000)
 
-   console.log(key1)
+   await chrome.page.focus('.search-desktop .placeholder')
+
+   // await chrome.page.goto('http://www.91vps.com/register.asp')
+
+   // await sleep(3000)
+
+   // await chrome.page.focus('#username')
 
 }
 
-run()
+run().catch(function (error) {
+   console.log(error)
+})

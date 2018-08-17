@@ -1,4 +1,4 @@
-const autoChrome = require('../../')
+const autoChrome = require('../..')
 const { sleep, signale } = autoChrome.helper
 
 async function run() {
@@ -7,19 +7,20 @@ async function run() {
       executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
       args: ['--start-maximized'],
-      // devtools: true,
+      devtools: false,
       // slowMo: 20, // 减速
    })
 
-   await chrome.page.goto('https://www.so.com/')
+   await chrome.page.goto('http://www.runoob.com/')
 
-   await sleep(1000)
+   await sleep(2000)
 
-   await chrome.page.type('#input', 'hellow word')
+   let element = await chrome.page.$('#footer')
 
-   await sleep(500)
+   // console.log(element)
 
-   await chrome.keyboard.press("Enter")
+   await element.scroll()
+
 
 }
 
