@@ -11,25 +11,11 @@ async function run() {
       // slowMo: 20, // 减速
    })
 
-   // let page = await chrome.newPage('https://www.szhkch.com/')
+   let frameTree = await chrome.page.send('Page.getFrameTree')
 
-   let page = await chrome.newPage('https://www.so.com/')
+   console.log(frameTree.frameTree)
 
-   // await page.awaitLoading.catch(info => {
-   //    signale.warn(info, 999)
-   // })
-
-   // await sleep(2000)
-
-   // await chrome.mouse.scroll(0, 500)
-
-   // await sleep(1000)
-
-   // await page.close()
-
-   // await sleep(2000)
-
-   // await chrome.close()
+   console.log(frameTree.frameTree.childFrames)
 
 }
 
