@@ -12,13 +12,30 @@ async function run() {
       // slowMo: 20, // 减速
    })
 
-   let page = await chrome.newPage()
+   // chrome.on('navigation', page => {
+   //    console.log(page.targetId)
+   // })
 
-   await page.goto('https://www.baidu.com/')
+   // let page = await chrome.newPage('https://www.baidu.com/')
 
-   await sleep(2000)
+   await chrome.page.goto('https://www.baidu.com/')
 
-   await page.click('a[href="https://www.hao123.com"]')
+   // await sleep(2000)
+
+   await chrome.page.goto('http://v.baidu.com/')
+
+   await chrome.page.goto('https://www.hao123.com/')
+
+   await chrome.page.goto('https://cn.vuejs.org/')
+
+   await chrome.page.goto('http://johnny-five.io/')
+
+   await chrome.page.goto('https://github.com/')
+
+   // await chrome.page.goto('https://www.hao123.com/')
+
+
+   // await page.click('a[href="https://www.hao123.com"]')
 
 }
 

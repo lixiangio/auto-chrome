@@ -1,4 +1,4 @@
-const autoChrome = require('../../')
+const autoChrome = require('..')
 const { sleep, signale } = autoChrome.helper
 
 
@@ -16,9 +16,15 @@ async function run() {
       console.log(page.targetId)
    })
 
-   let page = await chrome.newPage('http://v.baidu.com/')
+   await chrome.newPage('https://www.baidu.com/')
 
-   await page.goto('https://www.hao123.com')
+   await sleep(2000)
+
+   await chrome.newPage('https://www.baidu.com/')
+
+   await sleep(2000)
+
+   await chrome.initPage()
 
 }
 

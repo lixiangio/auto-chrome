@@ -11,13 +11,45 @@ async function run() {
       // slowMo: 20, // 减速
    })
 
-   // let page = await chrome.newPage('https://www.szhkch.com/')
+   let page = await chrome.newPage('https://www.szhkch.com/')
 
-   let page = await chrome.newPage('https://www.so.com/')
+   // let page = await chrome.newPage('https://www.so.com/')
 
    // await page.awaitLoading.catch(info => {
    //    signale.warn(info, 999)
    // })
+
+   let data = await page.evaluate(async function () {
+
+      let elements = document.querySelectorAll("body a")
+
+      let key = Math.round(Math.random() * (elements.length * 0.3))
+
+      let element = elements[key]
+
+      if (element) {
+
+         let tagetElement = element
+
+         // 迭代到根节点，将所有父级style.display设为block
+         while (element) {
+            element = element.parentNode
+            if (element && element.style) {
+               element.style.display = "block"
+            }
+         }
+
+         let { x, y, width, height } = await tagetElement.getBoundingClientRect()
+
+         let { innerText, href } = tagetElement
+
+         return { x, y, width, height, innerText, href };
+
+      }
+
+   })
+
+   console.log(data)
 
    // await sleep(2000)
 
