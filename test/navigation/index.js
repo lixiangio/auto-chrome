@@ -34,7 +34,6 @@ async function run() {
 
    // await chrome.page.goto('https://www.hao123.com/')
 
-
    // await page.click('a[href="https://www.hao123.com"]')
 
 }

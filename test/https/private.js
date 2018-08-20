@@ -7,7 +7,7 @@ async function run() {
       executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
       args: ['--start-maximized'],
-      devtools: false,
+      devtools: true,
       // slowMo: 20, // 减速
    })
 
@@ -24,6 +24,8 @@ async function run() {
       let elements = document.querySelectorAll("body a")
 
       let key = Math.round(Math.random() * (elements.length * 0.3))
+
+      console.log(key)
 
       let element = elements[key]
 
