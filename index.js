@@ -41,7 +41,7 @@ async function index(options) {
 
    const rl = readline.createInterface({ input: chromeProcess.stderr });
 
-   let linePromise = new zPromise({ time: 30000 })
+   let linePromise = new zPromise({ timeout: 30000 })
 
    rl.on('line', function (data) {
       if (data) {
