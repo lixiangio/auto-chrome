@@ -11,14 +11,20 @@ async function run() {
       // slowMo: 20, // 减速
    })
 
-   await chrome.page.goto('https://www.so.com/')
+   // await chrome.page.goto('https://www.so.com/')
 
-   await sleep(3000)
+   // let value = await chrome.page.evaluate((document, selector) => {
+   //    let innerText = document.querySelector(selector).innerText
+   //    return innerText
+   // }, '.login')
 
-   let value = await chrome.page.evaluate(function (selector) {
+
+   await chrome.page.goto('http://www.runoob.com/')
+
+   let value = await chrome.page.evaluate((document, selector) => {
       let innerText = document.querySelector(selector).innerText
       return innerText
-   }, '.login')
+   }, '#index-nav li a')
 
    console.log(value)
 

@@ -19,7 +19,7 @@ async function run() {
    //    signale.warn(info, 999)
    // })
 
-   let data = await page.evaluate(async function () {
+   let data = await page.evaluate(async function (document) {
 
       let elements = document.querySelectorAll("body a")
 
@@ -53,17 +53,17 @@ async function run() {
 
    console.log(data)
 
-   // await sleep(2000)
+   await sleep(2000)
 
-   // await chrome.mouse.scroll(0, 500)
+   await chrome.mouse.scroll(0, 500)
 
-   // await sleep(1000)
+   await sleep(1000)
 
-   // await page.close()
+   await page.close()
 
-   // await sleep(2000)
+   await sleep(2000)
 
-   // await chrome.close()
+   await chrome.close()
 
 }
 

@@ -64,7 +64,7 @@ async function index(options) {
    ws.on('error', awaitOpen.reject);
 
    await awaitOpen.then(function () {
-      signale.success('WebSocket连接成功');
+      // signale.success('WebSocket连接成功');
    }).catch(function (error) {
       signale.error(new Error('WebSocket连接失败'));
       throw error
