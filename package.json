@@ -15,5 +15,18 @@
     "timechain": "^1.1.1",
     "ws": "^6.0.0",
     "zpromise": "^1.2.0"
-  }
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiangle/auto-chrome.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xiangle/auto-chrome/issues"
+  },
+  "homepage": "https://github.com/xiangle/auto-chrome#readme"
 }
