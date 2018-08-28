@@ -3,7 +3,7 @@ const readline = require('readline');
 const WebSocket = require('ws')
 const Chrome = require('./lib/Chrome')
 const helper = require('./lib/helper')
-const { signale, zPromise } = helper
+const { logger, zPromise } = helper
 
 async function index(options) {
 
@@ -32,7 +32,7 @@ async function index(options) {
    let chromeProcess = childProcess.spawn(executablePath, args)
 
    chromeProcess.once('exit', () => {
-      signale.success('浏览器关闭');
+      logger.success('浏览器关闭');
    });
 
    chromeProcess.once('message', (message) => {
@@ -64,9 +64,9 @@ async function index(options) {
    ws.on('error', awaitOpen.reject);
 
    await awaitOpen.then(function () {
-      // signale.success('WebSocket连接成功');
+      // logger.success('WebSocket连接成功');
    }).catch(function (error) {
-      signale.error(new Error('WebSocket连接失败'));
+      logger.error(new Error('WebSocket连接失败'));
       throw error
    })
 

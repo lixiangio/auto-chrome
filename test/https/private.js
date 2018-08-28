@@ -1,5 +1,5 @@
 const autoChrome = require('../../')
-const { sleep, signale } = autoChrome.helper
+const { sleep, logger } = autoChrome.helper
 
 async function run() {
 
@@ -16,7 +16,7 @@ async function run() {
    // let page = await chrome.newPage('https://www.so.com/')
 
    // await page.awaitLoading.catch(info => {
-   //    signale.warn(info, 999)
+   //    logger.warn(info, 999)
    // })
 
    let data = await page.evaluate(async function (document) {
