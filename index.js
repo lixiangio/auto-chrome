@@ -1,3 +1,5 @@
+"use strict"
+
 const childProcess = require('child_process')
 const readline = require('readline');
 const WebSocket = require('ws')

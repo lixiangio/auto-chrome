@@ -11,6 +11,8 @@ async function run() {
       // slowMo: 20, // 减速
    })
 
+   console.log(1212)
+
    let page = await chrome.newPage('https://www.szhkch.com/')
 
    // let page = await chrome.newPage('https://www.so.com/')
@@ -18,6 +20,8 @@ async function run() {
    // await page.awaitLoading.catch(info => {
    //    logger.warn(info, 999)
    // })
+
+   console.log(999)
 
    let data = await page.evaluate(async function (document) {
 
@@ -50,6 +54,8 @@ async function run() {
       }
 
    })
+
+   console.log(1111)
 
    console.log(data)
 
