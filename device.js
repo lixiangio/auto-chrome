@@ -19,8 +19,8 @@ module.exports = [
     'name': 'Chrome',
     'userAgent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36',
     'viewport': {
-      'width': 1440,
-      'height': 600,
+      'width': 1920,
+      'height': 1080,
       'hasTouch': true
     }
   },
@@ -463,90 +463,6 @@ module.exports = [
       'width': 812,
       'height': 375,
       'deviceScaleFactor': 3,
-      'mobile': true,
-      'hasTouch': true,
-      'isLandscape': true
-    }
-  },
-  {
-    'name': 'Kindle Fire HDX',
-    'userAgent': 'Mozilla/5.0 (Linux; U; en-us; KFAPWI Build/JDQ39) AppleWebKit/535.19 (KHTML, like Gecko) Silk/3.13 Safari/535.19 Silk-Accelerated=true',
-    'viewport': {
-      'width': 800,
-      'height': 1280,
-      'deviceScaleFactor': 2,
-      'mobile': true,
-      'hasTouch': true,
-      'isLandscape': false
-    }
-  },
-  {
-    'name': 'Kindle Fire HDX landscape',
-    'userAgent': 'Mozilla/5.0 (Linux; U; en-us; KFAPWI Build/JDQ39) AppleWebKit/535.19 (KHTML, like Gecko) Silk/3.13 Safari/535.19 Silk-Accelerated=true',
-    'viewport': {
-      'width': 1280,
-      'height': 800,
-      'deviceScaleFactor': 2,
-      'mobile': true,
-      'hasTouch': true,
-      'isLandscape': true
-    }
-  },
-  {
-    'name': 'LG Optimus L70',
-    'userAgent': 'Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; LGMS323 Build/KOT49I.MS32310c) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/69.0.3452.0 Mobile Safari/537.36',
-    'viewport': {
-      'width': 384,
-      'height': 640,
-      'deviceScaleFactor': 1.25,
-      'mobile': true,
-      'hasTouch': true,
-      'isLandscape': false
-    }
-  },
-  {
-    'name': 'LG Optimus L70 landscape',
-    'userAgent': 'Mozilla/5.0 (Linux; U; Android 4.4.2; en-us; LGMS323 Build/KOT49I.MS32310c) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/69.0.3452.0 Mobile Safari/537.36',
-    'viewport': {
-      'width': 640,
-      'height': 384,
-      'deviceScaleFactor': 1.25,
-      'mobile': true,
-      'hasTouch': true,
-      'isLandscape': true
-    }
-  },
-  {
-    'name': 'Microsoft Lumia 550',
-    'userAgent': 'Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; Microsoft; Lumia 550) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Mobile Safari/537.36 Edge/14.14263',
-    'viewport': {
-      'width': 640,
-      'height': 360,
-      'deviceScaleFactor': 2,
-      'mobile': true,
-      'hasTouch': true,
-      'isLandscape': false
-    }
-  },
-  {
-    'name': 'Microsoft Lumia 950',
-    'userAgent': 'Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; Microsoft; Lumia 950) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Mobile Safari/537.36 Edge/14.14263',
-    'viewport': {
-      'width': 360,
-      'height': 640,
-      'deviceScaleFactor': 4,
-      'mobile': true,
-      'hasTouch': true,
-      'isLandscape': false
-    }
-  },
-  {
-    'name': 'Microsoft Lumia 950 landscape',
-    'userAgent': 'Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; Microsoft; Lumia 950) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Mobile Safari/537.36 Edge/14.14263',
-    'viewport': {
-      'width': 640,
-      'height': 360,
-      'deviceScaleFactor': 4,
       'mobile': true,
       'hasTouch': true,
       'isLandscape': true
