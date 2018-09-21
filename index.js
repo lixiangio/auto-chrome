@@ -34,11 +34,11 @@ async function index(options) {
    let chromeProcess = childProcess.spawn(executablePath, args)
 
    chromeProcess.once('exit', () => {
-      logger.success('浏览器关闭');
+      logger.log('浏览器关闭');
    });
 
    chromeProcess.once('message', (message) => {
-      console.log("message", message);
+      logger.log("message", message);
    });
 
    const rl = readline.createInterface({ input: chromeProcess.stderr });
