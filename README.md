@@ -259,6 +259,13 @@ npm install auto-chrome
 
 关闭标签
 
+#### page.goBack()
+
+导航到上一个历史标签页
+
+#### page.goForward()
+
+导航到下一个历史标签页
 
 
 ### class: Element
