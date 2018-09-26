@@ -1,7 +1,7 @@
 "use strict"
 
 const childProcess = require('child_process')
-const readline = require('readline');
+const readline = require('readline')
 const WebSocket = require('ws')
 const Chrome = require('./lib/Chrome')
 const helper = require('./lib/helper')
@@ -57,7 +57,14 @@ async function index(options) {
       throw error
    })
 
-   let ws = new WebSocket(webSocketDebuggerUrl, { perMessageDeflate: false });
+   let ws
+   
+   try {
+      ws = new WebSocket(webSocketDebuggerUrl, { perMessageDeflate: false });
+   } catch (error) {
+      chromeProcess.kill()
+      throw error
+   }
 
    let awaitOpen = new zPromise()
 

@@ -7,3 +7,8 @@
 #### 0.5.0
 
 * 增加page.goBack()、page.goForward()
+
+
+#### 0.5.1
+
+* 捕获由ws模块抛出的未知bug，退出浏览器
