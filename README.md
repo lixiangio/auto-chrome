@@ -2,13 +2,13 @@
 
 使用Node.js自动化控制Chrome或Chromium，基于[chrome devtools](https://chromedevtools.github.io/devtools-protocol/)协议的高仿真用户行为模拟器。
 
-借鉴于puppeteer，选择重写是因为在实际应用中puppeteer存在各种奇怪的bug，导致线程阻塞且难以被修复。另外，puppeteer不会支持所有chrome devtools协议，同时又缺乏可扩展性和易用性，一些实现细节也不符合预期。
+借鉴于puppeteer，选择重写是因为在实际应用中puppeteer存在各种奇怪的bug，导致线程阻塞且难以被修复，一些实现细节也不符合预期。
 
-chrome devtools协议api过于原始，对开发者而言并不友好。puppeteer api在设计上大量延用了chrome devtools协议的原始风格，虽然功能丰富，但是易用性却很糟糕。
+chrome devtools协议api过于原始，对开发者而言并不友好。puppeteer api在设计上大量延用了chrome devtools协议的原始风格，虽然功能丰富，但是操作过于繁琐。
 
-auto-chrome以简洁和易用为设计原则，重点简化常见应用场景，只提供常用功能，通过扩展的方式满足定制化需求。
+auto-chrome以简洁和易用为设计原则，重点简化常见应用场景，通过扩展的方式满足定制化需求。
 
-项目中部分引用了puppeteer源码，目前依然处于初级阶段，很多功能并不完善。
+项目中引用了少量puppeteer源码，目前依然处于初级阶段，很多功能并不完善。
 
 
 ## 特性
@@ -70,13 +70,15 @@ npm install auto-chrome
 
     * `emulate` *Object* 设备仿真，该配置对于初始标签不太凑效，可能由于初始targetCreated事件并没有被捕获。
 
-        * `mobile` *Boolean* 移动设备，默认false
+        * `viewport` *Object* 
 
-        * `hasTouch` *Boolean* 启用触控，默认false
+            * `mobile` *Boolean* 移动设备，默认false
 
-        * `width` *Number* 屏幕宽度，默认自适应屏幕宽度
+            * `width` *Number* 屏幕宽度，默认自适应屏幕宽度
 
-        * `width` *Number* 屏幕高度，默认自适应屏幕高度
+            * `height` *Number* 屏幕高度，默认自适应屏幕高度
+
+        * `isTouch` *Boolean* 启用触控，默认false
 
         * `geolocation` *Object* 地理位置，使用Google地图坐标
 
@@ -92,13 +94,13 @@ npm install auto-chrome
 
      * `ignoreHTTPSErrors` *Boolean* 忽略https错误，默认true
 
-#### chrome.mouse
-
-鼠标操作，page.mouse的快捷引用
-
 #### chrome.keyboard
 
 鼠标操作，page.keyboard的快捷引用
+
+#### chrome.mouse
+
+鼠标操作，page.mouse的快捷引用
 
 #### chrome.touch
 
@@ -156,7 +158,7 @@ npm install auto-chrome
 
     * `mobile` *Boolean* 移动设备
 
-    * `hasTouch` *Boolean* 启用触控
+    * `isTouch` *Boolean* 触控模式
 
     * `width` *Number* 屏幕宽度
 
@@ -216,12 +218,6 @@ npm install auto-chrome
 
     * `delay` *Number* 输入间隔时间，ms
 
-#### page.scroll(selector)
-
-滚动至指定元素可视区域，会尽量沿Y轴居中
-
-* `selector` *String* CSS选择器
-
 #### page.send(method, params)
 
 发送包含session的原始chrome devtools协议消息
@@ -231,17 +227,11 @@ npm install auto-chrome
 * `params` *Object* 参数
 
 
-#### page.touchScroll(selector, options)
+#### page.scroll(selector)
 
-通过touch方式，滚动页面至指定元素可视区
+滚动至指定元素可视区域，会尽量沿Y轴居中
 
-* `selector` *String* CSS选择器字符串
-
-* `options` *Object* 选项
-
-   * `steps` *Number* touchmove的触发次数，默认50
-
-   * `interval` *Number* 连续滑动的时间间隔，默认2000，单位ms
+* `selector` *String* CSS选择器
 
 #### page.focus(selector)
 

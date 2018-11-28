@@ -1,6 +1,6 @@
-const puppeteer = require('../../');
+const autoChrome = require('../..')
 
-const { sleep } = require('../helper.js');
+const { sleep } = autoChrome.helper
 
 /**
  * 
@@ -8,7 +8,7 @@ const { sleep } = require('../helper.js');
  */
 async function run() {
 
-   let browser = await puppeteer.launch({
+   let browser = await autoChrome({
       headless: false,
       devtools: true,
       args: [``]
@@ -23,7 +23,7 @@ async function run() {
 
    await sleep(1000)
 
-   await page.goto('D:/Nodejs/git-project/auto-chrome/test/click/index.html')
+   await page.goto('D:/Nodejs/Project/auto-chrome/test/click/index.html')
 
    // 触发isTrusted:false click
    // await page.$eval('#button', element => {

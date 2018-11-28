@@ -7,7 +7,7 @@ const { sleep, logger } = autoChrome.helper
 async function run() {
 
    let chrome = await autoChrome({
-      executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
+      executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
       args: ['--start-maximized'],
       ignoreHTTPSErrors: true, //忽略https错误
@@ -15,7 +15,7 @@ async function run() {
       headless: false,
    })
 
-   await chrome.page.goto('D:/Nodejs/git-project/auto-chrome/test/dialog/index.html')
+   await chrome.page.goto('D:/Nodejs/Project/auto-chrome/test/dialog/index.html')
 
    // await chrome.mouse.move(300, 300)
 

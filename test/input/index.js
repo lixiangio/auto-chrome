@@ -1,11 +1,14 @@
 const autoChrome = require('../../')
+const config = require('../helpers/config')
+
 const { sleep, logger } = autoChrome.helper
+const { executablePath, userDataDir } = config
 
 async function run() {
 
    let chrome = await autoChrome({
-      executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
-      userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
+      executablePath,
+      userDataDir,
       args: ['--start-maximized'],
       // devtools: true,
       // slowMo: 20, // 减速

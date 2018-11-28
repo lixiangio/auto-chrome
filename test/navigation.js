@@ -1,18 +1,19 @@
-const autoChrome = require('../..')
-const devices = require('../../device')
-const { sleep, logger } = autoChrome.helper
+"use strict"
+
+const autoChrome = require('..')
+const devices = require('../device')
+const config = require('./helpers/config')
+
+const { sleep } = autoChrome.helper
+const { executablePath, userDataDir } = config
 
 let { userAgent, viewport } = devices['iPhone 6'];
-
-// console.log(userAgent)
-
-// console.log(viewport)
 
 async function run() {
 
    let chrome = await autoChrome({
-      executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
-      userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
+      executablePath,
+      userDataDir,
       args: [
          `--user-agent=${userAgent}`,
          '--start-maximized'
@@ -23,7 +24,7 @@ async function run() {
             latitude: 22.6088954693,
             accuracy: 14
          },
-         ...viewport
+         viewport
       },
       // devtools: true,
    })
@@ -83,6 +84,7 @@ async function run() {
    await sleep(1500)
 
    await await chrome.page.goBack()
+
 }
 
 run().catch(function (error) {

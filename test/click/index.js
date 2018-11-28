@@ -1,15 +1,28 @@
 const autoChrome = require('../../')
+const devices = require('../../device')
+
 const { sleep, logger } = autoChrome.helper
+
+const { userAgent, viewport, isTouch } = devices['iPhone 6'];
+// const { userAgent, viewport, isTouch } = devices['Chrome'];
 
 async function run() {
 
    let chrome = await autoChrome({
-      executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
+      executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
-      args: ['--start-maximized'],
+      devtools: true,
+      args: [
+         `--user-agent=${userAgent}`,
+         '--start-maximized'
+      ],
+      emulate: {
+         isTouch,
+         viewport,
+      }
    })
 
-   await chrome.page.goto('D:/Nodejs/git-project/auto-chrome/test/click/index.html')
+   await chrome.page.goto('D:/Nodejs/Project/auto-chrome/test/click/index.html')
 
    await chrome.page.evaluate(function () {
 
@@ -17,7 +30,7 @@ async function run() {
          let { localName, style } = ev.target
          if (localName === 'li') {
             style.backgroundColor = "#ea3c3c"
-            console.log(ev.type)
+            // console.log(ev.type)
          }
       })
 
@@ -29,19 +42,24 @@ async function run() {
          }
       })
 
+      window.addEventListener('touchstart', function (ev) {
+         let { localName, style } = ev.target
+         console.log(ev.type)
+      })
+
    })
 
    await sleep(1000)
 
-   await chrome.mouse.click(500, 300)
+   await chrome.clicker.click(500, 300)
 
    await sleep(1000)
 
-   await chrome.mouse.click(600, 500)
+   await chrome.clicker.click(600, 500)
 
    await sleep(1000)
 
-   await chrome.mouse.click(700, 200)
+   await chrome.clicker.click(700, 200)
 
    // await chrome.mouse.move(500, 300)
 

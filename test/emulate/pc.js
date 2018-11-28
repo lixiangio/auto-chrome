@@ -1,3 +1,5 @@
+"use strict"
+
 const autoChrome = require('../..')
 const devices = require('../../device')
 
@@ -5,12 +7,10 @@ let { userAgent, viewport } = devices['Chrome'];
 
 const { width, height } = viewport
 
-console.log(userAgent)
-
 async function run() {
 
    let chrome = await autoChrome({
-      executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
+      executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
       args: [
          `--user-agent=${userAgent}`,
@@ -23,12 +23,10 @@ async function run() {
             latitude: 22.6088954693,
             accuracy: 14
          },
-         screenWidth: width,
-         screenHeight: height,
-         width: width,
-         height: Math.floor(height * 0.87),
-         // mobile: true,
-         // ...viewport
+         viewport:{
+            width: width,
+            height: Math.floor(height * 0.87),
+         },
       },
       // devtools: true,
       // slowMo: 20, // 减速

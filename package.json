@@ -1,10 +1,11 @@
 {
   "name": "auto-chrome",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "使用Node.js操作Chrome或Chromium，高仿真的用户行为模拟器",
   "main": "index.js",
   "scripts": {
     "dev": "node test/",
+    "debug": "@powershell -Command $env:DEBUG = '*'; node ./test/init",
     "test": "set debut=chrome:message:other & node test"
   },
   "author": "",

@@ -1,11 +1,12 @@
 const autoChrome = require('../../')
 const devices = require('../../device')
-const { sleep, logger } = autoChrome.helper
+const config = require('../helpers/config')
 
+const { sleep, logger } = autoChrome.helper
 let { userAgent, viewport } = devices['iPhone 6'];
 
 const { width, height } = viewport
-
+const { executablePath, userDataDir } = config
 
 /**
  * 
@@ -14,8 +15,8 @@ const { width, height } = viewport
 async function run() {
 
    let chrome = await autoChrome({
-      executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
-      userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
+      executablePath,
+      userDataDir,
       args: [
          // `--profile-directory=Default`, 
          `--user-agent=${userAgent}`,
@@ -28,7 +29,7 @@ async function run() {
       // slowMo: 20, // 减速
    })
 
-   await chrome.newPage('D:/Nodejs/git-project/auto-chrome/test/touch/index.html')
+   await chrome.newPage('D:/Nodejs/Project/auto-chrome/test/touch/index.html')
 
    await sleep(2000)
 
@@ -70,7 +71,7 @@ async function run() {
    //    steps: 50
    // })
 
-   await chrome.page.touchScroll('#taget')
+   await chrome.page.scroll('#taget')
 
 }
 

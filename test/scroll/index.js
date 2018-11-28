@@ -7,14 +7,14 @@ const { sleep, logger } = autoChrome.helper
 async function run() {
 
    let chrome = await autoChrome({
-      executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
+      executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
       args: ['--start-maximized'],
       devtools: false,
       // slowMo: 20, // 减速
    })
 
-   await chrome.page.goto('D:/Nodejs/git-project/auto-chrome/test/scroll/index.html')
+   await chrome.page.goto('D:/Nodejs/Project/auto-chrome/test/scroll/index.html')
 
    await sleep(1000)
 
@@ -22,15 +22,15 @@ async function run() {
 
    await sleep(1000)
 
-   await chrome.mouse.scroll(0, 500)
+   await chrome.clicker.scroll(0, 500)
 
    await sleep(1000)
 
-   await chrome.mouse.scroll(0, 300)
+   await chrome.clicker.scroll(0, 300)
 
    await sleep(1000)
 
-   await chrome.mouse.scroll(0, 700)
+   await chrome.clicker.scroll(0, 700)
 
    await sleep(1000)
 

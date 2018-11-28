@@ -5,8 +5,10 @@ let { userAgent, viewport } = devices['iPhone 6'];
 
 async function run() {
 
+   console.log(viewport)
+   
    let chrome = await autoChrome({
-      executablePath: "D:/Project/clicker/client/chrome-win32/chrome.exe",
+      executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
       args: [
          `--user-agent=${userAgent}`,
@@ -18,7 +20,7 @@ async function run() {
             latitude: 22.6088954693,
             accuracy: 14
          },
-         ...viewport
+         viewport
       }
    })
 

@@ -5,19 +5,20 @@ const readline = require('readline')
 const WebSocket = require('ws')
 const Chrome = require('./lib/Chrome')
 const helper = require('./lib/helper')
+
 const { logger, zPromise } = helper
 
 async function index(options) {
 
-   let { args = [], executablePath, ignoreHTTPSErrors, emulate } = options
+   let { args = [], userDataDir, headless, devtools, executablePath } = options
 
    args.push("--remote-debugging-port=9222")
 
-   if (options.userDataDir) {
-      args.push(`--user-data-dir=${options.userDataDir}`)
+   if (userDataDir) {
+      args.push(`--user-data-dir=${userDataDir}`)
    }
 
-   if (options.headless) {
+   if (headless) {
       args.push(
          '--headless',
          '--disable-gpu',
@@ -26,7 +27,7 @@ async function index(options) {
       );
    }
 
-   if (options.devtools) {
+   if (devtools) {
       args.push('--auto-open-devtools-for-tabs');
    }
 
@@ -58,7 +59,7 @@ async function index(options) {
    })
 
    let ws
-   
+
    try {
       ws = new WebSocket(webSocketDebuggerUrl, { perMessageDeflate: false });
    } catch (error) {
@@ -73,11 +74,13 @@ async function index(options) {
    ws.on('error', awaitOpen.reject);
 
    await awaitOpen.then(function () {
-      // logger.success('WebSocket连接成功');
+      logger.success('Chrome 连接成功');
    }).catch(function (error) {
-      logger.error(new Error('WebSocket连接失败'));
+      logger.error(new Error('Chrome 连接失败'));
       throw error
    })
+
+   let { ignoreHTTPSErrors, emulate } = options
 
    let chrome = new Chrome(ws, ignoreHTTPSErrors, emulate)
 
