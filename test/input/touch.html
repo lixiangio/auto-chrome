@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8">
+   <title>close</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+</head>
+
+<body>
+
+   <div>
+      <input>
+      <div id="box"></div>
+   </div>
+
+</body>
+
+<script>
+   let c = 0
+   let box = window.document.getElementById('box')
+   window.addEventListener('touchstart', function (ev) {
+      box.innerText = `touchstart${c++}`
+   })
+
+   window.addEventListener('touchmove', function (ev) {
+      box.innerText = `touchmove${c++}`
+   })
+
+   window.addEventListener('touchend', function (ev) {
+      box.innerText = `touchend${c++}`
+   })
+
+   window.addEventListener('keydown', function (ev) {
+      box.innerText = `keydown${c++}，${ev.type}`
+   })
+
+   window.addEventListener('keydown', function (ev) {
+      box.innerText = `id:${c++}，
+      type:${ev.type}，
+      char:${ev.char}，
+      detail:${ev.detail}，
+      key:${ev.key}，
+      code:${ev.code}
+      `
+   })
+
+   window.addEventListener('keyup', function (ev) {
+      box.innerText = `id:${c++}，
+      type:${ev.type}，
+      char:${ev.char}，
+      detail:${ev.detail}，
+      key:${ev.key}，
+      code:${ev.code}
+      `
+   })
+
+</script>
+
+</html>

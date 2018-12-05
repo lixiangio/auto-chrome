@@ -5,7 +5,7 @@ let { userAgent, viewport } = devices['iPhone 6'];
 
 const { width, height } = viewport
 
-async function run() {
+async function main() {
 
    let chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
@@ -33,4 +33,4 @@ async function run() {
 
 }
 
-run()
+main()

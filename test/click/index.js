@@ -3,15 +3,15 @@ const devices = require('../../device')
 
 const { sleep, logger } = autoChrome.helper
 
-const { userAgent, viewport, isTouch } = devices['iPhone 6'];
-// const { userAgent, viewport, isTouch } = devices['Chrome'];
+// const { userAgent, viewport, isTouch } = devices['iPhone 6'];
+const { userAgent, viewport, isTouch } = devices['Chrome'];
 
-async function run() {
+async function main() {
 
    let chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
-      devtools: true,
+      // devtools: true,
       args: [
          `--user-agent=${userAgent}`,
          '--start-maximized'
@@ -24,7 +24,7 @@ async function run() {
 
    await chrome.page.goto('D:/Nodejs/Project/auto-chrome/test/click/index.html')
 
-   await chrome.page.evaluate(function () {
+   await chrome.page.run(function () {
 
       window.addEventListener('mousemove', function (ev) {
          let { localName, style } = ev.target
@@ -65,4 +65,4 @@ async function run() {
 
 }
 
-run()
+main()

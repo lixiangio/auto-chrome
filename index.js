@@ -8,7 +8,7 @@ const helper = require('./lib/helper')
 
 const { logger, zPromise } = helper
 
-async function index(options) {
+async function main(options) {
 
    let { args = [], userDataDir, headless, devtools, executablePath } = options
 
@@ -31,25 +31,25 @@ async function index(options) {
       args.push('--auto-open-devtools-for-tabs');
    }
 
-   // 异步启动浏览器
+   // 启动浏览器
    let chromeProcess = childProcess.spawn(executablePath, args)
 
    chromeProcess.once('exit', () => {
       logger.log('浏览器关闭');
-   });
+   })
 
    chromeProcess.once('message', (message) => {
       logger.log("message", message);
-   });
+   })
 
-   const rl = readline.createInterface({ input: chromeProcess.stderr });
+   let rl = readline.createInterface({ input: chromeProcess.stderr });
 
    let linePromise = new zPromise({ delay: 30000 })
 
    rl.on('line', function (data) {
-      if (data) {
-         data = data.replace('DevTools listening on ', '')
-         linePromise.resolve(data)
+      if (data.indexOf('ws://') >= 0) {
+         let url = data.replace('DevTools listening on ', '')
+         linePromise.resolve(url)
       }
    })
 
@@ -84,12 +84,12 @@ async function index(options) {
 
    let chrome = new Chrome(ws, ignoreHTTPSErrors, emulate)
 
-   await chrome.run()
+   await chrome.init()
 
    return chrome
 
 }
 
-index.helper = helper
+main.helper = helper
 
-module.exports = index
+module.exports = main

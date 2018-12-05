@@ -3,7 +3,7 @@ const devices = require('../../device')
 
 let { userAgent, viewport } = devices['iPhone 6'];
 
-async function run() {
+async function main() {
 
    let chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
@@ -26,7 +26,7 @@ async function run() {
 
    await chrome.newPage('https://www.baidu.com/')
 
-   let data = await chrome.page.evaluate(document => {
+   let data = await chrome.page.run(() => {
 
       return {
          "window.screen.height": window.screen.height,
@@ -41,4 +41,4 @@ async function run() {
 
 }
 
-run()
+main()

@@ -5,7 +5,7 @@ const autoChrome = require('../../')
 const { sleep } = autoChrome.helper
 
 
-async function run() {
+async function main() {
 
    let chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
@@ -31,4 +31,4 @@ async function run() {
 
 }
 
-run()
+main()

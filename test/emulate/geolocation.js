@@ -3,7 +3,7 @@ const devices = require('../../device')
 
 let { userAgent, viewport } = devices['iPhone 6'];
 
-async function run() {
+async function main() {
 
    console.log(viewport)
    
@@ -28,4 +28,4 @@ async function run() {
    
 }
 
-run()
+main()

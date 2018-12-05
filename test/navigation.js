@@ -7,9 +7,9 @@ const config = require('./helpers/config')
 const { sleep } = autoChrome.helper
 const { executablePath, userDataDir } = config
 
-let { userAgent, viewport } = devices['iPhone 6'];
+let { userAgent, viewport, isTouch } = devices['iPhone 6'];
 
-async function run() {
+async function main() {
 
    let chrome = await autoChrome({
       executablePath,
@@ -24,7 +24,8 @@ async function run() {
             latitude: 22.6088954693,
             accuracy: 14
          },
-         viewport
+         viewport,
+         isTouch
       },
       // devtools: true,
    })
@@ -45,7 +46,9 @@ async function run() {
 
    await sleep(2000)
 
-   let elment = await chrome.page.$('.c-result:nth-child(3)')
+   let elments = await chrome.page.$$('#results .c-result')
+
+   let elment = elments[6]
 
    await elment.scroll()
 
@@ -53,13 +56,19 @@ async function run() {
 
    await elment.click()
 
+   // await elment.evaluate({
+   //    func: (element) => {
+   //       element.style.border = "1px solid #ed0000"
+   //    },
+   // })
+
    await sleep(1500)
 
-   await await chrome.page.goBack()
+   await await chrome.page.prev()
 
    await sleep(1500)
 
-   await await chrome.page.goForward()
+   await await chrome.page.next()
 
    await sleep(1500)
 
@@ -75,18 +84,18 @@ async function run() {
 
    await sleep(2000)
 
-   await await chrome.page.goBack()
-   
+   await await chrome.page.prev()
+
    await sleep(2000)
 
-   await await chrome.page.goBack()
+   await await chrome.page.prev()
 
    await sleep(1500)
 
-   await await chrome.page.goBack()
+   await await chrome.page.prev()
 
 }
 
-run().catch(function (error) {
+main().catch(function (error) {
    console.log(error)
 })

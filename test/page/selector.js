@@ -1,7 +1,7 @@
-const autoChrome = require('../../')
+const autoChrome = require('../..')
 const { sleep, logger } = autoChrome.helper
 
-async function run() {
+async function main() {
 
    let chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
@@ -15,10 +15,14 @@ async function run() {
 
    await sleep(3000)
 
-   let value = await chrome.page.$('.login')
+   let $ = await chrome.page.$('.login, #input')
 
-   console.log(value)
+   console.log($)
+
+   let $$ = await chrome.page.$$('.login, #input')
+
+   console.log($$)
 
 }
 
-run()
+main()

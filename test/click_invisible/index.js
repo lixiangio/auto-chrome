@@ -6,7 +6,7 @@ const { sleep } = autoChrome.helper
  * 
  * @param {*} device 用户配置目录名称
  */
-async function run() {
+async function main() {
 
    let browser = await autoChrome({
       headless: false,
@@ -45,4 +45,4 @@ async function run() {
 
 }
 
-run()
+main()

@@ -40,7 +40,7 @@ npm install auto-chrome
 
 ## chrome devtools术语
 
-* `Target` 表示浏览器中的多种对象，可以是browser、page、iframe、other类型其中之一。当type为page类型时，targetId对应于主框架的frame id。
+* `Target` 表示浏览器中的某个目标对象，可以是browser、page、iframe、other类型之一。当type为page类型时，targetId对应于主框架的frame id。
 
 * `Session` session机制用于创建多个会话，可以为每个Target绑定独立的session，也可以让多个Target共享同一个session。
 
@@ -53,10 +53,7 @@ npm install auto-chrome
 * `Context` JavaScript运行时所处的的上下文，由于页面内可能包含Frame，每个Frame拥有独立的运行时，因此需要生成唯一contextId来区分它们。
 
 
-
-## API
-
-### class: autoChrome(options)
+## autoChrome(options)
 
 * `options` *Object* 全局实例配置选项，优先级低于page
 
@@ -94,35 +91,39 @@ npm install auto-chrome
 
      * `ignoreHTTPSErrors` *Boolean* 忽略https错误，默认true
 
-#### chrome.keyboard
+* `return` *Chrome* Chrome类实例
+
+## class: Chrome
+
+### chrome.keyboard
 
 鼠标操作，page.keyboard的快捷引用
 
-#### chrome.mouse
+### chrome.mouse
 
 鼠标操作，page.mouse的快捷引用
 
-#### chrome.touch
+### chrome.touch
 
 触控设备操作，page.touch的快捷引用
 
-#### chrome.pages
+### chrome.pages
 
 包含所有打开page的Map对象
 
-#### chrome.page
+### chrome.page
 
 当前激活状态的page
 
-#### chrome.newPage(url)
+### chrome.newPage(url)
 
 * `url` *String* 打开网页地址，缺省时打开空白网页
 
-#### chrome.closePage(pageId)
+### chrome.closePage(pageId)
 
 * `pageId` *String* 要删除page的id
 
-#### chrome.send(method, params)
+### chrome.send(method, params)
 
 发送原始的chrome devtools协议消息
 
@@ -130,27 +131,26 @@ npm install auto-chrome
 
 * `params` *Object* 参数
 
-#### chrome.close()
+### chrome.close()
 
 关闭浏览器
 
 
+## class: Page
 
-### class: Page
-
-#### page.mouse
+### page.mouse
 
 鼠标实例
 
-#### page.keyboard
+### page.keyboard
 
 键盘实例
 
-#### page.touch
+### page.touch
 
 触控设备实例
 
-#### page.emulate(options)
+### page.emulate(options)
 
 设备仿真，直接调用该方法可能导致混乱，正常应该由事件驱动在创建标签执行page.emulate()，手动调用会存在延时覆盖问题。
 
@@ -172,19 +172,21 @@ npm install auto-chrome
 
         * `accuracy` *Number* 精准度
 
-#### page.goto(url)
+### page.goto(url)
 
 在标签内打开新网页
 
-#### page.evaluate(pageFunction, arg, arg, ...)
+### page.run(pageFunction, ...arg)
 
 向页面注入js函数，获取执行后的返回值
 
 * `pageFunction` *Function* 注入函数
 
-* `arg` *\** 可序列化参数，不支持函数
+* `arg` * 可序列化参数，不支持函数
 
-#### page.$(selector)
+* `return` *Object* 远程资源相关信息，[RemoteObject](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#type-RemoteObject)
+
+### page.$(selector)
 
 选择单个元素
 
@@ -192,7 +194,7 @@ npm install auto-chrome
 
 * `return` *Object* 单个Elment实例
 
-#### page.$$(selector)
+### page.$$(selector)
 
 选择多个元素
 
@@ -200,13 +202,13 @@ npm install auto-chrome
 
 * `return` *Array* 多个Elment实例数组
 
-#### page.click(selector)
+### page.click(selector)
 
 通过CSS选择器点击元素
 
 * `selector` *String* CSS选择器
 
-#### page.type(selector, text, options)
+### page.type(selector, text, options)
 
 通过CSS选择器聚焦input，输入文本
 
@@ -218,7 +220,7 @@ npm install auto-chrome
 
     * `delay` *Number* 输入间隔时间，ms
 
-#### page.send(method, params)
+### page.send(method, params)
 
 发送包含session的原始chrome devtools协议消息
 
@@ -227,33 +229,33 @@ npm install auto-chrome
 * `params` *Object* 参数
 
 
-#### page.scroll(selector)
+### page.scroll(selector)
 
 滚动至指定元素可视区域，会尽量沿Y轴居中
 
 * `selector` *String* CSS选择器
 
-#### page.focus(selector)
+### page.focus(selector)
 
 通过CSS选择器聚焦元素
 
 * `selector` *String* CSS选择器
 
-#### page.getBoundingRect(selector)
+### page.getBoundingRect(selector)
 
 通过CSS选择器获取元素坐标，值由getBoundingClientRect()函数获取
 
 * `selector` *String* CSS选择器
 
-#### page.close()
+### page.close()
 
 关闭标签
 
-#### page.goBack()
+### page.goBack()
 
 导航到上一个历史标签页
 
-#### page.goForward()
+### page.goForward()
 
 导航到下一个历史标签页
 
@@ -264,7 +266,7 @@ npm install auto-chrome
 
 对于大的对象或DOM对象，直接返回它们并不现实，因此需要一种远程操作的增量机制。devtools通过保存注入函数的执行结果并返回引用id，实现状态追踪，这样就可以在已有远程结果基于上做增量操作。
 
-#### elment.$(selector)
+### elment.$(selector)
 
 * `selector` *String* 
 
@@ -272,7 +274,7 @@ npm install auto-chrome
 
 选择单个元素，并生成远程引用对象
 
-#### elment.$$(selector)
+### elment.$$(selector)
 
 * `selector` *String* 
 
@@ -280,13 +282,13 @@ npm install auto-chrome
 
 选择多个元素，并生成远程引用对象
 
-#### elment.get(name)
+### elment.get(name)
 
 * `name` *String* 
 
 获取elment中指定的属性值
 
-#### elment.set(name, value)
+### elment.set(name, value)
 
 * `name` *String* 属性名称
 
@@ -294,26 +296,26 @@ npm install auto-chrome
 
 设置elment中指定的属性值
 
-#### elment.value(value)
+### elment.value(value)
 
 * `value` *String* 赋值
 
 获取或设置值，仅适用于表单元素
 
-#### elment.focus()
+### elment.focus()
 
 聚焦元素
 
-#### elment.getBoundingRect()
+### elment.getBoundingRect()
 
 通过getBoundingClientRect函数获取元素大小、坐标信息
 
 
 
 
-### class: Mouse
+## class: Mouse
 
-#### mouse.click(x, y, options)
+### mouse.click(x, y, options)
 
 新增模拟鼠标移动轨迹，原click可能出于效率考虑，只会触发一次mousemoved
 
@@ -324,7 +326,7 @@ click操作中已经包含了move，多数情况下不再需要单独模拟move�
    * `steps` *Number* mousemoved事件的触发次数，默认20
 
 
-#### mouse.move(x, y, options)
+### mouse.move(x, y, options)
 
 将steps默认值改为20，原值为1，即只触发一次。移动距离相同时，触发次数越少，对应的移动速度越快
 
@@ -333,7 +335,7 @@ click操作中已经包含了move，多数情况下不再需要单独模拟move�
    * `steps` *Number* 触发mousemoved事件的次数，默认值20
 
 
-#### mouse.scroll(x, y, step)
+### mouse.scroll(x, y, step)
 
 滚动至指定坐标，目前仅支持纵向滚动
 
@@ -345,9 +347,9 @@ click操作中已经包含了move，多数情况下不再需要单独模拟move�
 
 
 
-### class: Touch
+## class: Touch
 
-#### touch.slide({start, end, steps})
+### touch.slide({start, end, steps})
 
 模拟touch单点滑动手势
 
@@ -368,7 +370,7 @@ click操作中已经包含了move，多数情况下不再需要单独模拟move�
 * `delay` *Number* 触点释放前的停留时间，用于滑动惯性控制
 
 
-#### touch.scroll(x, y, options)
+### touch.scroll(x, y, options)
 
 通过touch滚动页面至指定的可视坐标
 

@@ -4,7 +4,7 @@ const { sleep, logger } = autoChrome.helper
 /**
  * @param {*} device 用户配置目录名称
  */
-async function run() {
+async function main() {
 
    let chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
@@ -19,7 +19,7 @@ async function run() {
 
    // await chrome.mouse.move(300, 300)
 
-   // await page.evaluate(async function () {
+   // await page.run(async function () {
 
    // })
 
@@ -30,4 +30,4 @@ async function run() {
 
 }
 
-run()
+main()

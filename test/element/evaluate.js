@@ -1,7 +1,7 @@
 const autoChrome = require('../..')
 const { sleep, logger } = autoChrome.helper
 
-async function run() {
+async function main() {
 
    let chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
@@ -13,7 +13,7 @@ async function run() {
 
    // await chrome.page.goto('https://www.so.com/')
 
-   // let value = await chrome.page.evaluate((document, selector) => {
+   // let value = await chrome.page.run((selector) => {
    //    let innerText = document.querySelector(selector).innerText
    //    return innerText
    // }, '.login')
@@ -21,7 +21,7 @@ async function run() {
 
    await chrome.page.goto('http://www.runoob.com/')
 
-   let value = await chrome.page.evaluate((document, selector) => {
+   let value = await chrome.page.run((selector) => {
       let innerText = document.querySelector(selector).innerText
       return innerText
    }, '#index-nav li a')
@@ -30,4 +30,4 @@ async function run() {
 
 }
 
-run()
+main()

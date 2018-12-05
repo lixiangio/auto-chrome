@@ -12,7 +12,7 @@ const { executablePath, userDataDir } = config
  * 
  * @param {*} device 用户配置目录名称
  */
-async function run() {
+async function main() {
 
    let chrome = await autoChrome({
       executablePath,
@@ -33,7 +33,7 @@ async function run() {
 
    await sleep(2000)
 
-   await chrome.page.evaluate(async function () {
+   await chrome.page.run(async function () {
 
       window.addEventListener('touchstart', function (ev) {
          let { localName, style } = ev.target
@@ -75,6 +75,6 @@ async function run() {
 
 }
 
-run().catch(function(error){
+main().catch(function(error){
    console.error(error)
 })

@@ -1,6 +1,6 @@
 {
   "name": "auto-chrome",
-  "version": "0.6.0",
+  "version": "0.6.4",
   "description": "使用Node.js操作Chrome或Chromium，高仿真的用户行为模拟器",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "debug": "^3.1.0",
     "loggercc": "^1.2.10",
     "timechain": "^1.2.0",
-    "ws": "^6.0.0",
+    "ws": "^6.1.2",
     "zpromise": "^1.2.2"
   },
   "directories": {

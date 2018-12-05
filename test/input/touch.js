@@ -1,7 +1,8 @@
-const autoChrome = require('../../')
+const autoChrome = require('../..')
 const config = require('../helpers/config')
 
 const { sleep, logger } = autoChrome.helper
+
 const { executablePath, userDataDir } = config
 
 async function main() {
@@ -10,20 +11,24 @@ async function main() {
       executablePath,
       userDataDir,
       args: ['--start-maximized'],
-      // devtools: true,
+      devtools: true,
       // slowMo: 20, // 减速
    })
 
-   await chrome.page.goto('https://www.so.com/')
+   let page = chrome.page
+
+   await chrome.page.goto('D:/Nodejs/Project/auto-chrome/test/input/touch.html')
 
    await sleep(1000)
 
-   await chrome.page.type('#input', 'hellow word')
+   let input = await page.$('input')
 
-   await sleep(500)
+   await input.click()
 
-   await chrome.keyboard.press("Enter")
+   await input.type('hellow你好吗')
 
 }
 
-main()
+main().catch(function (error) {
+   console.log(error)
+})

@@ -5,7 +5,7 @@ const { sleep, logger } = autoChrome.helper
 
 const { executablePath, userDataDir } = config
 
-async function run() {
+async function main() {
 
    let chrome = await autoChrome({
       executablePath,
@@ -23,7 +23,9 @@ async function run() {
 
    let input = await page.$('.search-desktop .placeholder')
 
-   await input.focus()
+   await input.scroll()
+
+   await input.click()
 
    await input.type('hellow word')
 
@@ -33,6 +35,6 @@ async function run() {
 
 }
 
-run().catch(function (error) {
+main().catch(function (error) {
    console.log(error)
 })
