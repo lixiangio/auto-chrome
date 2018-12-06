@@ -17,11 +17,11 @@ async function main() {
 
    let $ = await chrome.page.$('.login, #input')
 
-   console.log($)
+   console.log(!!$)
 
    let $$ = await chrome.page.$$('.login, #input')
 
-   console.log($$)
+   console.log($$.length)
 
 }
 

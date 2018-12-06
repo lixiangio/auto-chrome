@@ -1,8 +1,6 @@
 const autoChrome = require('../')
 const devices = require('../device')
 
-const { sleep, logger } = autoChrome.helper
-
 const { userAgent, viewport, isTouch } = devices['iPhone 6'];
 
 async function main() {
@@ -25,41 +23,38 @@ async function main() {
 
    await page.goto('https://m.so.com/')
 
-   await sleep(1000)
-
    let element = await page.click('#q')
-
-   await sleep(1000)
 
    await element.type('汽车')
 
-   // 触发加载
-   await page.keyboard.press("Enter")
-
-   // let elements = document.querySelectorAll($items)
-
-   // let sort = 0
-
-   // 遍历匹配url位置
-   // for (let element of elements) {
-
-   //    sort++
-   //    if (element.outerHTML.indexOf(url) >= 0) {
-   //       element.sort = sort
-   //       return element
-   //    }
-
-   // }
-
-   // // 找不到目标时随机选择element
-   // sort = 1 + Math.round(Math.random() * elements.length)
-
-   // return elements
-
-   // await sleep(3000)
+   // 触发导航
+   await Promise.all([
+      page.keyboard.press("Enter"),
+      page.waitNavigation()
+   ])
 
    let result = await page.run((url, $items) => {
-      return document
+
+      let elements = document.querySelectorAll($items)
+
+      let sort = 0
+
+      // 遍历匹配url位置
+      for (let element of elements) {
+
+         sort++
+         if (element.outerHTML.indexOf(url) >= 0) {
+            element.sort = sort
+            return element
+         }
+
+      }
+
+      // 找不到目标时随机选择element
+      sort = 1 + Math.round(Math.random() * elements.length)
+
+      return elements
+
    }, 'm.autohome.com.cn', `#main > .r-results > div[data-page='1'] > a`)
 
    console.log(result)

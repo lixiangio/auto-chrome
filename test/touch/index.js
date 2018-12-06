@@ -3,9 +3,10 @@ const devices = require('../../device')
 const config = require('../helpers/config')
 
 const { sleep, logger } = autoChrome.helper
-let { userAgent, viewport } = devices['iPhone 6'];
+let { userAgent, viewport, isTouch } = devices['iPhone 6'];
 
 const { width, height } = viewport
+
 const { executablePath, userDataDir } = config
 
 /**
@@ -24,8 +25,11 @@ async function main() {
          // `--window-position=0,0`,
          // `--window-size=${width}, ${height}`
       ],
-      emulate: viewport,
-      // devtools: true,
+      emulate: {
+         viewport,
+         isTouch
+      },
+      devtools: true,
       // slowMo: 20, // 减速
    })
 
@@ -35,19 +39,19 @@ async function main() {
 
    await chrome.page.run(async function () {
 
-      window.addEventListener('touchstart', function (ev) {
+      document.body.addEventListener('touchstart', function (ev) {
          let { localName, style } = ev.target
          style.backgroundColor = "#ea3c3c"
          console.log(ev.type)
       })
 
-      window.addEventListener('touchmove', function (ev) {
+      document.body.addEventListener('touchmove', function (ev) {
          let { localName, style } = ev.target
          style.backgroundColor = "#f79c9c"
          console.log(ev.type)
       })
 
-      window.addEventListener('touchend', function (ev) {
+      document.body.addEventListener('touchend', function (ev) {
          let { localName, style } = ev.target
          style.backgroundColor = "#ea3c3c"
          console.log(ev.type)
@@ -58,23 +62,23 @@ async function main() {
    await sleep(2000)
 
    // 横向
-   // await page.touch.slide({
-   //    start: { x: 700, y: 100 },
-   //    end: { x: 50, y: 100 },
-   //    steps: 20
-   // })
+   await chrome.page.touch.slide({
+      start: { x: 700, y: 100 },
+      end: { x: 50, y: 100 },
+      steps: 20
+   })
 
    // 纵向
-   // await page.touch.slide({
-   //    start: { x: 250, y: 500 },
-   //    end: { x: 250, y: 100 },
-   //    steps: 50
-   // })
+   await chrome.page.touch.slide({
+      start: { x: 250, y: 500 },
+      end: { x: 250, y: 100 },
+      steps: 50
+   })
 
    await chrome.page.scroll('#taget')
 
 }
 
-main().catch(function(error){
+main().catch(function (error) {
    console.error(error)
 })

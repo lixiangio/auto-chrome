@@ -17,11 +17,11 @@ async function main() {
 
    await chrome.page.focus('.search-desktop .placeholder')
 
-   // await chrome.page.goto('http://www.91vps.com/register.asp')
+   await chrome.page.goto('http://www.91vps.com/register.asp')
 
-   // await sleep(3000)
+   await sleep(3000)
 
-   // await chrome.page.focus('#username')
+   await chrome.page.focus('#username')
 
 }
 

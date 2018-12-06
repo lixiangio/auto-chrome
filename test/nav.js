@@ -5,9 +5,10 @@ const devices = require('../device')
 const config = require('./helpers/config')
 
 const { sleep } = autoChrome.helper
+
 const { executablePath, userDataDir } = config
 
-let { userAgent, viewport, isTouch } = devices['iPhone 6'];
+const { userAgent, viewport, isTouch } = devices['iPhone 6']
 
 async function main() {
 

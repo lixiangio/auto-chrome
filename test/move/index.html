@@ -34,6 +34,31 @@
          background-color: #888;
       }
    </style>
+   <script>
+      window.onload = function () {
+
+         let body = document.body
+
+         // window.addEventListener('mouseenter', function (ev) {
+         //    console.log('mouseenter', ev)
+         // })
+
+         body.addEventListener('click', function (ev) {
+            ev.target.style.backgroundColor = "#ea3c3c"
+            console.log('click', ev)
+         })
+
+         body.addEventListener('mousemove', function (ev) {
+            ev.target.style.backgroundColor = "#f79c9c"
+            console.log('mousemove', ev)
+         })
+
+         body.addEventListener('touchmove', function (ev) {
+            console.log(ev.type, ev)
+         })
+
+      }
+   </script>
 </head>
 
 <body>
@@ -7957,31 +7982,5 @@
    </div>
 
 </body>
-
-<script>
-   let body = document.body
-
-   // window.addEventListener('mouseenter', function (ev) {
-   //    console.log('mouseenter', ev)
-   // })
-
-   window.onload = function () {
-      console.log(888)
-   }
-
-   window.addEventListener('click', function (ev) {
-      ev.target.style.backgroundColor = "#ea3c3c"
-      console.log('click', ev)
-   })
-
-   window.addEventListener('mousemove', function (ev) {
-      ev.target.style.backgroundColor = "#f79c9c"
-      console.log('mousemove', ev)
-   })
-
-   window.addEventListener('touchmove', function (ev) {
-      console.log(ev.type, ev)
-   })
-</script>
 
 </html>

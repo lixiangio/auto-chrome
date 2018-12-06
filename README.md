@@ -53,6 +53,38 @@ npm install auto-chrome
 * `Context` JavaScript运行时所处的的上下文，由于页面内可能包含Frame，每个Frame拥有独立的运行时，因此需要生成唯一contextId来区分它们。
 
 
+## 注意事项
+
+### 页面导航
+
+浏览器导航事件可分为可预测和不可预测两种，由于触发导航的方式非常多，通过鼠标、键盘、JS脚本等方式均可能触发未知的导航事件。如果导航切换时序不正确，会产生上下文消息错乱的bug。
+
+#### 可预测导航
+
+对于chrome.newPage()、page.goto()这类明确包含导航行为的显性操作，autoChrome进行内部封装，在使用时不需要做额外的处理。
+
+#### 不可预测导航
+
+对于不可预测导航，如按下Enter键、鼠标点击绑定了跳转事件的非链接元素触发导航行为。
+
+autoChrome无法预判一个操作是否会触发导航，只能由用户来指定某个步骤是否需要等待导航结束后再继续执行。
+
+有时候会出现连用户自己也无法确定某个操作是否会触发导航，比如当点击一个动态元素就会存在不确定性。
+
+```js
+// 等待导航键盘示例代码
+await Promise.all([
+    page.keyboard.press("Enter"),
+    page.waitNavigation()
+])
+
+// 鼠标示例
+await Promise.all([
+    page.click("#input"),
+    page.waitNavigation()
+])
+```
+
 ## autoChrome(options)
 
 * `options` *Object* 全局实例配置选项，优先级低于page

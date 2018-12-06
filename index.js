@@ -47,10 +47,12 @@ async function main(options) {
    let linePromise = new zPromise({ delay: 30000 })
 
    rl.on('line', function (data) {
+
       if (data.indexOf('ws://') >= 0) {
          let url = data.replace('DevTools listening on ', '')
          linePromise.resolve(url)
       }
+      
    })
 
    // 获取webSocket连接地址

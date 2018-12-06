@@ -21,7 +21,7 @@ async function main() {
          viewport,
       }
    })
-
+   
    await chrome.page.goto('D:/Nodejs/Project/auto-chrome/test/click/index.html')
 
    await chrome.page.run(function () {
@@ -51,15 +51,15 @@ async function main() {
 
    await sleep(1000)
 
-   await chrome.clicker.click(500, 300)
+   // await chrome.clicker.click(500, 300)
 
-   await sleep(1000)
+   // await sleep(1000)
 
-   await chrome.clicker.click(600, 500)
+   // await chrome.clicker.click(600, 500)
 
-   await sleep(1000)
+   // await sleep(1000)
 
-   await chrome.clicker.click(700, 200)
+   // await chrome.clicker.click(700, 200)
 
    // await chrome.mouse.move(500, 300)
 

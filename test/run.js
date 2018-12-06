@@ -1,3 +1,5 @@
+"use strict"
+
 const autoChrome = require('../')
 const devices = require('../device')
 
@@ -33,7 +35,7 @@ async function main() {
       return document
    }, 'm.autohome.com.cn', `#main > .r-results > div[data-page='1'] > a`)
 
-   // console.log(result)
+   console.log(result)
 
    let element = await page.$('#q')
 

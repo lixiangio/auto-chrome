@@ -20,8 +20,10 @@ module.exports = [
     'userAgent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36',
     'viewport': {
       'width': 1920,
-      'height': 1080
-    }
+      'height': 1080,
+      'mobile': false
+    },
+    'isTouch': true
   },
   {
     'name': 'iPad Pro',
