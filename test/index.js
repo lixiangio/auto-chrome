@@ -3,6 +3,8 @@ const devices = require('../device')
 
 const { userAgent, viewport, isTouch } = devices['iPhone 6'];
 
+const { sleep } = autoChrome.helper
+
 async function main() {
 
    let chrome = await autoChrome({
