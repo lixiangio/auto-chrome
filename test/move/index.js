@@ -2,7 +2,7 @@
 
 const autoChrome = require('../../')
 
-const { sleep } = autoChrome.helper
+const { sleep } = require('../helpers')
 
 
 async function main() {

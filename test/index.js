@@ -1,9 +1,9 @@
+"use strict"
+
 const autoChrome = require('../')
 const devices = require('../device')
 
-const { userAgent, viewport, isTouch } = devices['iPhone 6'];
-
-const { sleep } = autoChrome.helper
+const { userAgent, viewport, isTouch } = devices['iPhone 6']
 
 async function main() {
 
@@ -29,11 +29,8 @@ async function main() {
 
    await element.type('汽车')
 
-   // 触发导航
-   await Promise.all([
-      page.keyboard.press("Enter"),
-      page.waitNavigation()
-   ])
+   // 回车，触发并等待导航结束
+   await page.enter()
 
    let result = await page.run((url, $items) => {
 

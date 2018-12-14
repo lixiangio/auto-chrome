@@ -1,5 +1,5 @@
 const autoChrome = require('../../')
-const { sleep, logger } = autoChrome.helper
+const { sleep, logger } = require('../helpers')
 
 async function main() {
 
@@ -13,13 +13,7 @@ async function main() {
 
    let page = await chrome.newPage('https://www.szhkch.com/')
 
-   // let page = await chrome.newPage('https://www.so.com/')
-
-   // await page.awaitLoading.catch(info => {
-   //    logger.warn(info, 999)
-   // })
-
-   let data = await page.run(async function () {
+   await page.run(async function () {
 
       let elements = document.querySelectorAll("body a")
 

@@ -1,7 +1,7 @@
 const autoChrome = require('../../')
 const devices = require('../../device')
 
-const { sleep, logger } = autoChrome.helper
+const { sleep, logger } = require('../helpers')
 
 // const { userAgent, viewport, isTouch } = devices['iPhone 6'];
 const { userAgent, viewport, isTouch } = devices['Chrome'];

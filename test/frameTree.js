@@ -1,5 +1,4 @@
-const autoChrome = require('../../')
-const { sleep, logger } = autoChrome.helper
+const autoChrome = require('..')
 
 async function main() {
 

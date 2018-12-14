@@ -2,7 +2,7 @@ const autoChrome = require('../../')
 const devices = require('../../device')
 const config = require('../helpers/config')
 
-const { sleep, logger } = autoChrome.helper
+const { sleep, logger } = require('../helpers')
 let { userAgent, viewport, isTouch } = devices['iPhone 6'];
 
 const { width, height } = viewport

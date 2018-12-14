@@ -1,7 +1,7 @@
 const autoChrome = require('../..')
 const config = require('../helpers/config')
 
-const { sleep, logger } = autoChrome.helper
+const { sleep, logger } = require('../helpers')
 
 const { executablePath, userDataDir } = config
 

@@ -4,8 +4,6 @@ const devices = require('../../device')
 let { userAgent, viewport } = devices['iPhone 6'];
 
 async function main() {
-
-   console.log(viewport)
    
    let chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",

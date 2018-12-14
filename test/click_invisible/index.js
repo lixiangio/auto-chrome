@@ -1,6 +1,5 @@
-const autoChrome = require('../..')
-
-const { sleep } = autoChrome.helper
+const autoChrome = require('../../')
+const { sleep } = require('../helpers')
 
 /**
  * 

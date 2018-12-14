@@ -1,1 +1,3 @@
 [1127/001208.535:ERROR:http_transport_win.cc(273)] WinHttpSendRequest: The operation timed out (0x2ee2)
+[1210/233337.693:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[1213/172311.417:ERROR:file_io.cc(89)] ReadExactly: expected 40, observed 0

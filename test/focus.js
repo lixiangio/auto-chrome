@@ -1,5 +1,6 @@
+"use strict"
+
 const autoChrome = require('..')
-const { sleep, logger } = autoChrome.helper
 
 async function main() {
 
@@ -11,17 +12,11 @@ async function main() {
       // slowMo: 20, // 减速
    })
 
+   return
+
    await chrome.page.goto('http://www.runoob.com/')
 
-   // await sleep(3000)
-
    await chrome.page.focus('.search-desktop .placeholder')
-
-   await chrome.page.goto('http://www.91vps.com/register.asp')
-
-   await sleep(3000)
-
-   await chrome.page.focus('#username')
 
 }
 

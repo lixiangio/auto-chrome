@@ -1,5 +1,5 @@
 const autoChrome = require('../../');
-const { sleep, logger } = autoChrome.helper
+const { sleep, logger } = require('../helpers')
 
 /**
  * @param {*} device 用户配置目录名称

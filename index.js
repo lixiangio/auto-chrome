@@ -6,7 +6,7 @@ const WebSocket = require('ws')
 const Chrome = require('./lib/Chrome')
 const helper = require('./lib/helper')
 
-const { logger, zPromise } = helper
+const { logger, timerPromise } = helper
 
 async function main(options) {
 
@@ -35,7 +35,7 @@ async function main(options) {
    let chromeProcess = childProcess.spawn(executablePath, args)
 
    chromeProcess.once('exit', () => {
-      logger.log('浏览器关闭');
+      logger.info('浏览器关闭');
    })
 
    chromeProcess.once('message', (message) => {
@@ -44,32 +44,38 @@ async function main(options) {
 
    let rl = readline.createInterface({ input: chromeProcess.stderr });
 
-   let linePromise = new zPromise({ delay: 30000 })
+   let linePromise = new timerPromise(30000)
 
    rl.on('line', function (data) {
 
       if (data.indexOf('ws://') >= 0) {
+
          let url = data.replace('DevTools listening on ', '')
+
          linePromise.resolve(url)
+
       }
-      
+
    })
 
    // 获取webSocket连接地址
-   let webSocketDebuggerUrl = await linePromise.catch(function (error) {
+   let webSocketUrl = await linePromise.catch(error => {
       throw error
    })
 
-   let ws
-
    try {
-      ws = new WebSocket(webSocketDebuggerUrl, { perMessageDeflate: false });
+
+      var ws = new WebSocket(webSocketUrl, { perMessageDeflate: false });
+
    } catch (error) {
+
       chromeProcess.kill()
+      
       throw error
+
    }
 
-   let awaitOpen = new zPromise()
+   let awaitOpen = new timerPromise(30000)
 
    ws.on('open', awaitOpen.resolve);
 
@@ -91,7 +97,5 @@ async function main(options) {
    return chrome
 
 }
-
-main.helper = helper
 
 module.exports = main
