@@ -16,14 +16,38 @@ async function main() {
 
    await page.goto('https://www.baidu.com/')
 
+   let el = await page.$('#head')
+
+   console.log(page.contextId)
+
+   console.log(el.objectId)
+
+   el = await page.$('a')
+
+   console.log(el.objectId)
+
+   el = await page.$('#kw')
+
+   console.log(el.objectId)
+
+   return
+
    await page.goto('http://v.baidu.com/')
+
+   await page.click('xxx')
 
    await page.goto('https://www.hao123.com/')
 
+   await page.click('xxx')
+
    await page.goto('https://cn.vuejs.org/')
+
+   await page.click('xxx')
 
    await page.goto('http://johnny-five.io/')
 
+   await page.click('xxx')
+   
    await page.goto('https://github.com/')
 
    await page.goto('https://www.hao123.com/')
