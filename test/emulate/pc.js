@@ -5,7 +5,7 @@ const devices = require('../../device')
 
 let { userAgent, viewport } = devices['Chrome'];
 
-const { width, height } = viewport
+console.log(viewport)
 
 async function main() {
 
@@ -14,8 +14,7 @@ async function main() {
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
       args: [
          `--user-agent=${userAgent}`,
-         '--start-maximized',
-         // `--window-size=${width}, ${height}`
+         '--start-maximized'
       ],
       emulate: {
          geolocation: {
@@ -23,31 +22,30 @@ async function main() {
             latitude: 22.6088954693,
             accuracy: 14
          },
-         viewport:{
-            width: width,
-            height: Math.floor(height * 0.87),
-         },
+         viewport,
       },
       // devtools: true,
       // slowMo: 20, // 减速
    })
 
-   await chrome.newPage('https://www.so.com/')
+   // await chrome.newPage('http://cn.screenresolution.org/')
 
-   let data = await chrome.page.run(() => {
+   await chrome.newPage('http://pingmu.zh-ang.com/')
 
-      return {
-         "window.screen.height": window.screen.height,
-         "window.screen.availHeight": window.screen.availHeight,
-         "window.innerHeight": window.innerHeight,
-         "window.screen.width": window.screen.width,
-         "window.screen.availWidth": window.screen.availWidth,
-         "window.innerWidth": window.innerWidth,
-      }
+   // let data = await chrome.page.run(() => {
 
-   })
+   //    return {
+   //       "window.screen.height": window.screen.height,
+   //       "window.screen.availHeight": window.screen.availHeight,
+   //       "window.innerHeight": window.innerHeight,
+   //       "window.screen.width": window.screen.width,
+   //       "window.screen.availWidth": window.screen.availWidth,
+   //       "window.innerWidth": window.innerWidth,
+   //    }
 
-   console.log(data)
+   // })
+
+   // console.log(data)
 
 }
 
