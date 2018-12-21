@@ -82,9 +82,9 @@ async function main(options) {
    ws.on('error', awaitOpen.reject);
 
    await awaitOpen.then(function () {
-      logger.success('Chrome 连接成功');
+      logger.success('Chrome连接成功');
    }).catch(function (error) {
-      logger.error(new Error('Chrome 连接失败'));
+      logger.error(new Error('Chrome连接失败'));
       throw error
    })
 

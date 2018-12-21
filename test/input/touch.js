@@ -12,7 +12,6 @@ async function main() {
       userDataDir,
       args: ['--start-maximized'],
       devtools: true,
-      // slowMo: 20, // 减速
    })
 
    let page = chrome.page

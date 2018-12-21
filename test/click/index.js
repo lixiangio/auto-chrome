@@ -3,8 +3,8 @@ const devices = require('../../device')
 
 const { sleep, logger } = require('../helpers')
 
-// const { userAgent, viewport, isTouch } = devices['iPhone 6'];
-const { userAgent, viewport, isTouch } = devices['Chrome'];
+// const { userAgent, viewport } = devices['iPhone 6'];
+const { userAgent, viewport } = devices['Chrome'];
 
 async function main() {
 
@@ -17,7 +17,6 @@ async function main() {
          '--start-maximized'
       ],
       emulate: {
-         isTouch,
          viewport,
       }
    })

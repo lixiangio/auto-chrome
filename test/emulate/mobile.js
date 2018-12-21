@@ -18,7 +18,6 @@ async function main() {
             latitude: 22.6088954693,
             accuracy: 14
          },
-         isTouch: true,
          viewport
       },
       // devtools: true,

@@ -13,7 +13,7 @@ async function main() {
       args: [``]
    })
 
-   let [page] = await browser.pages()
+   let [page] = browser.pages
 
    // await page.setViewport({
    //    width: 0,

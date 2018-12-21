@@ -1,6 +1,4 @@
 const autoChrome = require('../../')
-const { sleep, logger } = require('../helpers')
-
 
 async function main() {
 
@@ -9,7 +7,6 @@ async function main() {
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
       args: ['--start-maximized'],
       devtools: false,
-      // slowMo: 20, // 减速
    })
 
    let page = await chrome.newPage('https://www.baidu.com/')

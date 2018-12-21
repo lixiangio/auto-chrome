@@ -3,7 +3,7 @@ const devices = require('../../device')
 const config = require('../helpers/config')
 
 const { sleep, logger } = require('../helpers')
-let { userAgent, viewport, isTouch } = devices['iPhone 6'];
+let { userAgent, viewport } = devices['iPhone 6'];
 
 const { width, height } = viewport
 
@@ -26,11 +26,9 @@ async function main() {
          // `--window-size=${width}, ${height}`
       ],
       emulate: {
-         viewport,
-         isTouch
+         viewport
       },
-      devtools: true,
-      // slowMo: 20, // 减速
+      // devtools: true,
    })
 
    await chrome.newPage('D:/Nodejs/Project/auto-chrome/test/touch/index.html')

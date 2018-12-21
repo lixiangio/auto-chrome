@@ -1,9 +1,7 @@
 "use strict"
 
 const autoChrome = require('../../')
-
 const { sleep } = require('../helpers')
-
 
 async function main() {
 
@@ -12,22 +10,23 @@ async function main() {
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
       args: ['--start-maximized'],
       devtools: false,
-      // slowMo: 20, // 减速
    })
 
-   await chrome.page.goto('D:/Nodejs/Project/auto-chrome/test/move/index.html')
+   let { page } = chrome
+
+   page.goto('D:/Nodejs/Project/auto-chrome/test/move/index.html')
 
    await sleep(1500)
 
-   await chrome.clicker.move(300, 100)
+   await page.clicker.move(300, 100)
 
-   await chrome.clicker.move(600, 600)
+   await page.clicker.move(600, 600)
 
-   await chrome.clicker.click(300, 500)
+   await page.clicker.click(300, 500)
 
-   await chrome.clicker.click(600, 100)
+   await page.clicker.click(600, 100)
 
-   await chrome.clicker.click(1000, 350)
+   await page.clicker.click(1000, 350)
 
 }
 

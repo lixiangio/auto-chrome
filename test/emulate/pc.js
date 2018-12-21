@@ -25,7 +25,6 @@ async function main() {
          viewport,
       },
       // devtools: true,
-      // slowMo: 20, // 减速
    })
 
    // await chrome.newPage('http://cn.screenresolution.org/')

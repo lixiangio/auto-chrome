@@ -26,7 +26,6 @@ async function main() {
          viewport
       },
       // devtools: true,
-      // slowMo: 20, // 减速
    })
 
    await chrome.newPage('https://map.baidu.com/mobile/webapp/index/index/')

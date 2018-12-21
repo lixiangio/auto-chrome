@@ -8,7 +8,6 @@ async function main() {
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
       args: ['--start-maximized'],
       devtools: true,
-      // slowMo: 20, // 减速
    })
 
    let page = await chrome.newPage('https://www.szhkch.com/')

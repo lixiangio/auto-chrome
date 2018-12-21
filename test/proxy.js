@@ -3,7 +3,7 @@
 const autoChrome = require('..')
 const devices = require('../device')
 
-const { userAgent, viewport, isTouch } = devices['iPhone 6']
+const { userAgent, viewport } = devices['iPhone 6']
 
 async function main() {
 
@@ -17,7 +17,6 @@ async function main() {
          '--proxy-server=14.157.100.237:21341'
       ],
       emulate: {
-         isTouch,
          viewport,
       }
    })

@@ -7,7 +7,6 @@ async function main() {
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
       args: ['--start-maximized'],
       devtools: false,
-      // slowMo: 20, // 减速
    })
 
    let frameTree = await chrome.page.send('Page.getFrameTree')

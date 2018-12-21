@@ -11,7 +11,6 @@ async function main() {
       userDataDir,
       args: ['--start-maximized'],
       // devtools: true,
-      // slowMo: 20, // 减速
    })
 
    await chrome.page.goto('https://www.so.com/')

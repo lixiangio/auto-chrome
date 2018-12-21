@@ -7,7 +7,7 @@ const { sleep } = require('./helpers')
 
 const { executablePath, userDataDir } = config
 
-const { userAgent, viewport, isTouch } = devices['iPhone 6']
+const { userAgent, viewport } = devices['iPhone 6']
 
 async function main() {
 
@@ -16,7 +16,9 @@ async function main() {
       userDataDir,
       args: [
          `--user-agent=${userAgent}`,
-         '--start-maximized'
+         '--start-maximized',
+         '--enable-touchview',
+         '--enabled'
       ],
       emulate: {
          geolocation: {
@@ -24,8 +26,7 @@ async function main() {
             latitude: 22.6088954693,
             accuracy: 14
          },
-         viewport,
-         isTouch
+         viewport
       },
       // devtools: true,
    })

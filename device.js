@@ -22,8 +22,7 @@ module.exports = [
       'screenWidth': 1920,
       'screenHeight': 1080,
       'mobile': false
-    },
-    'isTouch': true
+    }
   },
   {
     'name': 'iPad Pro',
@@ -33,8 +32,7 @@ module.exports = [
       'screenHeight': 1366,
       'deviceScaleFactor': 1,
       'mobile': true
-    },
-    'isTouch': true
+    }
   },
   {
     'name': 'iPad landscape',
@@ -44,8 +42,7 @@ module.exports = [
       'screenHeight': 768,
       'deviceScaleFactor': 2,
       'mobile': true
-    },
-    'isTouch': true,
+    }
   },
   {
     'name': 'iPad Mini',
@@ -55,8 +52,7 @@ module.exports = [
       'screenHeight': 1024,
       'deviceScaleFactor': 2,
       'mobile': true
-    },
-    'isTouch': true
+    }
   },
   {
     'name': 'iPad Mini landscape',
@@ -66,8 +62,7 @@ module.exports = [
       'screenHeight': 768,
       'deviceScaleFactor': 2,
       'mobile': true
-    },
-    'isTouch': true,
+    }
   },
   {
     'name': 'iPad Pro landscape',
@@ -77,8 +72,7 @@ module.exports = [
       'screenHeight': 1024,
       'deviceScaleFactor': 2,
       'mobile': true
-    },
-    'isTouch': true,
+    }
   },
   {
     'name': 'iPhone 4',
@@ -88,8 +82,7 @@ module.exports = [
       'screenHeight': 480,
       'deviceScaleFactor': 2,
       'mobile': true
-    },
-    'isTouch': true
+    }
   },
   {
     'name': 'iPhone 4 landscape',
@@ -99,8 +92,7 @@ module.exports = [
       'screenHeight': 320,
       'deviceScaleFactor': 2,
       'mobile': true
-    },
-    'isTouch': true,
+    }
   },
   {
     'name': 'iPhone 5',
@@ -110,8 +102,7 @@ module.exports = [
       'screenHeight': 568,
       'deviceScaleFactor': 2,
       'mobile': true
-    },
-    'isTouch': true
+    }
   },
   {
     'name': 'iPhone 5 landscape',
@@ -121,8 +112,7 @@ module.exports = [
       'screenHeight': 320,
       'deviceScaleFactor': 2,
       'mobile': true
-    },
-    'isTouch': true,
+    }
   },
   {
     'name': 'iPhone 6',
@@ -132,8 +122,7 @@ module.exports = [
       'screenHeight': 667,
       'deviceScaleFactor': 2,
       'mobile': true
-    },
-    'isTouch': true
+    }
   },
   {
     'name': 'iPhone 6 landscape',
@@ -143,8 +132,7 @@ module.exports = [
       'screenHeight': 375,
       'deviceScaleFactor': 2,
       'mobile': true
-    },
-    'isTouch': true
+    }
   },
   {
     'name': 'iPhone 6 Plus',
@@ -154,8 +142,7 @@ module.exports = [
       'screenHeight': 736,
       'deviceScaleFactor': 3,
       'mobile': true
-    },
-    'isTouch': true,
+    }
   },
   {
     'name': 'iPhone 6 Plus landscape',
@@ -165,8 +152,7 @@ module.exports = [
       'screenHeight': 414,
       'deviceScaleFactor': 3,
       'mobile': true,
-    },
-    'isTouch': true
+    }
   },
   {
     'name': 'iPhone 7',
@@ -176,8 +162,7 @@ module.exports = [
       'screenHeight': 667,
       'deviceScaleFactor': 2,
       'mobile': true,
-    },
-    'isTouch': true
+    }
   },
   {
     'name': 'iPhone 7 landscape',
@@ -187,8 +172,7 @@ module.exports = [
       'screenHeight': 375,
       'deviceScaleFactor': 2,
       'mobile': true,
-    },
-    'isTouch': true
+    }
   },
   {
     'name': 'iPhone 7 Plus',
@@ -198,8 +182,7 @@ module.exports = [
       'screenHeight': 736,
       'deviceScaleFactor': 3,
       'mobile': true,
-    },
-    'isTouch': true
+    }
   },
   {
     'name': 'iPhone 7 Plus landscape',
@@ -208,8 +191,7 @@ module.exports = [
       'screenWidth': 736,
       'screenHeight': 414,
       'deviceScaleFactor': 3,
-      'mobile': true,
-      'isTouch': true,
+      'mobile': true
     }
   },
   {
@@ -219,8 +201,7 @@ module.exports = [
       'screenWidth': 375,
       'screenHeight': 667,
       'deviceScaleFactor': 2,
-      'mobile': true,
-      'isTouch': true,
+      'mobile': true
     }
   },
   {
@@ -230,8 +211,7 @@ module.exports = [
       'screenWidth': 667,
       'screenHeight': 375,
       'deviceScaleFactor': 2,
-      'mobile': true,
-      'isTouch': true,
+      'mobile': true
     }
   },
   {
@@ -242,8 +222,7 @@ module.exports = [
       'screenHeight': 736,
       'deviceScaleFactor': 3,
       'mobile': true
-    },
-    'isTouch': true,
+    }
   },
   {
     'name': 'iPhone 8 Plus landscape',
@@ -253,8 +232,7 @@ module.exports = [
       'screenHeight': 414,
       'deviceScaleFactor': 3,
       'mobile': true
-    },
-    'isTouch': true,
+    }
   },
   {
     'name': 'iPhone SE',
@@ -264,8 +242,7 @@ module.exports = [
       'screenHeight': 568,
       'deviceScaleFactor': 2,
       'mobile': true
-    },
-    'isTouch': true,
+    }
   },
   {
     'name': 'iPhone SE landscape',
@@ -275,8 +252,7 @@ module.exports = [
       'screenHeight': 320,
       'deviceScaleFactor': 2,
       'mobile': true
-    },
-    'isTouch': true,
+    }
   },
   {
     'name': 'iPhone X',
@@ -286,8 +262,7 @@ module.exports = [
       'screenHeight': 812,
       'deviceScaleFactor': 3,
       'mobile': true
-    },
-    'isTouch': true,
+    }
   },
   {
     'name': 'iPhone X landscape',
@@ -297,8 +272,7 @@ module.exports = [
       'screenHeight': 375,
       'deviceScaleFactor': 3,
       'mobile': true
-    },
-    'isTouch': true,
+    }
   },
   {
     'name': 'Nexus 6P',
@@ -308,8 +282,7 @@ module.exports = [
       'screenHeight': 732,
       'deviceScaleFactor': 3.5,
       'mobile': true
-    },
-    'isTouch': true,
+    }
   },
 ];
 

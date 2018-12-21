@@ -61,6 +61,8 @@ npm install auto-chrome
 
 浏览器导航事件可分为可预测和不可预测两种，由于触发导航的方式非常多，通过鼠标、键盘、JS脚本等方式均可能触发未知的导航事件。如果导航切换时序不正确，会产生上下文消息错乱的bug。
 
+另外一种情况是由于url重定向，频繁的触发上下文切换，导致上下文错位。这种场景难以被察觉，也很难做预判。
+
 #### 可预测导航
 
 对于chrome.newPage()、page.goto()这类明确包含导航行为的显性操作，autoChrome进行内部封装，在使用时不需要做额外的处理。
@@ -108,8 +110,6 @@ await Promise.all([
             * `width` *Number* 屏幕宽度，默认自适应屏幕宽度
 
             * `height` *Number* 屏幕高度，默认自适应屏幕高度
-
-        * `isTouch` *Boolean* 启用触控，默认false
 
         * `geolocation` *Object* 地理位置，使用Google地图坐标
 
@@ -191,8 +191,6 @@ await Promise.all([
 * `options` *Object* 选项
 
     * `mobile` *Boolean* 移动设备
-
-    * `isTouch` *Boolean* 触控模式
 
     * `width` *Number* 屏幕宽度
 
