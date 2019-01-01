@@ -90,7 +90,7 @@ async function main(options) {
 
    let { ignoreHTTPSErrors, emulate } = options
 
-   let chrome = new Chrome(ws, ignoreHTTPSErrors, emulate)
+   let chrome = new Chrome(ws, ignoreHTTPSErrors, emulate, chromeProcess)
 
    await chrome.init()
 

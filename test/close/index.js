@@ -1,3 +1,5 @@
+"use strict"
+
 const autoChrome = require('../../')
 const { sleep } = require('../helpers')
 
@@ -17,10 +19,6 @@ async function main() {
    let page2 = await chrome.newPage('https://www.baidu.com/')
 
    await sleep(2000)
-
-   await chrome.clicker.scroll(0, 500)
-
-   await sleep(1000)
 
    await page2.close()
 
