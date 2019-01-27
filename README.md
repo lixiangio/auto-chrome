@@ -155,7 +155,13 @@ await Promise.all([
 
 ### chrome.closePage(pageId)
 
+通过pageId关闭指定的标签
+
 * `pageId` *String* 要删除page的id
+
+### chrome.createBrowserContext()
+
+创建BrowserContext，仅支持隐身模式。
 
 ### chrome.send(method, params)
 

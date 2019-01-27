@@ -20,6 +20,14 @@ async function main() {
       }
    })
 
+   await chrome.newChromePage('www.baidu.com')
+
+   await chrome.newChromePage('www.so.com')
+
+   await chrome.newChromePage('www.sogou.com')
+
+   return
+
    let { page } = chrome
 
    await page.goto('https://m.so.com/')

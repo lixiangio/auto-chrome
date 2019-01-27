@@ -1,5 +1,6 @@
 "use strict"
 
+const cluster = require('cluster');
 const childProcess = require('child_process')
 const readline = require('readline')
 const WebSocket = require('ws')
@@ -12,7 +13,15 @@ async function main(options) {
 
    let { args = [], userDataDir, headless, devtools, executablePath } = options
 
-   args.push("--remote-debugging-port=9222")
+   // cluster模式下启用多个不同的端口，避免端口重复
+   let port
+   if (cluster.isMaster) {
+      port = 9222
+   } else if (cluster.isWorker) {
+      port = 9222 + cluster.worker.id
+   }
+
+   args.push(`--remote-debugging-port=${port}`)
 
    if (userDataDir) {
       args.push(`--user-data-dir=${userDataDir}`)
@@ -70,7 +79,7 @@ async function main(options) {
    } catch (error) {
 
       chromeProcess.kill()
-      
+
       throw error
 
    }
@@ -93,6 +102,8 @@ async function main(options) {
    let chrome = new Chrome(ws, ignoreHTTPSErrors, emulate, chromeProcess)
 
    await chrome.init()
+
+   chrome.options = options
 
    return chrome
 

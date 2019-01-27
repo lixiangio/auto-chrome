@@ -14,7 +14,7 @@ async function main() {
       args: [
          `--user-agent=${userAgent}`,
          '--start-maximized',
-         '--proxy-server=14.157.100.237:21341'
+         '--proxy-server=113.110.194.28:10306'
       ],
       emulate: {
          viewport,
