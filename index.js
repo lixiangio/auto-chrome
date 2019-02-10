@@ -11,7 +11,7 @@ const { logger, timerPromise } = helper
 
 async function main(options) {
 
-   let { args = [], userDataDir, headless, devtools, executablePath } = options
+   let { args = [], userDataDir, profileDirectory, headless, devtools, executablePath } = options
 
    // cluster模式下启用多个不同的端口，避免端口重复
    let port
@@ -27,12 +27,17 @@ async function main(options) {
       args.push(`--user-data-dir=${userDataDir}`)
    }
 
+   if (profileDir) {
+      args.push(`--profile-directory=${profileDir}`)
+   }
+
    if (headless) {
       args.push(
          '--headless',
          '--disable-gpu',
          '--hide-scrollbars',
-         '--mute-audio'
+         '--mute-audio',
+         '--force-device-scale-factor=1.25',
       );
    }
 
@@ -101,9 +106,9 @@ async function main(options) {
 
    let chrome = new Chrome(ws, ignoreHTTPSErrors, emulate, chromeProcess)
 
-   await chrome.init()
-
    chrome.options = options
+
+   await chrome.init()
 
    return chrome
 

@@ -6,12 +6,14 @@ const numCPUs = require('os').cpus().length;
 if (cluster.isMaster) {
 
    for (let i = 0; i < 2; i++) {
-      cluster.fork({ cid: i });
+
+      cluster.fork();
+      
    }
 
 } else {
 
-   let cid = process.env.cid
+   const { worker: { id } } = cluster
 
    const autoChrome = require('..')
    const devices = require('../device')
@@ -27,7 +29,7 @@ if (cluster.isMaster) {
       let chrome = await autoChrome({
          executablePath,
          // userDataDir: `C:/Users/Administrator/AppData/Local/Google/Chrome/User Data${cid}/`,
-         userDataDir: `C:/Users/Xiang/AppData/Local/Chromium/User Data${cid}/`,
+         userDataDir: `C:/Users/Xiang/AppData/Local/Chromium/User Data${id}/`,
          args: [
             `--user-agent=${userAgent}`,
             '--start-maximized',
@@ -110,12 +112,10 @@ if (cluster.isMaster) {
 
       // await await chrome.page.prev()
 
-      
    }
 
    main().catch(function (error) {
       console.log(error)
    })
-
 
 }

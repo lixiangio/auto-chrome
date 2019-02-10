@@ -16,7 +16,8 @@ async function main() {
       userDataDir,
       args: [
          `--user-agent=${userAgent}`,
-         '--start-maximized'
+         '--start-maximized',
+         '--force-device-scale-factor=1.25',
       ],
       emulate: {
          geolocation: {
@@ -26,6 +27,7 @@ async function main() {
          },
          viewport
       },
+      loadTimeout: 6000,
       // devtools: true,
    })
 
@@ -43,7 +45,7 @@ async function main() {
 
    await chrome.keyboard.press("Enter")
 
-   await chrome.page.close()
+   // await chrome.page.close()
 
 }
 

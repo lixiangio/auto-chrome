@@ -14,7 +14,8 @@ async function main() {
       args: [
          `--user-agent=${userAgent}`,
          '--start-maximized',
-         '--proxy-server=113.110.194.28:10306'
+         '--proxy-server=27.40.154.183:4338',
+         '--force-device-scale-factor=1.25',
       ],
       emulate: {
          viewport,
@@ -31,32 +32,6 @@ async function main() {
 
    // 回车，触发并等待导航结束
    await page.enter()
-
-   let result = await page.run((url, $items) => {
-
-      let elements = document.querySelectorAll($items)
-
-      let sort = 0
-
-      // 遍历匹配url位置
-      for (let element of elements) {
-
-         sort++
-         if (element.outerHTML.indexOf(url) >= 0) {
-            element.sort = sort
-            return element
-         }
-
-      }
-
-      // 找不到目标时随机选择element
-      sort = 1 + Math.round(Math.random() * elements.length)
-
-      return elements
-
-   }, 'm.autohome.com.cn', `#main > .r-results > div[data-page='1'] > a`)
-
-   console.log(result)
 
 }
 

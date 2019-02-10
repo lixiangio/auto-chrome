@@ -4,7 +4,7 @@
 
 借鉴于puppeteer，选择重写是因为在实际应用中puppeteer存在各种奇怪的bug，导致线程持续阻塞且难以被修复，一些实现细节也不符合预期。
 
-chrome devtools协议api过于原始，对开发者而言并不友好。puppeteer api在设计上大量延用了chrome devtools协议的原始风格，虽然功能丰富，但是操作依然过于繁琐。
+chrome devtools协议api过于原始，对开发者而言并不友好。puppeteer api虽然功能丰富，但是操作依然过于繁琐，且存在一些难以规避的Bug。
 
 auto-chrome以简洁和易用为设计原则，重点简化常见应用场景，通过扩展的方式满足定制化需求。
 
@@ -99,7 +99,9 @@ await Promise.all([
 
         * `ars` *String* Chrome启动参数
 
-    * `userDataDir` *String* 用户配置文件路径
+    * `userDataDir` *String* 用户数据文件路径，定义独立的Chrome实例，支持cluster模式下并行
+
+    * `profileDir` *String* 用户配置文件路径，定义Chrome实例中的user
 
     * `emulate` *Object* 设备仿真，该配置对于初始标签不太凑效，可能由于初始targetCreated事件并没有被捕获。
 
@@ -124,6 +126,8 @@ await Promise.all([
      * `devtools` *Boolean* 为每个page自动打开devtools，默认false
 
      * `ignoreHTTPSErrors` *Boolean* 忽略https错误，默认true
+
+     * `loadTimeout` *Number* 自动导航等待页面加载的最大停留时间，单位ms
 
 * `return` *Chrome* Chrome类实例
 
@@ -161,7 +165,7 @@ await Promise.all([
 
 ### chrome.createBrowserContext()
 
-创建BrowserContext，仅支持隐身模式。
+创建独立的浏览器环境，只能在隐身模式下运行。
 
 ### chrome.send(method, params)
 
