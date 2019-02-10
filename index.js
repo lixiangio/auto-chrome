@@ -11,7 +11,7 @@ const { logger, timerPromise } = helper
 
 async function main(options) {
 
-   let { args = [], userDataDir, profileDirectory, headless, devtools, executablePath } = options
+   let { args = [], userDataDir, profileDir, headless, devtools, executablePath } = options
 
    // cluster模式下启用多个不同的端口，避免端口重复
    let port
@@ -48,11 +48,11 @@ async function main(options) {
    // 启动浏览器
    let chromeProcess = childProcess.spawn(executablePath, args)
 
-   chromeProcess.once('exit', () => {
-      logger.info('浏览器关闭');
+   chromeProcess.on('error', error => {
+      logger.error(error);
    })
 
-   chromeProcess.once('message', (message) => {
+   chromeProcess.on('message', (message) => {
       logger.log("message", message);
    })
 
@@ -104,7 +104,7 @@ async function main(options) {
 
    let { ignoreHTTPSErrors, emulate } = options
 
-   let chrome = new Chrome(ws, ignoreHTTPSErrors, emulate, chromeProcess)
+   let chrome = new Chrome(ws, ignoreHTTPSErrors, emulate)
 
    chrome.options = options
 

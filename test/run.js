@@ -2,7 +2,7 @@
 
 const autoChrome = require('../')
 const devices = require('../device')
-const { sleep, logger } = require('./helpers')
+const { sleep } = require('./helpers')
 
 const { userAgent, viewport } = devices['iPhone 6'];
 

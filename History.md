@@ -32,3 +32,8 @@
 * 增加viewport.screenWidth、viewport.screenHeight参数，用于定义屏幕分辨率
 
 * viewport.width、viewport.height在缺省状态下会用screenWidth、screenHeight进行填充
+
+
+### 0.11.6
+
+* Chrome.close()改用关闭所有标签的方式优雅的退出浏览器。在实测中发现使用Chrome DevTools Protocol的"Browser.close"消息和childProcess.kill()均无法关闭浏览器。
