@@ -9,7 +9,7 @@ async function main() {
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
       args: ['--start-maximized'],
-      devtools: false,
+      devtools: true,
    })
 
    let { page } = chrome

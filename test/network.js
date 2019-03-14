@@ -20,13 +20,11 @@ async function main() {
       }
    })
 
-   await chrome.newChromePage('www.baidu.com')
+   await chrome.newPage('https://www.baidu.com')
 
-   await chrome.newChromePage('www.so.com')
+   await chrome.newPage('https://www.so.com')
 
-   await chrome.newChromePage('www.sogou.com')
-
-   return
+   await chrome.newPage('https://www.sogou.com')
 
    let { page } = chrome
 

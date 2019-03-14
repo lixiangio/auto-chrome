@@ -44,7 +44,7 @@ async function main() {
 
    await sleep(2000)
 
-   await chrome.clicker.scroll(0, 500)
+   await chrome.page.clicker.scroll(0, 500)
 
    await sleep(1000)
 

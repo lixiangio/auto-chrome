@@ -18,7 +18,8 @@ async function main() {
          `--user-agent=${userAgent}`,
          '--start-maximized',
          '--enable-touchview',
-         '--enabled'
+         '--enabled',
+         '--force-device-scale-factor=1.25'
       ],
       emulate: {
          geolocation: {

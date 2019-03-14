@@ -1,11 +1,11 @@
 "use strict"
 
 const cluster = require('cluster');
-const childProcess = require('child_process')
-const readline = require('readline')
-const WebSocket = require('ws')
-const Chrome = require('./lib/Chrome')
-const helper = require('./lib/helper')
+const childProcess = require('child_process');
+const readline = require('readline');
+const WebSocket = require('ws');
+const Chrome = require('./lib/Chrome');
+const helper = require('./lib/helper');
 
 const { logger, timerPromise } = helper
 
@@ -52,8 +52,8 @@ async function main(options) {
       logger.error(error);
    })
 
-   chromeProcess.on('message', (message) => {
-      logger.log("message", message);
+   chromeProcess.on('message', message => {
+      logger.info(message);
    })
 
    let rl = readline.createInterface({ input: chromeProcess.stderr });

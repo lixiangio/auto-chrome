@@ -7,13 +7,13 @@ const { sleep } = require('../helpers')
  */
 async function main() {
 
-   let browser = await autoChrome({
-      headless: false,
-      devtools: true,
-      args: [``]
+   let chrome = await autoChrome({
+      executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+      userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
+      devtools: true
    })
 
-   let [page] = browser.pages
+   let { page } = chrome
 
    // await page.setViewport({
    //    width: 0,
@@ -31,11 +31,9 @@ async function main() {
 
    // 显示隐藏的按钮
    await page.$eval('#button', element => {
-      while (element) {
-         element = element.parentNode
-         if (element && element.style) {
-            element.style.display = "block"
-         }
+      element = element.parentNode
+      if (element && element.style) {
+         element.style.display = "block"
       }
    });
 

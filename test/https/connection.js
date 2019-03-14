@@ -10,19 +10,19 @@ async function main() {
       devtools: false,
    })
 
-   let page1 = await chrome.newPage('https://www.so.com/')
+   let page = await chrome.newPage('https://www.so.com/')
 
    await sleep(1000)
 
-   await chrome.page.goto('https://www.sohu.com/a/218915569_161207')
+   await page.goto('https://www.sohu.com/a/218915569_161207')
 
    await sleep(2000)
 
-   await chrome.clicker.scroll(0, 500)
+   await page.clicker.scroll(0, 500)
 
    await sleep(2000)
 
-   await page1.close()
+   await page.close()
 
    await sleep(3000)
 

@@ -36,4 +36,4 @@
 
 ### 0.11.6
 
-* Chrome.close()改用关闭所有标签的方式优雅的退出浏览器。在实测中发现使用Chrome DevTools Protocol的"Browser.close"消息和childProcess.kill()均无法关闭浏览器。
+* Chrome.close()改用关闭所有标签的方式优雅的退出浏览器。在实测中发现使用DevTools协议的"Browser.close"消息和childProcess.kill()均无法关闭浏览器。
