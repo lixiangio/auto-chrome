@@ -7,7 +7,7 @@ const { sleep } = require('./helpers')
 
 const { executablePath, userDataDir } = config
 
-const { userAgent, viewport } = devices['iPhone 6']
+const { userAgent, viewport } = devices['iPhone 6'];
 
 async function main() {
 
@@ -15,10 +15,11 @@ async function main() {
       executablePath,
       userDataDir,
       args: [
+         'https://www.baidu.com/',
          `--user-agent=${userAgent}`,
-         '--start-maximized',
-         '--enable-touchview',
-         '--enabled',
+         // '--start-maximized',
+         // '--enable-touchview',
+         // '--enabled',
          '--force-device-scale-factor=1.25'
       ],
       emulate: {
@@ -31,10 +32,6 @@ async function main() {
       },
       // devtools: true,
    })
-
-   await chrome.page.goto('https://www.baidu.com/')
-
-   await sleep(1000)
 
    await chrome.page.click('#index-kw')
 

@@ -1,6 +1,6 @@
 {
   "name": "auto-chrome",
-  "version": "0.11.6",
+  "version": "0.11.7",
   "description": "使用Node.js操作Chrome或Chromium，高仿真的用户行为模拟器",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,11 @@
     "test": "test"
   },
   "devDependencies": {},
+  "files": [
+    "lib",
+    "device.js",
+    "index.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xiangle/auto-chrome.git"

@@ -7,7 +7,7 @@ const WebSocket = require('ws');
 const Chrome = require('./lib/Chrome');
 const helper = require('./lib/helper');
 
-const { logger, timerPromise } = helper
+const { logger, timerPromise } = helper;
 
 async function main(options) {
 
@@ -16,19 +16,19 @@ async function main(options) {
    // cluster模式下启用多个不同的端口，避免端口重复
    let port
    if (cluster.isMaster) {
-      port = 9222
+      port = 9222;
    } else if (cluster.isWorker) {
-      port = 9222 + cluster.worker.id
+      port = 9222 + cluster.worker.id;
    }
 
-   args.push(`--remote-debugging-port=${port}`)
+   args.push(`--remote-debugging-port=${port}`);
 
    if (userDataDir) {
-      args.push(`--user-data-dir=${userDataDir}`)
+      args.push(`--user-data-dir=${userDataDir}`);
    }
 
    if (profileDir) {
-      args.push(`--profile-directory=${profileDir}`)
+      args.push(`--profile-directory=${profileDir}`);
    }
 
    if (headless) {
@@ -46,7 +46,7 @@ async function main(options) {
    }
 
    // 启动浏览器
-   let chromeProcess = childProcess.spawn(executablePath, args)
+   const chromeProcess = childProcess.execFile(executablePath, args);
 
    chromeProcess.on('error', error => {
       logger.error(error);
@@ -56,24 +56,24 @@ async function main(options) {
       logger.info(message);
    })
 
-   let rl = readline.createInterface({ input: chromeProcess.stderr });
+   const rl = readline.createInterface({ input: chromeProcess.stderr });
 
-   let linePromise = new timerPromise(30000)
+   const linePromise = new timerPromise(30000);
 
    rl.on('line', function (data) {
 
       if (data.indexOf('ws://') >= 0) {
 
-         let url = data.replace('DevTools listening on ', '')
+         const url = data.replace('DevTools listening on ', '');
 
-         linePromise.resolve(url)
+         linePromise.resolve(url);
 
       }
 
    })
 
    // 获取webSocket连接地址
-   let webSocketUrl = await linePromise.catch(error => {
+   const webSocketUrl = await linePromise.catch(error => {
       throw error
    })
 
@@ -83,13 +83,13 @@ async function main(options) {
 
    } catch (error) {
 
-      chromeProcess.kill()
+      chromeProcess.kill();
 
-      throw error
+      throw error;
 
    }
 
-   let awaitOpen = new timerPromise(30000)
+   const awaitOpen = new timerPromise(30000);
 
    ws.on('open', awaitOpen.resolve);
 
@@ -99,18 +99,18 @@ async function main(options) {
       logger.success('Chrome连接成功');
    }).catch(function (error) {
       logger.error(new Error('Chrome连接失败'));
-      throw error
+      throw error;
    })
 
-   let { ignoreHTTPSErrors, emulate } = options
+   const { ignoreHTTPSErrors, emulate } = options;
 
-   let chrome = new Chrome(ws, ignoreHTTPSErrors, emulate)
+   const chrome = new Chrome(ws, ignoreHTTPSErrors, emulate);
 
-   chrome.options = options
+   chrome.options = options;
 
-   await chrome.init()
+   await chrome.init();
 
-   return chrome
+   return chrome;
 
 }
 

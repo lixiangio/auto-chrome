@@ -33,9 +33,9 @@ if (cluster.isMaster) {
          args: [
             `--user-agent=${userAgent}`,
             '--start-maximized',
-            '--enable-touchview',
-            '--enabled',
-            '--force-device-scale-factor=1.25',
+            // '--enable-touchview',
+            // '--enabled',
+            // '--force-device-scale-factor=1.25',
          ],
          emulate: {
             // geolocation: {
@@ -50,9 +50,11 @@ if (cluster.isMaster) {
 
       await chrome.page.goto('https://m.baidu.com/')
 
-      await sleep(1000)
+      await sleep(2000)
 
       await chrome.page.click('#index-kw')
+      
+      return
 
       await sleep(500)
 

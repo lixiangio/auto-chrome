@@ -1,8 +1,8 @@
 "use strict"
 
-const autoChrome = require('..')
-const devices = require('../device')
-const config = require('./helpers/config')
+const autoChrome = require('..');
+const devices = require('../device');
+const config = require('./helpers/config.js');
 
 const { executablePath, userDataDir } = config
 
@@ -39,6 +39,8 @@ async function main() {
    await chrome.keyboard.press("Enter")
 
    // await chrome.page.close()
+
+   await chrome.close();
 
 }
 
