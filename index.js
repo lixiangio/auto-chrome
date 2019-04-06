@@ -108,6 +108,8 @@ async function main(options) {
 
    chrome.options = options;
 
+   chrome.process = chromeProcess;
+
    await chrome.init();
 
    return chrome;
