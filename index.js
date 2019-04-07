@@ -4,8 +4,8 @@ const cluster = require('cluster');
 const childProcess = require('child_process');
 const readline = require('readline');
 const WebSocket = require('ws');
-const Chrome = require('./lib/Chrome');
-const helper = require('./lib/helper');
+const Chrome = require('./lib/Chrome.js');
+const helper = require('./lib/helper.js');
 
 const { logger, timerPromise } = helper;
 
@@ -116,4 +116,4 @@ async function main(options) {
 
 }
 
-module.exports = main
+module.exports = main;
