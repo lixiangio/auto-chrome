@@ -161,7 +161,7 @@ await Promise.all([
 
 * `url` *String* 打开网页地址，缺省时打开空白网页
 
-### chrome.closePage(pageId)
+### chrome.closePageById(pageId)
 
 通过pageId关闭指定的标签
 

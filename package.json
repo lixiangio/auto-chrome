@@ -1,8 +1,8 @@
 {
   "name": "auto-chrome",
-  "version": "0.11.9",
+  "version": "0.11.10",
   "description": "使用Node.js操作Chrome或Chromium，高仿真的用户行为模拟器",
-  "main": "index.js",
+  "main": "lib/",
   "scripts": {
     "dev": "node test/",
     "debug": "@powershell -Command $env:DEBUG = '*'; node ./test/init",

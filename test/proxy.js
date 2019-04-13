@@ -1,9 +1,9 @@
-"use strict"
+"use strict";
 
-const autoChrome = require('..')
-const devices = require('../device')
+const autoChrome = require('../lib/');
+const devices = require('../device.js');
 
-const { userAgent, viewport } = devices['iPhone 6']
+const { userAgent, viewport } = devices['iPhone 6'];
 
 async function main() {
 
@@ -14,7 +14,7 @@ async function main() {
       args: [
          `--user-agent=${userAgent}`,
          '--start-maximized',
-         '--proxy-server=27.40.154.183:4338',
+         '--proxy-server=58.218.200.227:17322',
          '--force-device-scale-factor=1.25',
       ],
       emulate: {
@@ -25,6 +25,8 @@ async function main() {
    let page = chrome.page
 
    await page.goto('https://m.so.com/')
+
+   return;
 
    let element = await page.click('#q')
 

@@ -1,28 +1,29 @@
-const autoChrome = require('../../')
-const { sleep } = require('../helpers')
+"use strict";
+
+const autoChrome = require('../../lib/');
+const { sleep } = require('../helpers/');
 
 /**
- * 
  * @param {*} device 用户配置目录名称
  */
 async function main() {
 
-   let chrome = await autoChrome({
+   const chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: "C:/Users/Xiang/AppData/Local/Chromium/User Data/",
       devtools: true
    })
 
-   let { page } = chrome
+   const { page } = chrome;
 
    // await page.setViewport({
    //    width: 0,
    //    height: 0,
    // })
 
-   await sleep(1000)
+   await sleep(1000);
 
-   await page.goto('D:/Nodejs/Project/auto-chrome/test/click/index.html')
+   await page.goto('D:/Nodejs/Project/auto-chrome/test/click/index.html');
 
    // 触发isTrusted:false click
    // await page.$eval('#button', element => {
@@ -38,8 +39,8 @@ async function main() {
    });
 
    // 触发isTrusted:true click
-   await page.click('#button')
+   await page.click('#button');
 
 }
 
-main()
+main();

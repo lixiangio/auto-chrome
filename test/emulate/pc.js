@@ -1,7 +1,7 @@
 "use strict"
 
 const autoChrome = require('../..')
-const devices = require('../../device')
+const devices = require('../../device.js')
 
 let { userAgent, viewport } = devices['Chrome'];
 

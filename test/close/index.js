@@ -1,6 +1,6 @@
 "use strict"
 
-const autoChrome = require('../../')
+const autoChrome = require('../../lib/')
 const { sleep } = require('../helpers')
 
 async function main() {

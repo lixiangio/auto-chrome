@@ -1,16 +1,16 @@
 "use strict"
 
-const autoChrome = require('..');
-const devices = require('../device');
+const autoChrome = require('../lib/');
+const devices = require('../device.js');
 const config = require('./helpers/config.js');
 
-const { executablePath, userDataDir } = config
+const { executablePath, userDataDir } = config;
 
-const { userAgent, viewport } = devices['iPhone 6']
+const { userAgent, viewport } = devices['iPhone 6'];
 
 async function main() {
 
-   let chrome = await autoChrome({
+   const chrome = await autoChrome({
       executablePath,
       userDataDir,
       args: [
@@ -30,20 +30,24 @@ async function main() {
       // devtools: true,
    })
 
-   await chrome.newPage('https://m.baidu.com/')
+   await chrome.page.goto('https://m.baidu.com/');
 
-   await chrome.page.click('#index-kw')
+   // await chrome.newPage('https://m.baidu.com/');
 
-   await chrome.page.keyboard.type('汽车')
+   await chrome.page.click('#index-kw');
 
-   await chrome.keyboard.press("Enter")
+   await chrome.page.keyboard.type('汽车');
 
-   // await chrome.page.close()
+   await chrome.keyboard.press("Enter");
 
-   await chrome.close();
+   // await chrome.page.close();
+
+   // await chrome.close();
 
 }
 
 main().catch(function (error) {
-   console.log(error)
+
+   console.log(error);
+
 })

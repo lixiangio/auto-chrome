@@ -1,7 +1,7 @@
 "use strict"
 
 const autoChrome = require('../')
-const devices = require('../device')
+const devices = require('../device.js')
 const { sleep } = require('./helpers')
 
 const { userAgent, viewport } = devices['iPhone 6'];
@@ -23,18 +23,18 @@ async function main() {
       }
    })
 
-   let page = chrome.page
+   let page = chrome.page;
 
    let result = await page.run(function (url, selecte) {
       return document
    }, 'm.autohome.com.cn', `#main > .r-results > div[data-page='1'] > a`)
 
-   console.log(result)
+   console.log(result);
 
-   let element = await page.$('#q')
+   let element = await page.$('#q');
 
-   await element.click()
+   await element.click();
 
 }
 
-main()
+main();

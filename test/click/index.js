@@ -1,7 +1,9 @@
-const autoChrome = require('../../')
-const devices = require('../../device')
+"use strict";
 
-const { sleep, logger } = require('../helpers')
+const autoChrome = require('../../lib/');
+const devices = require('../../device.js');
+
+const { sleep, logger } = require('../helpers/');
 
 // const { userAgent, viewport } = devices['iPhone 6'];
 const { userAgent, viewport } = devices['Chrome'];

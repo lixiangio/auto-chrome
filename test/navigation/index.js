@@ -1,4 +1,4 @@
-const autoChrome = require('../../')
+const autoChrome = require('../../lib/')
 
 async function main() {
 
