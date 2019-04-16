@@ -3,6 +3,7 @@
 const autoChrome = require('../lib/');
 const devices = require('../device.js');
 const config = require('./helpers/config.js');
+const { sleep } = require('./helpers/')
 
 const { executablePath, userDataDir } = config;
 
@@ -16,7 +17,7 @@ async function main() {
       args: [
          `--user-agent=${userAgent}`,
          '--start-maximized',
-         '--force-device-scale-factor=1.25',
+         // '--force-device-scale-factor=1.25',
       ],
       emulate: {
          geolocation: {
@@ -30,9 +31,13 @@ async function main() {
       // devtools: true,
    })
 
-   await chrome.page.goto('https://m.baidu.com/');
+   chrome.ws.on('close', function () {
+      console.info("close");
+   });
 
-   // await chrome.newPage('https://m.baidu.com/');
+   // await chrome.page.goto('https://m.baidu.com/');
+
+   await chrome.newPage('https://m.baidu.com/');
 
    await chrome.page.click('#index-kw');
 

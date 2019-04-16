@@ -1,9 +1,9 @@
 "use strict"
 
-const autoChrome = require('../lib/')
-const devices = require('../device.js')
-const config = require('./helpers/config')
-const { sleep } = require('./helpers')
+const autoChrome = require('../lib/');
+const devices = require('../device.js');
+const config = require('./helpers/config');
+const { sleep } = require('./helpers');
 
 const { executablePath, userDataDir } = config
 

@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-   <meta charset="utf-8">
-   <title>dialog</title>
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
-   <style>
-      * {
-         padding: 0;
-         margin: 0;
-      }
+   <head>
+      <meta charset="utf-8">
+      <title>dialog</title>
+      <meta name="viewport"
+         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+      <style>
+         * {
+            padding: 0;
+            margin: 0;
+         }
 
-      html,
-      body,
-      #app {
-         height: 100%;
-      }
-   </style>
-</head>
+         html,
+         body,
+         #app {
+            height: 100%;
+         }
+      </style>
+      <script>
 
-<body>
-   <div>
-      <button onclick="func('onclick')">alert</button>
-   </div>
+         function func(info) {
+            console.log(info)
+            alert(info)
+         }
 
-</body>
+         document.addEventListener('beforeunload', function () {
+            alert('beforeunload')
+         })
 
-<script>
+      </script>
+   </head>
 
-   function func(info) {
-      console.log(info)
-      alert(info)
-   }
+   <body>
+      <div>
+         <button onclick="func('onclick')">alert</button>
+      </div>
 
-   document.addEventListener('beforeunload', function () {
-      alert('beforeunload')
-   })
-
-</script>
+   </body>
 
 </html>

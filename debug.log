@@ -1,5 +1,0 @@
-[1127/001208.535:ERROR:http_transport_win.cc(273)] WinHttpSendRequest: The operation timed out (0x2ee2)
-[1210/233337.693:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
-[1213/172311.417:ERROR:file_io.cc(89)] ReadExactly: expected 40, observed 0
-[0125/115720.831:WARNING:minidump_to_upload_parameters.cc(66)] duplicate annotation name metrics_client_id, discarding value 6e811200fa194531996e998d1b7d2456
-[0125/115742.076:ERROR:http_transport_win.cc(273)] WinHttpSendRequest: 操作成功完成。 (0x0)
