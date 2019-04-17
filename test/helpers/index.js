@@ -1,5 +1,7 @@
 "use strict"
 
-let helper = require('../../lib/helper')
-
-module.exports = helper
+module.exports = {
+   sleep(time = 0) {
+      return new Promise(resolve => setTimeout(resolve, time))
+   },
+}

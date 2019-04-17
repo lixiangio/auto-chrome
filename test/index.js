@@ -1,9 +1,9 @@
-"use strict"
+"use strict";
 
 const autoChrome = require('../lib/');
 const devices = require('../device.js');
 const config = require('./helpers/config.js');
-const { sleep } = require('./helpers/')
+const { sleep } = require('./helpers/');
 
 const { executablePath, userDataDir } = config;
 
@@ -13,7 +13,7 @@ async function main() {
 
    const chrome = await autoChrome({
       executablePath,
-      userDataDir,
+      userDataDir: userDataDir + 1,
       args: [
          `--user-agent=${userAgent}`,
          '--start-maximized',
@@ -45,9 +45,9 @@ async function main() {
 
    await chrome.keyboard.press("Enter");
 
-   // await chrome.page.close();
+   await sleep(1000);
 
-   // await chrome.close();
+   await chrome.close();
 
 }
 
