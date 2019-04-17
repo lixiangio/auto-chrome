@@ -35,6 +35,7 @@ if (cluster.isMaster) {
       const chrome = await autoChrome({
          executablePath,
          userDataDir: userDataDir + id,
+         port: 9222 + id,
          args: [
             `--user-agent=${userAgent}`,
             '--start-maximized',
@@ -65,7 +66,7 @@ if (cluster.isMaster) {
          await main().catch(function (error) {
 
             console.log(error);
-         
+
          })
 
       }

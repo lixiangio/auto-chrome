@@ -97,15 +97,15 @@ await Promise.all([
 
 * `options` *Object* 全局实例配置选项，优先级低于page
 
-    * `executablePath` *String* Chrome程序执行路径
-
     * `args[ars, ...]` *Array* Chrome启动参数数组
 
         * `ars` *String* Chrome启动参数
 
-    * `userDataDir` *String* 用户数据文件路径，定义独立的Chrome实例，支持cluster模式下并行
+    * `executablePath` *String* Chrome程序执行路径
 
-    * `profileDir` *String* 用户配置文件路径，定义Chrome实例中的user
+    * `userDataDir` *String* 用户配置文件路径，定义独立的Chrome实例，支持cluster模式下并行
+
+    * `port` *Number* ws远程连接端口号
 
     * `emulate` *Object* 设备仿真，该配置对于初始标签不太凑效，可能由于初始targetCreated事件并没有被捕获。
 
