@@ -1,6 +1,7 @@
 "use strict";
 
 const autoChrome = require('../../lib/');
+const { userDataDir } = require('../config.js');
 const { sleep } = require('../helpers/');
 
 /**

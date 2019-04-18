@@ -4,10 +4,10 @@
  * 除了默认的BrowserContext外，通过createBrowserContext创建的BrowserContext仅支持隐身模式
  */
 
-const autoChrome = require('../lib/')
-const devices = require('../device.js')
-const config = require('./helpers/config')
-const { sleep } = require('./helpers')
+const autoChrome = require('../lib/');
+const devices = require('../device.js');
+const config = require('./config.js');
+const { sleep } = require('./helpers');
 
 const { executablePath, userDataDir } = config
 

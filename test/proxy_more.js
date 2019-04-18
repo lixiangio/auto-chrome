@@ -12,7 +12,7 @@ if (cluster.isMaster) {
 
    const autoChrome = require('../lib/')
    const devices = require('../device.js')
-
+   const { executablePath, userDataDir } = require('./config.js');
    const { userAgent, viewport } = devices['Chrome']
 
    async function main() {

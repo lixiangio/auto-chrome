@@ -24,9 +24,9 @@ if (cluster.isMaster) {
 
    const autoChrome = require('../lib/');
    const devices = require('../device.js');
-   const config = require('./helpers/config');
+   const config = require('./config.js');
 
-   const { executablePath, userDataDir } = config
+   const { executablePath, userDataDir } = config;
 
    const { userAgent, viewport } = devices['iPhone 6']
 

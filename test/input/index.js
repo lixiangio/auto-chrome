@@ -1,8 +1,9 @@
-const autoChrome = require('../../lib/')
-const config = require('../helpers/config')
+"use strict"
 
-const { sleep } = require('../helpers')
-const { executablePath, userDataDir } = config
+const autoChrome = require('../../lib/')
+const { executablePath, userDataDir } = require('../config.js');
+const { sleep } = require('../helpers/')
+
 
 async function main() {
 

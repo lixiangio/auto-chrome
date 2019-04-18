@@ -2,7 +2,7 @@
 
 const autoChrome = require('../lib/');
 const devices = require('../device.js');
-const config = require('./helpers/config.js');
+const config = require('./config.js');
 const { sleep } = require('./helpers/');
 
 const { executablePath, userDataDir } = config;

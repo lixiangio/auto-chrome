@@ -1,4 +1,7 @@
+"use strict"
+
 const autoChrome = require('../../lib/');
+const { userDataDir } = require('../config.js');
 
 /**
  * @param {*} device 用户配置目录名称

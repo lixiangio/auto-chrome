@@ -2,8 +2,8 @@
 
 const autoChrome = require('../../lib/');
 const devices = require('../../device.js');
-
-const { sleep, logger } = require('../helpers/');
+const { userDataDir } = require('../config.js');
+const { sleep } = require('../helpers/');
 
 // const { userAgent, viewport } = devices['iPhone 6'];
 const { userAgent, viewport } = devices['Chrome'];
@@ -22,7 +22,7 @@ async function main() {
          viewport,
       }
    })
-   
+
    await chrome.page.goto('D:/Nodejs/Project/auto-chrome/test/click/index.html')
 
    await chrome.page.run(function () {
@@ -52,17 +52,17 @@ async function main() {
 
    await sleep(1000)
 
-   // await chrome.clicker.click(500, 300)
+   await chrome.mouse.click(500, 300)
 
-   // await sleep(1000)
+   await sleep(1000)
 
-   // await chrome.clicker.click(600, 500)
+   await chrome.mouse.click(600, 500)
 
-   // await sleep(1000)
+   await sleep(1000)
 
-   // await chrome.clicker.click(700, 200)
+   await chrome.mouse.click(700, 200)
 
-   // await chrome.mouse.move(500, 300)
+   await chrome.mouse.move(500, 300)
 
 }
 

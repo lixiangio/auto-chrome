@@ -1,13 +1,11 @@
+"use strict";
+
 const autoChrome = require('../../lib/')
 const devices = require('../../device.js')
-const config = require('../helpers/config')
+const { executablePath, userDataDir } = require('../config.js');
 
 const { sleep, logger } = require('../helpers')
 let { userAgent, viewport } = devices['iPhone 6'];
-
-const { width, height } = viewport
-
-const { executablePath, userDataDir } = config
 
 /**
  * 
@@ -17,7 +15,7 @@ async function main() {
 
    let chrome = await autoChrome({
       executablePath,
-      userDataDir,
+      userDataDir: userDataDir + 1,
       args: [
          // `--profile-directory=Default`, 
          `--user-agent=${userAgent}`,
