@@ -1,5 +1,8 @@
 const autoChrome = require('../')
 const { sleep } = require('./helpers')
+const config = require('./config.js');
+
+const { executablePath, userDataDir } = config;
 
 async function main() {
 

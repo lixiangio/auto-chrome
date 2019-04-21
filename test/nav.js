@@ -5,7 +5,7 @@ const devices = require('../device.js');
 const config = require('./config.js');
 const { sleep } = require('./helpers');
 
-const { executablePath, userDataDir } = config
+const { executablePath, userDataDir } = config;
 
 const { userAgent, viewport } = devices['iPhone 6'];
 
@@ -13,7 +13,7 @@ async function main() {
 
    let chrome = await autoChrome({
       executablePath,
-      userDataDir,
+      userDataDir: userDataDir + 1,
       args: [
          'https://www.baidu.com/',
          `--user-agent=${userAgent}`,

@@ -14,7 +14,7 @@ async function main() {
       args: [
          `--user-agent=${userAgent}`,
          '--start-maximized',
-         '--proxy-server=58.218.200.227:17322',
+         '--proxy-server=115.221.8.125:4312',
          '--force-device-scale-factor=1.25',
       ],
       emulate: {
@@ -22,7 +22,7 @@ async function main() {
       }
    })
 
-   let page = chrome.page
+   let page = chrome.page;
 
    await page.goto('https://m.so.com/')
 

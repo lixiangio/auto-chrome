@@ -19,19 +19,19 @@ async function main() {
 
    let element = await chrome.page.$('.runoob-block dl dd:nth-child(2) a')
 
-   await element.scroll()
+   await element.scroll();
 
-   await element.click()
+   await element.click();
 
    console.log('-----------------')
 
    element = await chrome.page.$('.runoob-block dl dd:nth-child(3) a')
 
-   console.log("element", !!element)
+   console.log("element", !!element);
 
-   await element.scroll()
+   await element.scroll();
 
-   await element.click()
+   await element.click();
 
    console.log('-----------------')
 
