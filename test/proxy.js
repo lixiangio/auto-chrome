@@ -9,12 +9,12 @@ async function main() {
 
    let chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
-      userDataDir: userDataDir + 1,
+      userDataDir: userDataDir + 3,
       // devtools: true,
       args: [
          `--user-agent=${userAgent}`,
          '--start-maximized',
-         '--proxy-server=115.221.8.125:4312',
+         '--proxy-server=113.121.178.186:40278',
          '--force-device-scale-factor=1.25',
       ],
       emulate: {
@@ -22,9 +22,9 @@ async function main() {
       }
    })
 
-   let page = chrome.page;
+   await chrome.newPage('https://m.baidu.com/')
 
-   await page.goto('https://m.so.com/')
+   let page = chrome.page;
 
    return;
 

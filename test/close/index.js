@@ -17,21 +17,21 @@ async function main() {
 
    await sleep(1000)
 
-   let page2 = await chrome.newPage('https://www.baidu.com/')
+   // let page2 = await chrome.newPage('https://www.baidu.com/')
 
-   await sleep(2000)
+   // await sleep(2000)
 
-   await page2.close()
+   // await page2.close()
 
-   await sleep(4000)
+   // await sleep(4000)
 
-   await chrome.page.goto('https://www.szhkch.com/')
+   await chrome.page.goto('https://mirrors.aliyun.com/ubuntukylin/ubuntukylin-19.04-enhanced-amd64.iso')
 
-   await sleep(2000)
+   // await sleep(2000)
 
-   await page1.close()
+   // await page1.close()
 
-   await sleep(3000)
+   await sleep(30000)
 
    await chrome.close()
 
