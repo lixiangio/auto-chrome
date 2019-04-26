@@ -129,7 +129,9 @@ await Promise.all([
 
      * `devtools` *Boolean* 为每个page自动打开devtools，默认false
 
-     * `ignoreHTTPSErrors` *Boolean* 忽略https错误，默认true
+     * `ignoreHTTPSErrors` *Boolean* 忽略https错误，默认false
+
+    * `disableDownload` *Boolean* 禁止下载文件，默认false
 
      * `loadTimeout` *Number* 自动导航等待页面加载的最大停留时间，单位ms
 

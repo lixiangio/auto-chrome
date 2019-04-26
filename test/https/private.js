@@ -10,50 +10,57 @@ async function main() {
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: userDataDir + 1,
       args: ['--start-maximized'],
+      ignoreHTTPSErrors: true,
       devtools: true,
    })
 
-   let page = await chrome.newPage('https://www.szhkch.com/')
+   try {
 
-   await page.run(async function () {
+      let page = await chrome.newPage('https://www.szhkch.com/')
 
-      let elements = document.querySelectorAll("body a")
+      await page.run(async function () {
 
-      let key = Math.round(Math.random() * (elements.length * 0.3))
+         let elements = document.querySelectorAll("body a")
 
-      let element = elements[key]
+         let key = Math.round(Math.random() * (elements.length * 0.3))
 
-      if (element) {
+         let element = elements[key]
 
-         let tagetElement = element
+         if (element) {
 
-         // 迭代到根节点，将所有父级style.display设为block
-         while (element) {
-            element = element.parentNode
-            if (element && element.style) {
-               element.style.display = "block"
+            let tagetElement = element
+
+            // 迭代到根节点，将所有父级style.display设为block
+            while (element) {
+               element = element.parentNode
+               if (element && element.style) {
+                  element.style.display = "block"
+               }
             }
+
+            let { x, y, width, height } = await tagetElement.getBoundingClientRect()
+
+            let { innerText, href } = tagetElement
+
+            return { x, y, width, height, innerText, href };
+
          }
 
-         let { x, y, width, height } = await tagetElement.getBoundingClientRect()
+      })
 
-         let { innerText, href } = tagetElement
+      await sleep(2000)
 
-         return { x, y, width, height, innerText, href };
+      await chrome.page.clicker.scroll(0, 500)
 
-      }
+      await sleep(1000)
 
-   })
+      await page.close()
 
-   await sleep(2000)
+      await sleep(2000)
 
-   await chrome.page.clicker.scroll(0, 500)
+   } catch (error) {
 
-   await sleep(1000)
-
-   await page.close()
-
-   await sleep(2000)
+   }
 
    await chrome.close()
 
