@@ -3,7 +3,6 @@
 const autoChrome = require('../lib/');
 const devices = require('../device.js');
 const { executablePath, userDataDir } = require('./config.js');
-const { userAgent, viewport } = devices['iPhone 6'];
 
 async function main() {
 
@@ -12,17 +11,12 @@ async function main() {
       userDataDir: userDataDir + 3,
       // devtools: true,
       args: [
-         `--user-agent=${userAgent}`,
          '--start-maximized',
-         '--proxy-server=113.121.178.186:40278',
-         '--force-device-scale-factor=1.25',
+         '--proxy-server=119.116.97.98:4358',
       ],
-      emulate: {
-         viewport,
-      }
    })
 
-   await chrome.newPage('https://m.baidu.com/')
+   await chrome.newPage('https://www.baidu.com/s?ie=UTF-8&wd=ip');
 
    let page = chrome.page;
 
