@@ -11,7 +11,7 @@ const { userAgent, viewport } = devices['iPhone 6'];
 
 async function main() {
 
-   let chrome = await autoChrome({
+   const chrome = await autoChrome({
       executablePath,
       userDataDir: userDataDir + 1,
       args: [
@@ -20,7 +20,7 @@ async function main() {
          // '--start-maximized',
          // '--enable-touchview',
          // '--enabled',
-         '--force-device-scale-factor=1.25'
+         // '--force-device-scale-factor=1.25'
       ],
       emulate: {
          geolocation: {
@@ -45,15 +45,15 @@ async function main() {
 
    await sleep(2000)
 
-   let elments = await chrome.page.$$('#results .c-result')
+   const elments = await chrome.page.$$('#results .c-result')
 
-   let elment = elments[6]
+   const elment = elments[6];
 
    await elment.scroll()
 
    await sleep(1000)
 
-   await elment.click()
+   await elment.clickNav()
 
    // await elment.evaluate({
    //    func: (element) => {
@@ -63,38 +63,38 @@ async function main() {
 
    await sleep(1500)
 
-   await await chrome.page.prev()
+   await await chrome.page.prev();
 
    await sleep(1500)
 
-   await await chrome.page.next()
+   await await chrome.page.next();
 
    await sleep(1500)
 
-   await chrome.page.click('.athm-tab1st__assist a:nth-child(1)')
+   await chrome.page.clickNav('.athm-tab1st__assist a:nth-child(1)');
 
    await sleep(2000)
 
-   await chrome.page.click('.athm-tab1st__assist a:nth-child(2)')
+   await chrome.page.clickNav('.athm-tab1st__assist a:nth-child(2)');
 
    await sleep(2000)
 
-   await chrome.page.click('.athm-tab1st__assist a:nth-child(3)')
+   await chrome.page.clickNav('.athm-tab1st__assist a:nth-child(3)');
 
    await sleep(2000)
 
-   await await chrome.page.prev()
+   await await chrome.page.prev();
 
    await sleep(2000)
 
-   await await chrome.page.prev()
+   await await chrome.page.prev();
 
    await sleep(1500)
 
-   await await chrome.page.prev()
+   await await chrome.page.prev();
 
 }
 
 main().catch(function (error) {
-   console.log(error)
+   console.log(error);
 })

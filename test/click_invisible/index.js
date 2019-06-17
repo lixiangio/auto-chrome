@@ -28,7 +28,7 @@ async function main() {
 
    // 触发isTrusted:false click
    // await page.$eval('#button', element => {
-   //    element.click()
+   //    element.clickNav()
    // });
 
    // 显示隐藏的按钮

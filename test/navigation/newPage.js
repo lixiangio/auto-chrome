@@ -21,7 +21,7 @@ async function main() {
 
    await element.scroll();
 
-   await element.click();
+   await element.clickNav();
 
    console.log('-----------------')
 
@@ -31,7 +31,7 @@ async function main() {
 
    await element.scroll();
 
-   await element.click();
+   await element.clickNav();
 
    console.log('-----------------')
 
@@ -39,7 +39,7 @@ async function main() {
 
    await element.scroll()
 
-   await element.click()
+   await element.clickNav()
 
    console.log('-----------------')
 
@@ -47,7 +47,7 @@ async function main() {
 
    await element.scroll()
 
-   await element.click()
+   await element.clickNav()
 
 }
 

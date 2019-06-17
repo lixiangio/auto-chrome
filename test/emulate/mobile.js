@@ -28,14 +28,14 @@ async function main() {
 
    await chrome.newPage('https://www.baidu.com/')
 
-   let data = await chrome.page.run(() => {
+   const data = await chrome.page.run(() => {
 
-      return {
+      return JSON.stringify({
          "window.screen.height": window.screen.height,
          "window.screen.width": window.screen.width,
          "window.screen.availHeight": window.screen.availHeight,
          "window.screen.availWidth": window.screen.availWidth
-      }
+      })
 
    })
 

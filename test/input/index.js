@@ -9,7 +9,7 @@ async function main() {
 
    let chrome = await autoChrome({
       executablePath,
-      userDataDir,
+      userDataDir: userDataDir + 1,
       args: ['--start-maximized'],
       // devtools: true,
    })

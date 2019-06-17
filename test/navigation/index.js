@@ -6,14 +6,14 @@ const { sleep } = require('../helpers/')
 
 async function main() {
 
-   let chrome = await autoChrome({
+   const chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: userDataDir + 1,
       args: ['--start-maximized'],
       devtools: false,
    })
 
-   let page = await chrome.newPage('https://www.baidu.com/')
+   const page = await chrome.newPage('https://www.baidu.com/')
 
    await page.goto('https://www.baidu.com/')
 
@@ -35,25 +35,25 @@ async function main() {
 
    await page.goto('http://v.baidu.com/')
 
-   await page.click('xxx')
+   await page.clickNav('xxx')
 
    await page.goto('https://www.hao123.com/')
 
-   await page.click('xxx')
+   await page.clickNav('xxx')
 
    await page.goto('https://cn.vuejs.org/')
 
-   await page.click('xxx')
+   await page.clickNav('xxx')
 
    await page.goto('http://johnny-five.io/')
 
-   await page.click('xxx')
+   await page.clickNav('xxx')
    
    await page.goto('https://github.com/')
 
    await page.goto('https://www.hao123.com/')
 
-   await page.click('a[href="https://www.hao123.com"]')
+   await page.clickNav('a[href="https://www.hao123.com"]')
 
 }
 

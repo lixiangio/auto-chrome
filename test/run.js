@@ -9,7 +9,7 @@ const { userAgent, viewport } = devices['iPhone 6'];
 
 async function main() {
 
-   let chrome = await autoChrome({
+   const chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: userDataDir + 1,
       // devtools: true,
@@ -24,15 +24,15 @@ async function main() {
       }
    })
 
-   let page = chrome.page;
+   const page = chrome.page;
 
-   let result = await page.run(function (url, selecte) {
+   const result = await page.run(function (url, selecte) {
       return document
    }, 'm.autohome.com.cn', `#main > .r-results > div[data-page='1'] > a`)
 
    console.log(result);
 
-   let element = await page.$('#q');
+   const element = await page.$('#q');
 
    await element.click();
 

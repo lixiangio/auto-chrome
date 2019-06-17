@@ -6,26 +6,26 @@ const { sleep } = require('../helpers/')
 
 async function main() {
 
-   let chrome = await autoChrome({
+   const chrome = await autoChrome({
       executablePath,
-      userDataDir,
+      userDataDir: userDataDir + 1,
       args: ['--start-maximized'],
       // devtools: true,
    })
 
-   let page = chrome.page
+   const page = chrome.page;
 
-   await page.goto('http://www.runoob.com/')
+   await page.goto('http://www.runoob.com/');
 
-   await sleep(1000)
+   await sleep(1000);
 
-   let input = await page.$('.search-desktop .placeholder')
+   const element = await page.$('.search-desktop .placeholder');
 
-   await input.scroll()
+   await element.scroll();
 
-   await input.click()
+   await element.click();
 
-   await input.type('hellow word')
+   await element.type('hellow word')
 
    await sleep(500)
 

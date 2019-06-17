@@ -4,11 +4,11 @@ const autoChrome = require('../../lib')
 const { userDataDir } = require('../config.js');
 const devices = require('../../device.js');
 
-let { userAgent, viewport } = devices['iPhone 6'];
+const { userAgent, viewport } = devices['iPhone 6'];
 
 async function main() {
    
-   let chrome = await autoChrome({
+   const chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: userDataDir + 1,
       args: [
@@ -25,7 +25,7 @@ async function main() {
       }
    })
 
-   await chrome.newPage('https://map.baidu.com/mobile/webapp/index/index/')
+   await chrome.newPage('https://map.baidu.com/mobile/webapp/index/index/');
    
 }
 

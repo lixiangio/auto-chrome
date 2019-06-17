@@ -59,7 +59,7 @@ npm install auto-chrome
 
 ### 页面导航
 
-浏览器导航事件可分为可预测和不可预测两种，由于触发导航的方式非常多，通过鼠标、键盘、JS脚本等方式均可能触发未知的导航事件。如果导航切换时序不正确，会产生上下文消息错乱的bug。
+浏览器导航事件可分为可预测和不可预测两种，由于触发导航的方式非常多，通过鼠标、键盘、JS脚本方式均可能触发未知的导航事件。如果导航切换时序不正确，会产生上下文消息错乱的bug。
 
 另外一种情况是由于url重定向，频繁的触发上下文切换，导致上下文错位。这种场景难以被察觉，也很难做预判。
 
@@ -69,23 +69,27 @@ npm install auto-chrome
 
 #### 不可预测导航
 
-对于不可预测导航，如按下Enter键、鼠标点击绑定了跳转事件的非链接元素触发导航行为。
+* 键盘、鼠标事件绑定了跳转连接的非链接元素触发导航行为
 
-autoChrome无法预判一个操作是否会触发导航，只能由用户来指定某个步骤是否需要等待导航结束后再继续执行。
+* 导航可能在当前标签，也可能在新标签中加载
 
-有时候会出现连用户自己也无法确定某个操作是否会触发导航，比如当点击一个动态元素时就会存在不确定性。
+* 点击链接后出现一次或多次301重定向
+
+以上情况中，无法准确预判一个操作是否会触发导航。autoChrome中通过循环探测的方式来实现自动导航，该方案的缺点是时效不高，如果是已知的静态导航，用户可以自定义导航行为。
+
+有时候会出现连用户自己也无法确定某个操作是否会触发导航，比如当点击一个动态元素时会存在不确定性。
 
 ```js
 // 等待导航键盘示例代码
 await Promise.all([
-    page.keyboard.press("Enter"),
-    page.waitLoad()
+    chrome.keyboard.press("Enter"),
+    chrome.autoNav()
 ])
 
 // 鼠标示例
 await Promise.all([
     page.click("#input"),
-    page.waitLoad()
+    chrome.autoNav()
 ])
 ```
 
@@ -181,9 +185,17 @@ await Promise.all([
 
 * `params` *Object* 参数
 
+### chrome.autoNav(time)
+
+* `time` *Number* 等待超时时间
+
+循环监测，自动导航
+
+
 ### chrome.close()
 
 关闭浏览器
+
 
 
 ## class: Page
@@ -254,6 +266,10 @@ await Promise.all([
 
 通过CSS选择器点击元素
 
+### page.clickNav(selector)
+
+通过CSS选择器点击元素，内置导航
+
 * `selector` *String* CSS选择器
 
 ### page.type(selector, text, options)
@@ -299,11 +315,11 @@ await Promise.all([
 
 关闭标签
 
-### page.goBack()
+### page.prev()
 
 导航到上一个历史标签页
 
-### page.goForward()
+### page.next()
 
 导航到下一个历史标签页
 

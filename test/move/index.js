@@ -6,14 +6,14 @@ const { sleep } = require('../helpers/')
 
 async function main() {
 
-   let chrome = await autoChrome({
+   const chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: userDataDir + 1,
       args: ['--start-maximized'],
       devtools: true,
    })
 
-   let { page } = chrome
+   const { page } = chrome;
 
    page.goto('D:/Nodejs/Project/auto-chrome/test/move/index.html')
 

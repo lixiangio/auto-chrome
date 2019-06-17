@@ -11,9 +11,9 @@ const { userAgent, viewport } = devices['iPhone 6']
 
 async function main() {
 
-   let chrome = await autoChrome({
+   const chrome = await autoChrome({
       executablePath,
-      userDataDir,
+      userDataDir: userDataDir + 1,
       args: [
          `--user-agent=${userAgent}`,
          '--start-maximized',
@@ -31,7 +31,7 @@ async function main() {
       // devtools: true,
    })
 
-   let { page } = chrome
+   const { page } = chrome;
 
    await page.goto('https://www.baidu.com/')
 

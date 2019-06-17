@@ -17,7 +17,7 @@ async function main() {
 
    let chrome = await autoChrome({
       executablePath,
-      userDataDir,
+      userDataDir: userDataDir + 1,
       args: [
          `--user-agent=${userAgent}`,
          '--start-maximized'

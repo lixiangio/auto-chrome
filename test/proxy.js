@@ -6,23 +6,21 @@ const { executablePath, userDataDir } = require('./config.js');
 
 async function main() {
 
-   let chrome = await autoChrome({
+   const chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: userDataDir + 3,
       // devtools: true,
       args: [
          '--start-maximized',
-         '--proxy-server=119.116.97.98:4358',
+         '--proxy-server=127.0.0.1:1337',
       ],
    })
 
    await chrome.newPage('https://www.baidu.com/s?ie=UTF-8&wd=ip');
 
-   let page = chrome.page;
+   const page = chrome.page;
 
-   return;
-
-   let element = await page.click('#q')
+   const element = await page.click('#q')
 
    await element.type('ip')
 

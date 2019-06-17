@@ -31,10 +31,6 @@ async function main() {
       // devtools: true,
    })
 
-   chrome.ws.on('close', function () {
-      console.info("close");
-   });
-
    // await chrome.page.goto('https://m.baidu.com/');
 
    await chrome.newPage('https://m.baidu.com/');
@@ -47,7 +43,7 @@ async function main() {
 
    await sleep(1000);
 
-   await chrome.close();
+   // await chrome.close();
 
 }
 

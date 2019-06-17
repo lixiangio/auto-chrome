@@ -11,9 +11,9 @@ const { userAgent, viewport } = devices['iPhone 6']
 
 async function main() {
 
-   let chrome = await autoChrome({
+   const chrome = await autoChrome({
       executablePath,
-      userDataDir,
+      userDataDir: userDataDir + 1,
       args: [
          `https://m.baidu.com`,
          `--new-window`,

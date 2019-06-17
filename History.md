@@ -37,3 +37,11 @@
 ### 0.11.6
 
 * Chrome.close()改用关闭所有标签的方式优雅的退出浏览器。在实测中发现使用DevTools协议的"Browser.close"消息和childProcess.kill()均无法关闭浏览器。
+
+### 1.1.0
+
+* 使用ipc pipe通信替换ws WebSocket
+
+* 简化自动导航逻辑
+
+* waitLoad()更名为autoNav()
