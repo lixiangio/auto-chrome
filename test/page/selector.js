@@ -6,7 +6,7 @@ const { sleep } = require('../helpers/')
 
 async function main() {
 
-   let chrome = await autoChrome({
+   const chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: userDataDir + 1,
       args: ['--start-maximized'],
@@ -17,11 +17,11 @@ async function main() {
 
    await sleep(3000)
 
-   let $ = await chrome.page.$('.login, #input')
+   const $ = await chrome.page.$('.login, #input')
 
    console.log(!!$)
 
-   let $$ = await chrome.page.$$('.login, #input')
+   const $$ = await chrome.page.$$('.login, #input')
 
    console.log($$.length)
 

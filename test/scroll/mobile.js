@@ -1,13 +1,13 @@
 "use strict"
 
-const autoChrome = require('../../lib/')
-const devices = require('../../device.js')
-const config = require('../config')
-const { sleep } = require('../helpers')
+const autoChrome = require('../../lib/');
+const devices = require('../../device.js');
+const config = require('../config');
+const { sleep } = require('../helpers');
 
-const { executablePath, userDataDir } = config
+const { executablePath, userDataDir } = config;
 
-const { userAgent, viewport } = devices['iPhone 6']
+const { userAgent, viewport } = devices['iPhone 6'];
 
 async function main() {
 
@@ -33,32 +33,33 @@ async function main() {
 
    const { page } = chrome;
 
-   await page.goto('https://www.baidu.com/')
+   await page.goto('https://www.baidu.com/');
 
-   await sleep(1000)
+   await sleep(1000);
 
-   await page.click('#index-kw')
+   await page.click('#index-kw');
 
-   await sleep(500)
+   await sleep(500);
 
-   await page.keyboard.type('汽车')
+   await page.keyboard.type('汽车');
 
-   await sleep(500)
+   await sleep(500);
 
-   await page.enter()
+   await page.enter();
 
-   await sleep(2000)
+   await sleep(2000);
 
-   let remote = await page.run((url, $items) => {
+   const remote = await page.run((url, $items) => {
 
-      let elements = document.querySelectorAll($items)
+      const elements = document.querySelectorAll($items)
 
       let sort = 0
 
       // 遍历匹配url位置
       for (let element of elements) {
 
-         sort++
+         sort++;
+
          if (element.outerHTML.indexOf(url) >= 0) {
             element.sort = sort
             return element
@@ -66,12 +67,14 @@ async function main() {
 
       }
 
-   }, 'xcar.com.cn', '#results .c-result')
+   }, 'xcar.com.cn', '#results .c-result');
 
-   let element = page.newElementByRemote(remote)
+   const element = page.newElementByRemote(remote);
 
    if (element) {
-      await element.scroll()
+
+      await element.scroll();
+
    }
 
 }

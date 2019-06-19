@@ -33,27 +33,27 @@ async function main() {
       // devtools: true,
    })
 
-   await chrome.page.click('#index-kw')
+   await chrome.page.click('#index-kw');
 
-   await sleep(500)
+   await sleep(500);
 
-   await chrome.page.keyboard.type('汽车')
+   await chrome.page.keyboard.type('汽车');
 
-   await sleep(500)
+   await sleep(500);
 
-   await chrome.keyboard.press("Enter")
+   await chrome.keyboard.press("Enter");
 
-   await sleep(2000)
+   await sleep(2000);
 
-   const elments = await chrome.page.$$('#results .c-result')
+   const elments = await chrome.page.$$('#results .c-result');
 
    const elment = elments[6];
 
-   await elment.scroll()
+   await elment.scroll();
 
-   await sleep(1000)
+   await sleep(1000);
 
-   await elment.clickNav()
+   await elment.clickNav();
 
    // await elment.evaluate({
    //    func: (element) => {

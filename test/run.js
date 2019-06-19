@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 const autoChrome = require('../')
 const devices = require('../device.js')
@@ -10,14 +10,14 @@ const { userAgent, viewport } = devices['iPhone 6'];
 async function main() {
 
    const chrome = await autoChrome({
-      executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+      executablePath,
       userDataDir: userDataDir + 1,
       // devtools: true,
       args: [
          'https://m.so.com/',
          `--user-agent=${userAgent}`,
          '--start-maximized',
-         '--force-device-scale-factor=1.25',
+         // '--force-device-scale-factor=1.25',
       ],
       emulate: {
          viewport,

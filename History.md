@@ -45,3 +45,7 @@
 * 简化自动导航逻辑
 
 * waitLoad()更名为autoNav()
+
+### 1.2.0
+
+* 使用clicker代替mouse、touch事件触发器，提高代码对设备的兼容性

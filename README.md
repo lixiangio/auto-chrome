@@ -197,7 +197,6 @@ await Promise.all([
 关闭浏览器
 
 
-
 ## class: Page
 
 ### page.mouse

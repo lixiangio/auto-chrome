@@ -1,29 +1,28 @@
-"use strict"
+"use strict";
 
-const autoChrome = require('../../lib')
+const autoChrome = require('../../lib');
 const { userDataDir } = require('../config.js');
-const { sleep } = require('../helpers/')
+const { sleep } = require('../helpers/');
 
 async function main() {
 
-   let chrome = await autoChrome({
+   const chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: userDataDir + 1,
       args: ['--start-maximized'],
       devtools: false,
-   })
+   });
 
-   await chrome.page.goto('http://www.runoob.com/')
+   await chrome.page.goto('http://www.runoob.com/');
 
-   await sleep(2000)
+   await sleep(2000);
 
-   let element = await chrome.page.$('#footer')
+   const element = await chrome.page.$('#footer');
 
    // console.log(element)
 
-   await element.scroll()
-
+   await element.scroll();
 
 }
 
-main()
+main();

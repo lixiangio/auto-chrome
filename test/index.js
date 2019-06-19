@@ -27,21 +27,24 @@ async function main() {
          },
          viewport
       },
-      loadTimeout: 6000,
       // devtools: true,
    })
 
    // await chrome.page.goto('https://m.baidu.com/');
 
-   await chrome.newPage('https://m.baidu.com/');
+   const page = await chrome.newPage('https://m.baidu.com/');
 
-   await chrome.page.click('#index-kw');
+   await page.click('#index-kw');
 
-   await chrome.page.keyboard.type('汽车');
+   await page.keyboard.type('汽车');
 
-   await chrome.keyboard.press("Enter");
+   await page.enter();
 
    await sleep(1000);
+
+   const element = await page.scroll("#page-controller .new-nextpage-only, #page-controller .new-nextpage");
+
+   await element.click();
 
    // await chrome.close();
 
