@@ -143,17 +143,13 @@ await Promise.all([
 
 ## class: Chrome
 
+### chrome.clicker
+
+mouse、touch事件实例，引用自当前活动状态page.clicker
+
 ### chrome.keyboard
 
-鼠标操作，page.keyboard的快捷引用
-
-### chrome.mouse
-
-鼠标操作，page.mouse的快捷引用
-
-### chrome.touch
-
-触控设备操作，page.touch的快捷引用
+键盘事件实例，引用自当前活动状态page.keyboard
 
 ### chrome.pages
 
@@ -199,17 +195,13 @@ await Promise.all([
 
 ## class: Page
 
-### page.mouse
+### page.clicker
 
-鼠标实例
+mouse、touch事件实例，当autoChrome(options)配置项emulate.viewport.mobile值为true时，使用touch实例，否则使用mouse实例
 
 ### page.keyboard
 
 键盘实例
-
-### page.touch
-
-触控设备实例
 
 ### page.emulate(options)
 
