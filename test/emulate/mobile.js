@@ -4,11 +4,11 @@ const autoChrome = require('../../lib')
 const { userDataDir } = require('../config.js');
 const devices = require('../../device.js');
 
-let { userAgent, viewport } = devices['iPhone 6'];
+const { userAgent, viewport } = devices['iPhone 6'];
 
 async function main() {
 
-   let chrome = await autoChrome({
+   const chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: userDataDir + 1,
       args: [
@@ -16,17 +16,17 @@ async function main() {
          '--start-maximized'
       ],
       emulate: {
+         viewport,
          geolocation: {
             longitude: 114.2916402075,
             latitude: 22.6088954693,
             accuracy: 14
          },
-         viewport
       },
       // devtools: true,
    })
 
-   await chrome.newPage('https://www.baidu.com/')
+   await chrome.newPage('http://pingmu.zh-ang.com/')
 
    const data = await chrome.page.run(() => {
 

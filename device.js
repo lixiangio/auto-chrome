@@ -16,12 +16,31 @@
 
 module.exports = [
   {
-    'name': 'Chrome',
+    'name': 'Chrome 1920',
     'userAgent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36',
     'viewport': {
       'screenWidth': 1920,
       'screenHeight': 1080,
-      'mobile': false
+      'width': 1920,
+      'height': 969,
+    }
+  },
+  {
+    'name': 'Chrome 1680',
+    'userAgent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36',
+    'viewport': {
+      'screenWidth': 1680,
+      'screenHeight': 1050,
+      'width': 1680,
+      'height': 939,
+    }
+  },
+  {
+    'name': 'Chrome 1366',
+    'userAgent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36',
+    'viewport': {
+      'screenWidth': 1366,
+      'screenHeight': 768,
     }
   },
   {

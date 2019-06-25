@@ -4,18 +4,16 @@ const autoChrome = require('../../lib')
 const { userDataDir } = require('../config.js');
 const devices = require('../../device.js')
 
-let { userAgent, viewport } = devices['Chrome'];
-
-console.log(viewport)
+const { userAgent, viewport } = devices['Chrome 1920'];
 
 async function main() {
 
-   let chrome = await autoChrome({
+   const chrome = await autoChrome({
       executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
       userDataDir: userDataDir + 1,
       args: [
          `--user-agent=${userAgent}`,
-         '--start-maximized'
+         '--start-maximized',
       ],
       emulate: {
          geolocation: {
@@ -30,23 +28,23 @@ async function main() {
 
    // await chrome.newPage('http://cn.screenresolution.org/')
 
-   await chrome.newPage('http://pingmu.zh-ang.com/')
+   await chrome.newPage('http://www.baidu.com/')
 
-   // let data = await chrome.page.run(() => {
+   const data = await chrome.page.run(() => {
 
-   //    return {
-   //       "window.screen.height": window.screen.height,
-   //       "window.screen.availHeight": window.screen.availHeight,
-   //       "window.innerHeight": window.innerHeight,
-   //       "window.screen.width": window.screen.width,
-   //       "window.screen.availWidth": window.screen.availWidth,
-   //       "window.innerWidth": window.innerWidth,
-   //    }
+      return JSON.stringify({
+         "window.screen.height": window.screen.height,
+         "window.screen.availHeight": window.screen.availHeight,
+         "window.innerHeight": window.innerHeight,
+         "window.screen.width": window.screen.width,
+         "window.screen.availWidth": window.screen.availWidth,
+         "window.innerWidth": window.innerWidth,
+      })
 
-   // })
+   })
 
-   // console.log(data)
+   console.log(JSON.parse(data.value));
 
 }
 
-main()
+main();

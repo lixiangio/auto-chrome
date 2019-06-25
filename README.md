@@ -57,17 +57,17 @@ npm install auto-chrome
 
 ## 注意事项
 
-### 页面导航
+由于301重定向到新的url，连续多次触发上下文切换，导致上下文错位。301难以被察觉，且很难做预判，在调试时应该格外注意。
+
+## 页面导航
 
 浏览器导航事件可分为可预测和不可预测两种，由于触发导航的方式非常多，通过鼠标、键盘、JS脚本方式均可能触发未知的导航事件。如果导航切换时序不正确，会产生上下文消息错乱的bug。
 
-另外一种情况是由于url重定向，频繁的触发上下文切换，导致上下文错位。这种场景难以被察觉，也很难做预判。
-
-#### 可预测导航
+### 可预测导航
 
 对于chrome.newPage()、page.goto()这类明确包含导航行为的显性操作，autoChrome进行内部封装，在使用时不需要做额外的处理。
 
-#### 不可预测导航
+### 不可预测导航
 
 * 导航可能刷新当前标签，也可能创建新标签
 
@@ -108,8 +108,6 @@ await Promise.all([
     * `executablePath` *String* Chrome程序执行路径
 
     * `userDataDir` *String* 用户配置文件路径，定义独立的Chrome实例，支持cluster模式下并行
-
-    * `port` *Number* ws远程连接端口号
 
     * `emulate` *Object* 设备仿真，该配置对于初始标签不太凑效，可能由于初始targetCreated事件并没有被捕获。
 
@@ -365,8 +363,9 @@ mouse、touch事件实例，当autoChrome(options)配置项emulate.viewport.mobi
 
 通过getBoundingClientRect函数获取元素大小、坐标信息
 
+### elment.scrollIntoView()
 
-
+于将指定元素快速切换至可视区域
 
 ## class: Mouse
 
