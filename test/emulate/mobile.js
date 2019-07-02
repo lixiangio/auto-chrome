@@ -26,7 +26,7 @@ async function main() {
       // devtools: true,
    })
 
-   await chrome.newPage('http://pingmu.zh-ang.com/')
+   await chrome.newPage('http://www.so.com/')
 
    const data = await chrome.page.run(() => {
 

@@ -53,3 +53,7 @@
 ### 1.2.2
 
 * 新增Element.scrollIntoView()方法，用于将指定元素快速切换至可视区域
+
+### 1.2.3
+
+* loggercc替换为consoln
