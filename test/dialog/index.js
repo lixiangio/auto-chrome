@@ -1,7 +1,7 @@
 "use strict"
 
 const autoChrome = require('../../lib/');
-const { userDataDir } = require('../config.js');
+const { executablePath, userDataDir } = require('../config.js');
 
 /**
  * @param {*} device 用户配置目录名称
@@ -9,8 +9,8 @@ const { userDataDir } = require('../config.js');
 async function main() {
 
    const chrome = await autoChrome({
-      executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
-      userDataDir: userDataDir + 1,
+      executablePath,
+      userDataDir,
       args: [
          '--start-maximized'
       ],

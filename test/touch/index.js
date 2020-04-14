@@ -13,9 +13,9 @@ let { userAgent, viewport } = devices['iPhone 6'];
  */
 async function main() {
 
-   let chrome = await autoChrome({
+   const chrome = await autoChrome({
       executablePath,
-      userDataDir: userDataDir + 1,
+      userDataDir,
       args: [
          // `--profile-directory=Default`, 
          `--user-agent=${userAgent}`,

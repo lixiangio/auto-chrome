@@ -11,7 +11,7 @@ async function main() {
 
    const chrome = await autoChrome({
       executablePath,
-      userDataDir: userDataDir + 1,
+      userDataDir,
       // devtools: true,
       args: [
          'https://m.so.com/',

@@ -7,8 +7,8 @@ const { sleep } = require('../helpers/')
 async function main() {
 
    const chrome = await autoChrome({
-      executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
-      userDataDir: userDataDir + 1,
+      executablePath,
+      userDataDir,
       args: ['--start-maximized'],
       devtools: false,
    })
@@ -17,19 +17,19 @@ async function main() {
 
    await page.goto('https://www.baidu.com/')
 
-   let el = await page.$('#head')
+   const head = await page.$('#head')
 
    console.log(page.contextId)
 
-   console.log(el.objectId)
+   console.log(head.objectId)
 
-   el = await page.$('a')
+   const a = await page.$('a')
 
-   console.log(el.objectId)
+   console.log(a.objectId)
 
-   el = await page.$('#kw')
+   const kw = await page.$('#kw')
 
-   console.log(el.objectId)
+   console.log(kw.objectId)
 
    return
 
@@ -48,7 +48,7 @@ async function main() {
    await page.goto('http://johnny-five.io/')
 
    await page.clickNav('xxx')
-   
+
    await page.goto('https://github.com/')
 
    await page.goto('https://www.hao123.com/')

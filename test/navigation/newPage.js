@@ -6,18 +6,18 @@ const { sleep } = require('../helpers/')
 
 async function main() {
 
-   let chrome = await autoChrome({
-      executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
-      userDataDir: userDataDir + 1,
+   const chrome = await autoChrome({
+      executablePath,
+      userDataDir,
       args: ['--start-maximized'],
       // devtools: true,
    })
 
-   await chrome.page.goto('http://www.runoob.com/')
+   await chrome.newPage('http://www.runoob.com/');
 
    console.log('-----------------')
 
-   let element = await chrome.page.$('.runoob-block dl dd:nth-child(2) a')
+   const element = await chrome.page.$('.runoob-block dl dd:nth-child(2) a')
 
    await element.scroll();
 
@@ -25,29 +25,29 @@ async function main() {
 
    console.log('-----------------')
 
-   element = await chrome.page.$('.runoob-block dl dd:nth-child(3) a')
+   const element2 = await chrome.page.$('.runoob-block dl dd:nth-child(3) a')
 
-   console.log("element", !!element);
+   console.log("element", !!element2);
 
-   await element.scroll();
+   await element2.scroll();
 
-   await element.clickNav();
-
-   console.log('-----------------')
-
-   element = await chrome.page.$('.runoob-block dl dd:nth-child(4) a')
-
-   await element.scroll()
-
-   await element.clickNav()
+   await element2.clickNav();
 
    console.log('-----------------')
 
-   element = await chrome.page.$('.runoob-block dl dd:nth-child(5) a')
+   const element3 = await chrome.page.$('.runoob-block dl dd:nth-child(4) a')
 
-   await element.scroll()
+   await element3.scroll();
 
-   await element.clickNav()
+   await element3.clickNav();
+
+   console.log('-----------------')
+
+   const element4 = await chrome.page.$('.runoob-block dl dd:nth-child(5) a')
+
+   await element4.scroll();
+
+   await element4.clickNav();
 
 }
 

@@ -2,7 +2,7 @@
 
 const autoChrome = require('../../lib/');
 const devices = require('../../device.js');
-const { userDataDir } = require('../config.js');
+const { executablePath, userDataDir } = require('../config.js');
 const { sleep } = require('../helpers/');
 
 // const { userAgent, viewport } = devices['iPhone 6'];
@@ -10,9 +10,9 @@ const { userAgent, viewport } = devices['Chrome'];
 
 async function main() {
 
-   let chrome = await autoChrome({
-      executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
-      userDataDir: userDataDir + 1,
+   const chrome = await autoChrome({
+      executablePath,
+      userDataDir,
       // devtools: true,
       args: [
          `--user-agent=${userAgent}`,

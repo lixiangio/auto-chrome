@@ -7,7 +7,7 @@ const { executablePath, userDataDir } = require('./config.js');
 async function main() {
 
    const chrome = await autoChrome({
-      executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+      executablePath,
       userDataDir: userDataDir + 3,
       // devtools: true,
       args: [

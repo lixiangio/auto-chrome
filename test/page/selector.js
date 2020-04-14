@@ -1,29 +1,29 @@
 "use strict"
 
-const autoChrome = require('../../lib/')
+const autoChrome = require('../../lib/');
 const { executablePath, userDataDir } = require('../config.js');
-const { sleep } = require('../helpers/')
+const { sleep } = require('../helpers/');
 
 async function main() {
 
    const chrome = await autoChrome({
-      executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
-      userDataDir: userDataDir + 1,
+      executablePath,
+      userDataDir,
       args: ['--start-maximized'],
       devtools: false,
    })
 
-   await chrome.page.goto('https://www.so.com/')
+   await chrome.newPage('https://www.so.com/')
 
    await sleep(3000)
 
-   const $ = await chrome.page.$('.login, #input')
+   const elment = await chrome.page.$('.login, #input')
 
-   console.log(!!$)
+   console.log(!!elment)
 
-   const $$ = await chrome.page.$$('.login, #input')
+   const elments = await chrome.page.$$('.login, #input')
 
-   console.log($$.length)
+   console.log(elments.length)
 
 }
 

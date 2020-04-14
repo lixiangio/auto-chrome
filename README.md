@@ -131,6 +131,8 @@ await Promise.all([
 
      * `devtools` *Boolean* 为每个page自动打开devtools，默认false
 
+     * `timeOut` *Number* 消息响应超时时间，默认150000
+
      * `ignoreHTTPSErrors` *Boolean* 忽略https错误，默认false
 
     * `disableDownload` *Boolean* 禁止下载文件，默认false

@@ -1,7 +1,7 @@
 "use strict";
 
 const autoChrome = require('../../lib/');
-const { userDataDir } = require('../config.js');
+const { executablePath, userDataDir } = require('../config.js');
 const { sleep } = require('../helpers/');
 
 /**
@@ -10,8 +10,8 @@ const { sleep } = require('../helpers/');
 async function main() {
 
    const chrome = await autoChrome({
-      executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
-      userDataDir: userDataDir + 1,
+      executablePath,
+      userDataDir,
       devtools: true
    })
 

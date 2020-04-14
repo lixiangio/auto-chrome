@@ -1,14 +1,14 @@
 "use strict"
 
 const autoChrome = require('../../lib')
-const { userDataDir } = require('../config.js');
+const { executablePath, userDataDir } = require('../config.js');
 const { sleep } = require('../helpers/')
 
 async function main() {
 
-   let chrome = await autoChrome({
-      executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
-      userDataDir: userDataDir + 1,
+   const chrome = await autoChrome({
+      executablePath,
+      userDataDir,
       args: ['--start-maximized'],
       devtools: false,
    })
@@ -23,7 +23,7 @@ async function main() {
 
    element = await element.$('.setting a')
 
-   let get = await element.get('innerText')
+   const get = await element.get('innerText')
 
    console.log(get)
 
@@ -31,7 +31,7 @@ async function main() {
 
    if (element) {
 
-      let bounding = await element.getBoundingRect()
+      const bounding = await element.getBoundingRect()
 
       console.log(bounding)
 

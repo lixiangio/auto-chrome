@@ -6,9 +6,9 @@ const { executablePath, userDataDir } = config;
 
 async function main() {
 
-   let chrome = await autoChrome({
-      executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
-      userDataDir: userDataDir + 1,
+   const chrome = await autoChrome({
+      executablePath,
+      userDataDir,
       args: ['--start-maximized'],
       devtools: false,
    })

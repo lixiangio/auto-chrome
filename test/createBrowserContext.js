@@ -15,9 +15,9 @@ const { userAgent, viewport } = devices['iPhone 6']
 
 async function main() {
 
-   let chrome = await autoChrome({
+   const chrome = await autoChrome({
       executablePath,
-      userDataDir: userDataDir + 1,
+      userDataDir,
       args: [
          `--user-agent=${userAgent}`,
          '--start-maximized'

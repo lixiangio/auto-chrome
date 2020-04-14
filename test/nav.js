@@ -13,7 +13,7 @@ async function main() {
 
    const chrome = await autoChrome({
       executablePath,
-      userDataDir: userDataDir + 1,
+      userDataDir,
       args: [
          'https://www.baidu.com/',
          `--user-agent=${userAgent}`,
@@ -96,5 +96,7 @@ async function main() {
 }
 
 main().catch(function (error) {
+
    console.log(error);
+   
 })

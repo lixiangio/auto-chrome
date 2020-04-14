@@ -1,15 +1,16 @@
 const autoChrome = require('../lib/')
+const { executablePath, userDataDir } = require('./config.js');
 
 async function main() {
 
-   let chrome = await autoChrome({
-      executablePath: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
-      userDataDir: userDataDir + 1,
+   const chrome = await autoChrome({
+      executablePath,
+      userDataDir,
       args: ['--start-maximized'],
       devtools: false,
    })
 
-   let frameTree = await chrome.page.send('Page.getFrameTree')
+   const frameTree = await chrome.page.send('Page.getFrameTree')
 
    console.log(frameTree.frameTree)
 
