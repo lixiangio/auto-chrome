@@ -21,13 +21,18 @@ async function main() {
       ],
       emulate: {
          viewport,
-      }
+      },
+      devtools: true,
    })
 
    const page = chrome.page;
 
-   const result = await page.run(function (url, selecte) {
-      return document
+   const result = await page.run(function (element, selecte) {
+      console.log(selecte)
+      return JSON.stringify({
+         a: 1,
+         b: 2
+      })
    }, 'm.autohome.com.cn', `#main > .r-results > div[data-page='1'] > a`)
 
    console.log(result);

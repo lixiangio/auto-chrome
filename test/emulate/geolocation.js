@@ -7,7 +7,7 @@ const devices = require('../../device.js');
 const { userAgent, viewport } = devices['iPhone 6'];
 
 async function main() {
-   
+
    const chrome = await autoChrome({
       executablePath,
       userDataDir,
@@ -26,7 +26,7 @@ async function main() {
    })
 
    await chrome.newPage('https://map.baidu.com/mobile/webapp/index/index/');
-   
+
 }
 
 main()
