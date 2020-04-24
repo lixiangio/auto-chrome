@@ -14,7 +14,7 @@ async function main() {
       args: [
          '--start-maximized'
       ],
-      ignoreHTTPSErrors: true, //忽略https错误
+      ignoreHTTPSErrors: true, // 忽略https错误
       // devtools: true,
    })
 

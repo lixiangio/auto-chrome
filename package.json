@@ -1,7 +1,7 @@
 {
   "name": "auto-chrome",
-  "version": "1.2.6",
-  "description": "使用Node.js操作Chrome或Chromium，高仿真的用户行为模拟器",
+  "version": "1.2.7",
+  "description": "用Node.js操作Chrome或Chromium，高仿真的用户行为模拟器",
   "main": "lib/",
   "scripts": {
     "dev": "node test/",

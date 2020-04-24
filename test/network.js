@@ -36,7 +36,9 @@ async function main() {
    await element.type('ip')
 
    // 回车，触发并等待导航结束
-   await page.enter()
+   await page.enter();
+
+   await chrome.initPage();
 
 }
 

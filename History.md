@@ -6,12 +6,12 @@
 
 ### 1.2.3
 
-* loggercc替换为consoln
+* consoln替换为consoln
 
 
 ### 1.2.3
 
-* loggercc替换为consoln
+* consoln替换为consoln
 
 
 ### 1.2.2
