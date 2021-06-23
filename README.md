@@ -1,29 +1,29 @@
 # auto-chrome
 
-使用Node.js自动化控制Chrome或Chromium，基于[chrome devtools](https://chromedevtools.github.io/devtools-protocol/)协议的高仿真用户行为模拟器。
+A highly emulated user behaviour simulator using Node.js to automate control of Chrome or Chromium, based on the [chrome devtools](https://chromedevtools.github.io/devtools-protocol/) protocol.
 
-借鉴于puppeteer，选择重写是因为在实际应用中puppeteer存在各种奇怪的bug，导致线程持续阻塞且难以被修复，一些实现细节也不符合预期。
+Borrowed from puppeteer, the rewrite was chosen because in practice puppeteer has various strange bugs that cause threads to constantly block and are difficult to fix, and some implementation details are not as expected.
 
-chrome devtools协议api过于原始，对开发者而言并不友好。puppeteer api虽然功能丰富，但是操作依然过于繁琐，且存在一些难以规避的Bug。
+The chrome devtools protocol api is too primitive and not developer friendly. the puppeteer api is feature rich but still too cumbersome to use and has a few bugs that are hard to get around.
 
-auto-chrome以简洁和易用为设计原则，重点简化常见应用场景，通过扩展的方式满足定制化需求。
+auto-chrome is designed for simplicity and ease of use, with a focus on simplifying common application scenarios and customisation through extensions.
 
 
-## 特性
+## Features
 
-* 支持自动聚焦，根据当前活跃标签自动切换标签，通过chrome.page获取当前处于激活状态的标签。这在实际应用中避免了多标签切换带来的苦恼，同时减少手动切换标签导致的混乱
+* Supports autofocus, which automatically switches between tabs based on the currently active tabs, using chrome.page to get the currently active tabs. This avoids the hassle of switching between multiple tabs in practice, and reduces the confusion caused by manual tab switching.
 
-* 支持主动导航监测，避免用户由于疏忽没有明确定义导航行为，导命操作错乱。
+* Supports active navigation monitoring to prevent users from inadvertently failing to clearly define navigation actions that could lead to confusing operations.
 
-* 支持消息队列等待超时自动解除，由于各种不可控因素，devtools并不保证100%对所有发送的消息做出回应，在没有超时机制的状态下消息将处于持续等待状态，导致任务无法继续执行
+* Support for automatic release of message queue wait timeout. Due to various uncontrollable factors, devtools does not guarantee 100% response to all messages sent, and without a timeout mechanism messages will be in a constant wait state, resulting in tasks not being able to continue.
 
-* 解除鼠标、键盘、触控输入设备与页面的绑定，避免频繁在多个页面间切换设备
+* Unbind mouse, keyboard and touch input devices to pages to avoid frequent switching of devices between pages
 
-* 支持高仿真输入，模拟鼠标移动轨迹和Touch手势
+* Highly emulated input, simulating mouse trajectory and Touch gestures
 
-* 简化的错误处理机制，即使任务出现异常依然能继续运行，尽可能保障线程不出现持久性阻塞
+* Simplified error handling mechanism that allows tasks to continue running even if there is an exception, ensuring that threads do not persistently block as much as possible
 
-* 支持GPS定位
+* Support for GPS positioning
 
 ## Install
 
@@ -32,374 +32,373 @@ npm install auto-chrome
 ```
 
 
-## chromium安装
+## chromium installation
 
-由于网络环境因素，auto-chrome并没有像puppeteer那样直接将chromium作为npm依赖进行安装。因此你需要手动下载chromium，并在launch.executablePath配置项中指定安装路径。
+Due to network environment factors, auto-chrome does not install chromium directly as an npm dependency like puppeteer does. Therefore you need to download chromium manually and specify the installation path in the launch.executablePath configuration item.
 
-推荐源：https://npm.taobao.org/mirrors/chromium-browser-snapshots/
-
-
-
-## chrome devtools术语
-
-* `Target` 表示浏览器中的某个目标对象，可以是browser、page、iframe、other类型之一。当type为page类型时，targetId对应于主框架的frame id。
-
-* `Session` session机制用于创建多个会话，可以为每个Target绑定独立的session，也可以让多个Target共享同一个session。
-
-* `Page` 浏览器标签，Chrome中允许打开多个Page，但始终只有一个Page处于激活状态。
-
-* `Runtime` JavaScript运行时，用于向网页注入JS代码实现对DOM的操作。
-
-* `Frame` 网页中的框架，主Frame中允许包含多个子Frame。
-
-* `Context` JavaScript运行时所处的的上下文，由于页面内可能包含Frame，每个Frame拥有独立的运行时，因此需要生成唯一contextId来区分它们。
+Recommended source: https://npm.taobao.org/mirrors/chromium-browser-snapshots/
 
 
-## 注意事项
 
-由于301重定向到新的url，连续多次触发上下文切换，导致上下文错位。301难以被察觉，且很难做预判，在调试时应该格外注意。
+## chrome devtools terminology
 
-## 页面导航
+* `Target` represents a target object in the browser, which can be one of types browser, page, iframe, or other. When the type is page, the targetId corresponds to the frame id of the main frame.
 
-浏览器导航事件可分为可预测和不可预测两种，由于触发导航的方式非常多，通过鼠标、键盘、JS脚本方式均可能触发未知的导航事件。如果导航切换时序不正确，会产生上下文消息错乱的bug。
+* ` Session` The session mechanism is used to create multiple sessions, either by binding a separate session for each Target or by having multiple Targets share the same session.
 
-### 可预测导航
+* `Page` browser tab, Chrome allows multiple Pages to be open, but only one Page is always active.
 
-对于chrome.newPage()、page.goto()这类明确包含导航行为的显性操作，autoChrome进行内部封装，在使用时不需要做额外的处理。
+* `Runtime` JavaScript runtime, used to inject JS code into a web page to enable manipulation of the DOM.
 
-### 不可预测导航
+* `Frame` The frame in a web page, the main Frame is allowed to contain multiple sub-Frames.
 
-* 导航可能刷新当前标签，也可能创建新标签
+* `Context` The context in which the JavaScript is run. As a page may contain Frames, each Frame has a separate runtime, so a unique contextId needs to be generated to distinguish between them.
 
-* 通过JS触发跳转链接的不可预测导航行为
 
-* 点击链接后出现一次或多次301重定向
+## Caution
 
-* 由于浏览器301缓存导致重定向的不确定性
+The 301 redirects to a new url, triggering multiple context switches in succession, resulting in contextual misalignment. 301 is difficult to detect and difficult to pre-determine, and extra care should be taken when debugging.
 
-针对以上情况，无法准确预判一个操作是否会触发导航事件。autoChrome中通过循环探测的方式来实现自动导航，该方案的缺点是时效不高，应用场景有限。
+## Page Navigation
+
+Browser navigation events can be classified as either predictable or unpredictable, and as there are so many ways to trigger navigation, unknown navigation events can be triggered by mouse, keyboard, or JS scripting methods. If navigation toggles are not timed correctly, this can result in a buggy contextual message.
+
+### Predictable navigation
+
+For explicit operations such as chrome.newPage() and page.goto(), which explicitly include navigation behaviour, autoChrome wraps them internally and does not require additional processing when using them.
+
+### Unpredictable navigation
+
+* Navigation may refresh the current tab and may create new tabs
+
+* Unpredictable navigation behaviour via JS triggered jump links
+
+* One or more 301 redirects after clicking on a link
+
+* Uncertainty of redirects due to browser 301 caching
+
+In the above case, it is not possible to predict exactly whether an action will trigger a navigation event. autoChrome implements automatic navigation by means of cyclic detection, which has the disadvantage of not being very time-efficient and has limited application scenarios.
 
 ```js
-// 等待导航键盘示例代码
+// Waiting for the navigation keyboard example code
 await Promise.all([
     chrome.keyboard.press("Enter"),
     chrome.autoNav()
 ])
 
-// 鼠标示例
+// Mouse example
 await Promise.all([
     page.click("#input"),
     chrome.autoNav()
 ])
 ```
 
-### 高分屏分辨率
+### High split screen resolution
 
-如果你的chrome运行在高分屏设备中，可能会出现touch事件错位的严重bug，这种情况可以尝试使用“--force-device-scale-factor=”来调整缩放比例。
+If your chrome is running in a high split screen device, there may be a serious bug with touch events being misaligned, in which case try using "--force-device-scale-factor=" to adjust the scaling.
 
 ## autoChrome(options)
 
-* `options` *Object* 全局实例配置选项，优先级低于page
+* `options` *Object* Global instance configuration option with lower priority than page
 
-    * `args[ars, ...]` *Array* Chrome启动参数数组
+    * `args[ars, ...]` *Array* Chrome Launch Parameters Array
 
-        * `ars` *String* Chrome启动参数
+        * `ars` *String* Chrome Launch Parameters
 
-    * `executablePath` *String* Chrome程序执行路径
+    * `executablePath` *String* Chrome program execution path
 
-    * `userDataDir` *String* 用户配置文件路径，定义独立的Chrome实例，支持cluster模式下并行
+    * `userDataDir` *String* User profile paths, definition of separate Chrome instances, support for parallelism in cluster mode
 
-    * `emulate` *Object* 设备仿真，该配置对于初始标签不太凑效，可能由于初始targetCreated事件并没有被捕获。
+    * `emulate` *Object* device emulation, this configuration does not work well for the initial tag, probably because the initial targetCreated event is not captured.
 
         * `viewport` *Object* 
 
-            * `mobile` *Boolean* 移动设备，默认false
+            * `mobile` *Boolean* Mobile device, default false
 
-            * `width` *Number* 屏幕宽度，默认自适应屏幕宽度
+            * `width` *Number* the width of the screen, the default adaptive screen width
 
-            * `height` *Number* 屏幕高度，默认自适应屏幕高度
+            * `height` *Number* the height of the screen, adapts to the screen height by default
 
-        * `geolocation` *Object* 地理位置，使用Google地图坐标
+        * `geolocation` *Object* geolocation, uses Google Maps coordinates
 
-            * `longitude` *Number* 经度
+            * `longitude` *Number* longitude
 
-            * `latitude` *Number* 纬度
+            * `latitude` *Number* latitude
 
-            * `accuracy` *Number* 精准度
+            * `accuracy` *Number* precision
 
-     * `headless` *Boolean* 隐藏执行模式，默认false
+     * `headless` *Boolean* Hide execution mode, default false
 
-     * `devtools` *Boolean* 为每个page自动打开devtools，默认false
+     * `devtools` *Boolean* Automatically opens devtools for each page, default false
 
-     * `timeOut` *Number* 消息响应超时时间，默认150000
+     * `timeOut` *Number* message response timeout, default 150000
 
-     * `ignoreHTTPSErrors` *Boolean* 忽略https错误，默认false
+     * `ignoreHTTPSErrors` *Boolean* Ignore https errors, default false
 
-    * `disableDownload` *Boolean* 禁止下载文件，默认false
+    * `disableDownload` *Boolean* disables downloading of files, default false
 
-     * `loadTimeout` *Number* 自动导航等待页面加载的最大停留时间，单位ms
+     * `loadTimeout` *Number* Maximum time to wait for a page to load for auto-navigation, in ms
 
-* `return` *Chrome* Chrome类实例
+* `return` *Chrome* Chrome Class Example
 
 ## class: Chrome
 
 ### chrome.clicker
-
-mouse、touch事件实例，引用自当前活动状态page.clicker
+mouse, touch event example, referenced from the currently active state page.clicker
 
 ### chrome.keyboard
 
-键盘事件实例，引用自当前活动状态page.keyboard
+Keyboard event instance, referenced from the currently active page.keyboard
 
 ### chrome.pages
 
-包含所有打开page的Map对象
+Map object containing all open pages
 
-### chrome.page
+### chrome.pages
 
-当前激活状态的page
+The page in the currently active state
 
 ### chrome.newPage(url)
 
-* `url` *String* 打开网页地址，缺省时打开空白网页
+* `url` *String* the address of the page to open, by default it opens a blank page
 
 ### chrome.closePageById(pageId)
 
-通过pageId关闭指定的标签
+Closes the specified tab by pageId
 
-* `pageId` *String* 要删除page的id
+* `pageId` *String* the id of the page to delete
 
 ### chrome.createBrowserContext()
 
-创建独立的浏览器环境，只能在隐身模式下运行。
+Creates a standalone browser environment that can only be run in incognito mode.
 
 ### chrome.send(method, params)
 
-发送原始的chrome devtools协议消息
+Sends the original chrome devtools protocol message
 
-* `method` *String* 方法名
+* `method` *String* method name
 
-* `params` *Object* 参数
+* `params` *Object* parameters
 
 ### chrome.autoNav(time)
 
-* `time` *Number* 等待超时时间
+* `time` *Number* wait timeout time
 
-循环监测，自动导航
+Loop monitoring, autoNav
 
 
 ### chrome.close()
 
-关闭浏览器
+Closes the browser
 
 
-## class: Page
+### class: Page
 
 ### page.clicker
 
-mouse、touch事件实例，当autoChrome(options)配置项emulate.viewport.mobile值为true时，使用touch实例，否则使用mouse实例
+mouse, touch event instances, use touch instance when autoChrome(options) config item emulate.viewport.mobile is true, otherwise use mouse instance
 
 ### page.keyboard
 
-键盘实例
+Keyboard instance
 
 ### page.emulate(options)
 
-设备仿真，直接调用该方法可能导致混乱，正常应该由事件驱动在创建标签执行page.emulate()，手动调用会存在延时覆盖问题。
+Device emulation, calling this method directly may lead to confusion, it should normally be executed by the event driver at the creation of the label page.emulate(), calling it manually will suffer from delayed overwriting.
 
-* `options` *Object* 选项
+* `options` *Object* options
 
-    * `mobile` *Boolean* 移动设备
+    * `mobile` *Boolean* mobile device
 
-    * `width` *Number* 屏幕宽度
+    * `width` *Number* screen width
 
-    * `width` *Number* 屏幕高度
+    * `width` *Number* screen height
 
-    * `geolocation` *Object* 地理位置
+    * `geolocation` *Object* geolocation
 
-        * `longitude` *Number* 经度
+        * `longitude` *Number* longitude
 
-        * `latitude` *Number* 纬度
+        * `latitude` *Number* latitude
 
-        * `accuracy` *Number* 精准度
+        * `accuracy` *Number* precision
 
 ### page.goto(url)
 
-在标签内打开新网页
+Open a new page inside a tab
 
-### page.run(pageFunction, ...arg)
+### page.run(pageFunction, ... .arg)
 
-向页面注入js函数，获取执行后的返回值
+Injects a js function into the page and gets the return value after execution
 
-* `pageFunction` *Function* 注入函数
+* `pageFunction` *Function* injects a function
 
-* `arg` * 可序列化参数，不支持函数
+* `arg` * serializable arguments, no function support
 
-* `return` *Object* 远程资源相关信息，[RemoteObject](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#type-RemoteObject)
+* `return` *Object* information about the remote resource, [RemoteObject](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#type-RemoteObject)
 
 ### page.$(selector)
 
-选择单个元素
+Selects a single element
 
-* `selector` *String* CSS选择器
+* `selector` *String* CSS selector
 
-* `return` *Object* 单个Elment实例
+* `return` *Object* single Elment instance
 
 ### page.$$(selector)
 
-选择多个元素
+Selects multiple elements
 
-* `selector` *String* CSS选择器
+* `selector` *String* CSS selector
 
-* `return` *Array* 多个Elment实例数组
+* `return` *Array* array of multiple Elment instances
 
 ### page.click(selector)
 
-通过CSS选择器点击元素
+Click on an element via CSS selector
 
 ### page.clickNav(selector)
 
-通过CSS选择器点击元素，内置导航
+Clicking on elements via CSS selectors, built-in navigation
 
-* `selector` *String* CSS选择器
+* `selector` *String* CSS selector
 
 ### page.type(selector, text, options)
 
-通过CSS选择器聚焦input，输入文本
+Focus input with CSS selector, input text
 
-* `selector` *String* CSS选择器
+* `selector` *String* CSS selector
 
-* `text` *String* 输入文本
+* `text` *String* input text
 
-* `options` *Object* 配置信息
+* `options` *Object* configuration information
 
-    * `delay` *Number* 输入间隔时间，ms
+    * `delay` *Number* input interval, ms
 
 ### page.send(method, params)
 
-发送包含session的原始chrome devtools协议消息
+Sends the original chrome devtools protocol message containing the session
 
-* `method` *String* 方法名
+* `method` *String* method name
 
-* `params` *Object* 参数
+* `params` *Object* parameters
 
 
 ### page.scroll(selector)
 
-滚动至指定元素可视区域，会尽量沿Y轴居中
+Scrolls to the visible area of the specified element, trying to centre it along the y-axis
 
-* `selector` *String* CSS选择器
+* `selector` *String* CSS selector
 
 ### page.focus(selector)
 
-通过CSS选择器聚焦元素
+Focuses the element with a CSS selector
 
-* `selector` *String* CSS选择器
+* `selector` *String* CSS selector
 
 ### page.getBoundingRect(selector)
 
-通过CSS选择器获取元素坐标，值由getBoundingClientRect()函数获取
+Get the coordinates of the element by CSS selector, the value is obtained by the getBoundingClientRect() function
 
-* `selector` *String* CSS选择器
+* `selector` *String* CSS selector
 
 ### page.close()
 
-关闭标签
+Closes the tag
 
 ### page.prev()
 
-导航到上一个历史标签页
+Navigate to the previous history tab
 
 ### page.next()
 
-导航到下一个历史标签页
+Navigate to the next history tab
 
 
 ### class: Element
 
-用于实现可追溯的远程elment，避免代码重复提交和重复执行。
+Used to implement traceable remote elment and avoid duplicate code commits and repeated executions.
 
-对于大的对象或DOM对象，直接返回它们并不现实，因此需要一种远程操作的增量机制。devtools通过保存注入函数的执行结果并返回引用id，实现状态追踪，这样就可以在已有远程结果基于上做增量操作。
+For large objects or DOM objects, it is not practical to return them directly, so an incremental mechanism for remote operations is needed. devtools implements state tracking by saving the execution results of the injected function and returning the reference id, so that incremental operations can be done on top of the existing remote results.
 
 ### elment.$(selector)
 
 * `selector` *String* 
 
-* `return` *Object* Elment实例
+* `return` *Object* Elment instance
 
-选择单个元素，并生成远程引用对象
+Selects a single element and generates a remote reference object
 
 ### elment.$$(selector)
 
 * `selector` *String* 
 
-* `return` *Array* 多个Elment实例数组
+* `return` *Array* Array of multiple Elment instances
 
-选择多个元素，并生成远程引用对象
+Selects multiple elements and generates a remote reference object
 
 ### elment.get(name)
 
 * `name` *String* 
 
-获取elment中指定的属性值
+Gets the value of the property specified in the elment
 
 ### elment.set(name, value)
 
-* `name` *String* 属性名称
+* `name` *String* The name of the attribute
 
-* `value` * 属性值
+* `value` * Attribute value
 
-设置elment中指定的属性值
+Set the value of the attribute specified in elment
 
 ### elment.value(value)
 
-* `value` *String* 赋值
+* `value` *String* Assign a value
 
-获取或设置值，仅适用于表单元素
+Gets or sets a value, applies to form elements only
 
 ### elment.focus()
 
-聚焦元素
+Focuses the element
 
 ### elment.getBoundingRect()
 
-通过getBoundingClientRect函数获取元素大小、坐标信息
+Get the size and coordinates of the element with the getBoundingClientRect function
 
 ### elment.scrollIntoView()
 
-于将指定元素快速切换至可视区域
+Quickly switch the specified element to the viewable area
 
 ## class: Mouse
 
 ### mouse.click(x, y, options)
 
-新增模拟鼠标移动轨迹，原click可能出于效率考虑，只会触发一次mousemoved
+Adds simulated mouse trajectory, the original click may only trigger a mousemoved once for efficiency reasons
 
-click操作中已经包含了move，多数情况下不再需要单独模拟move操作，除非只移动鼠标而不需要点击
+The click action already includes the move action, so in most cases there is no need to simulate the move action separately, unless you only move the mouse and don't need to click
 
 * `options` *Object*
 
-   * `steps` *Number* mousemoved事件的触发次数，默认20
+   * `steps` *Number* number of times the mousemoved event is triggered, default 20
 
 
 ### mouse.move(x, y, options)
 
-将steps默认值改为20，原值为1，即只触发一次。移动距离相同时，触发次数越少，对应的移动速度越快
+Change the default value of steps to 20, the original value is 1, i.e. it is only triggered once. If the distance travelled is the same, the lower the number of triggers, the faster the corresponding movement
 
-* `options` *Object* 选项
+* `options` *Object* options
 
-   * `steps` *Number* 触发mousemoved事件的次数，默认值20
+   * `steps` *Number* The number of times the mousemoved event is triggered, default value is 20
 
 
 ### mouse.scroll(x, y, step)
 
-滚动至指定坐标，目前仅支持纵向滚动
+Scroll to specified coordinates, currently only supports vertical scrolling
 
-* `x` *Number* 横向坐标，0
+* `x` *Number* horizontal coordinates, 0
 
-* `y` *Number* 纵向坐标
+* `y` *Number* vertical coordinate
 
-* `step` *Number* 步长
+* `step` *Number* step length
 
 
 
@@ -407,33 +406,33 @@ click操作中已经包含了move，多数情况下不再需要单独模拟move�
 
 ### touch.slide({start, end, steps})
 
-模拟touch单点滑动手势
+Simulates the touch single swipe gesture
 
-* `start` *Object* 起始坐标
+* `start` *Object* Start coordinate
 
-   * `x` *Number* touchstart x坐标
+   * `x` *Number* touchstart x coordinate
 
-   * `y` *Number* touchstart y坐标
+   * `y` *Number* touchstart y coordinate
 
-* `end` *Object* 结束坐标
+* `end` *Object* end coordinate
 
-   * `x` *Number* touchend x坐标
+   * `x` *Number* touchend x coordinate
 
-   * `y` *Number* touchend y坐标
+   * `y` *Number* touchend y coordinate
 
-* `steps` *Number* touchmove的触发次数
+* `steps` *Number* the number of times touchmove has been triggered
 
-* `delay` *Number* 触点释放前的停留时间，用于滑动惯性控制
+* `delay` *Number* dwell time before touch release, used for slide inertia control
 
 
 ### touch.scroll(x, y, options)
 
-通过touch滚动页面至指定的可视坐标
+Scrolls the page by touch to the specified visual coordinates
 
-* `x` *Number* 目标x坐标
+* `x` *Number* target x coordinate
 
-* `y` *Number* 目标y坐标
+* `y` *Number* target y coordinate
 
 * `options` *Object*
 
-   * `interval` *Number* 连续滑动的时间间隔，默认2000，单位ms
+   * `interval` *Number* the interval between successive swipes, default 2000, in ms
