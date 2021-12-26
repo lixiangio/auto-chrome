@@ -1,172 +1,162 @@
 # auto-chrome
 
-A highly emulated user behaviour simulator using Node.js to automate control of Chrome or Chromium, based on the [chrome devtools](https://chromedevtools.github.io/devtools-protocol/) protocol.
+Automated control of Chrome or Chromium using Node.js, a highly emulated user behavior simulator based on the [chrome devtools](https://chromedevtools.github.io/devtools-protocol/) protocol.
 
-Borrowed from puppeteer, the rewrite was chosen because in practice puppeteer has various strange bugs that cause threads to constantly block and are difficult to fix, and some implementation details are not as expected.
+Borrowed from puppeteer, the rewrite was chosen because puppeteer has various strange bugs in practice, causing threads to constantly block and be difficult to fix, and some implementation details are not as expected.
 
-The chrome devtools protocol api is too primitive and not developer friendly. the puppeteer api is feature rich but still too cumbersome to use and has a few bugs that are hard to get around.
+The chrome devtools protocol api is too primitive and not developer-friendly. puppeteer api is feature-rich, but still too cumbersome and has some bugs that are hard to avoid.
 
-auto-chrome is designed for simplicity and ease of use, with a focus on simplifying common application scenarios and customisation through extensions.
-
+auto-chrome is designed with simplicity and ease of use in mind, focusing on simplifying common application scenarios and meeting customization needs through extensions.
 
 ## Features
 
-* Supports autofocus, which automatically switches between tabs based on the currently active tabs, using chrome.page to get the currently active tabs. This avoids the hassle of switching between multiple tabs in practice, and reduces the confusion caused by manual tab switching.
+- Auto-chrome supports auto-focus, which automatically switches tabs based on the currently active tabs, and gets the currently active tabs via chrome.page. This avoids the pain of switching between multiple tabs in practice and reduces the confusion caused by manual tab switching.
 
-* Supports active navigation monitoring to prevent users from inadvertently failing to clearly define navigation actions that could lead to confusing operations.
+- Support active navigation monitoring, avoiding the user's negligent failure to clearly define the navigation behavior, resulting in confusing operations.
 
-* Support for automatic release of message queue wait timeout. Due to various uncontrollable factors, devtools does not guarantee 100% response to all messages sent, and without a timeout mechanism messages will be in a constant wait state, resulting in tasks not being able to continue.
+- Supports automatic release of message queue waiting timeout. Due to various uncontrollable factors, devtools does not guarantee 100% response to all messages sent, and messages will be in a continuous waiting state without a timeout mechanism, making it impossible for tasks to continue to be executed
 
-* Unbind mouse, keyboard and touch input devices to pages to avoid frequent switching of devices between pages
+- Unbind mouse, keyboard and touch input devices from the page, avoiding frequent switching between multiple pages
 
-* Highly emulated input, simulating mouse trajectory and Touch gestures
+- Support high simulation input, simulating mouse trajectory and Touch gestures
 
-* Simplified error handling mechanism that allows tasks to continue running even if there is an exception, ensuring that threads do not persistently block as much as possible
+- Simplified error handling mechanism, even if the task is abnormal, it can still continue to run, so as far as possible to ensure that threads do not persistently block
 
-* Support for GPS positioning
+- Support GPS location
 
 ## Install
 
-```
+npm install auto-chrome
 npm install auto-chrome
 ```
 
-
 ## chromium installation
 
-Due to network environment factors, auto-chrome does not install chromium directly as an npm dependency like puppeteer does. Therefore you need to download chromium manually and specify the installation path in the launch.executablePath configuration item.
+Due to the network environment, auto-chrome does not install chromium directly as an npm dependency like puppeteer does. So you need to download chromium manually and specify the installation path in the launch.executablePath configuration item.
 
 Recommended source: https://npm.taobao.org/mirrors/chromium-browser-snapshots/
 
-
-
 ## chrome devtools terminology
 
-* `Target` represents a target object in the browser, which can be one of types browser, page, iframe, or other. When the type is page, the targetId corresponds to the frame id of the main frame.
+- `Target` represents a target object in the browser, which can be one of the browser, page, iframe, or other types. When type is page, targetId corresponds to the frame id of the main frame.
 
-* ` Session` The session mechanism is used to create multiple sessions, either by binding a separate session for each Target or by having multiple Targets share the same session.
+- `Session` session mechanism is used to create multiple sessions, you can bind a separate session for each Target, or you can let multiple Targets share the same session.
 
-* `Page` browser tab, Chrome allows multiple Pages to be open, but only one Page is always active.
+- `Page` browser tab, Chrome allows multiple Pages to be opened, but only one Page is always active.
 
-* `Runtime` JavaScript runtime, used to inject JS code into a web page to enable manipulation of the DOM.
+- ` Runtime` JavaScript runtime, used to inject JS code into a web page to manipulate the DOM.
 
-* `Frame` The frame in a web page, the main Frame is allowed to contain multiple sub-Frames.
+- `Frame` The frame in a web page, the main Frame is allowed to contain multiple child frames.
 
-* `Context` The context in which the JavaScript is run. As a page may contain Frames, each Frame has a separate runtime, so a unique contextId needs to be generated to distinguish between them.
-
+- `Context` The context in which the JavaScript runs. Since a page may contain Frames, each Frame has a separate runtime, so a unique contextId needs to be generated to distinguish between them.
 
 ## Caution
 
-The 301 redirects to a new url, triggering multiple context switches in succession, resulting in contextual misalignment. 301 is difficult to detect and difficult to pre-determine, and extra care should be taken when debugging.
+The 301 redirects to a new url and triggers multiple context switches in a row, resulting in a context mismatch. 301 is hard to detect and difficult to predict, so extra care should be taken when debugging.
 
-## Page Navigation
+## Page navigation
 
-Browser navigation events can be classified as either predictable or unpredictable, and as there are so many ways to trigger navigation, unknown navigation events can be triggered by mouse, keyboard, or JS scripting methods. If navigation toggles are not timed correctly, this can result in a buggy contextual message.
+Browser navigation events can be divided into two kinds of predictable and unpredictable, because the navigation is triggered in many ways, through the mouse, keyboard, JS script method may trigger unknown navigation events. If the navigation switch is not timed correctly, it can create a bug of misplaced contextual messages.
 
 ### Predictable navigation
 
-For explicit operations such as chrome.newPage() and page.goto(), which explicitly include navigation behaviour, autoChrome wraps them internally and does not require additional processing when using them.
+For explicit operations like chrome.newPage() and page.goto(), which explicitly include navigation behavior, autoChrome wraps them internally and requires no additional processing when using them.
 
 ### Unpredictable navigation
 
-* Navigation may refresh the current tab and may create new tabs
+- Navigation may refresh the current tab or create a new tab
 
-* Unpredictable navigation behaviour via JS triggered jump links
+- Unpredictable navigation behavior of jump links triggered by JS
 
-* One or more 301 redirects after clicking on a link
+- One or more 301 redirects after clicking a link
 
-* Uncertainty of redirects due to browser 301 caching
+- Uncertainty of redirects due to browser 301 caching
 
-In the above case, it is not possible to predict exactly whether an action will trigger a navigation event. autoChrome implements automatic navigation by means of cyclic detection, which has the disadvantage of not being very time-efficient and has limited application scenarios.
+In the above case, it is impossible to accurately predict whether an action will trigger a navigation event. autoChrome implements automatic navigation by means of round-robin detection, which has the disadvantage of not being very time-efficient and has limited application scenarios.
 
 ```js
-// Waiting for the navigation keyboard example code
-await Promise.all([
-    chrome.keyboard.press("Enter"),
-    chrome.autoNav()
-])
+// await navigation keyboard sample code
+await Promise.all([chrome.keyboard.press("Enter"), chrome.autoNav()]);
 
 // Mouse example
-await Promise.all([
-    page.click("#input"),
-    chrome.autoNav()
-])
+await Promise.all([page.click("#input"), chrome.autoNav()]);
 ```
 
 ### High split screen resolution
 
-If your chrome is running in a high split screen device, there may be a serious bug with touch events being misaligned, in which case try using "--force-device-scale-factor=" to adjust the scaling.
+If your chrome is running on a high split-screen device, you may get a serious bug with touch events being misaligned, in which case try using "--force-device-scale-factor=" to adjust the scaling.
 
 ## autoChrome(options)
 
-* `options` *Object* Global instance configuration option with lower priority than page
+- `options` _Object_ Global instance configuration options, with lower priority than page
 
-    * `args[ars, ...]` *Array* Chrome Launch Parameters Array
+  - ` args[ars, ...] ` _Array_ Array of Chrome startup parameters
 
-        * `ars` *String* Chrome Launch Parameters
+    - `ars` _String_ Chrome startup parameters
 
-    * `executablePath` *String* Chrome program execution path
+  - `executablePath` _String_ Chrome program execution path
 
-    * `userDataDir` *String* User profile paths, definition of separate Chrome instances, support for parallelism in cluster mode
+  - `userDataDir` _String_ Path to user profile, defines separate Chrome instances, supports parallelism in cluster mode
 
-    * `emulate` *Object* device emulation, this configuration does not work well for the initial tag, probably because the initial targetCreated event is not captured.
+  - `emulate` _Object_ Device emulation, this configuration is less effective for initial tags, probably because the initial targetCreated event is not caught.
 
-        * `viewport` *Object* 
+    - `viewport` _Object_
 
-            * `mobile` *Boolean* Mobile device, default false
+      - `mobile` _Boolean_ Mobile device, default false
 
-            * `width` *Number* the width of the screen, the default adaptive screen width
+      - `width` _Number_ Screen width, default adaptive screen width
 
-            * `height` *Number* the height of the screen, adapts to the screen height by default
+      - `height` _Number_ Screen height, default adaptive screen height
 
-        * `geolocation` *Object* geolocation, uses Google Maps coordinates
+    - `geolocation` _Object_ geolocation, use Google Maps coordinates
 
-            * `longitude` *Number* longitude
+      - `longitude` _Number_ Longitude
 
-            * `latitude` *Number* latitude
+      - `latitude` _Number_ Latitude
 
-            * `accuracy` *Number* precision
+      - `accuracy` _Number_ Accuracy
 
-     * `headless` *Boolean* Hide execution mode, default false
+  - `headless` _Boolean_ Hide execution mode, default false
 
-     * `devtools` *Boolean* Automatically opens devtools for each page, default false
+  - `devtools` _Boolean_ Automatically turn on devtools for each page, default false
 
-     * `timeOut` *Number* message response timeout, default 150000
+  - `timeOut` _Number_ Message response timeout, default 150000
 
-     * `ignoreHTTPSErrors` *Boolean* Ignore https errors, default false
+  - `ignoreHTTPSErrors` _Boolean_ Ignore https errors, default false
 
-    * `disableDownload` *Boolean* disables downloading of files, default false
+  - `disableDownload` _Boolean_ Disable downloading of files, default false
 
-     * `loadTimeout` *Number* Maximum time to wait for a page to load for auto-navigation, in ms
+  - `loadTimeout` _Number_ Maximum dwell time for auto-navigation to wait for a page to load, in ms
 
-* `return` *Chrome* Chrome Class Example
+- `return` _Chrome_ Chrome class instance
 
 ## class: Chrome
 
 ### chrome.clicker
-mouse, touch event example, referenced from the currently active state page.clicker
+
+mouse, touch event instance, referenced from the currently active state page.clicker
 
 ### chrome.keyboard
 
-Keyboard event instance, referenced from the currently active page.keyboard
+Keyboard event instance, referenced from the currently active state page.keyboard
 
 ### chrome.pages
 
 Map object containing all open pages
 
-### chrome.pages
+### chrome.page
 
-The page in the currently active state
+The page that is currently active
 
 ### chrome.newPage(url)
 
-* `url` *String* the address of the page to open, by default it opens a blank page
+- `url` _String_ opens the page address, by default it opens a blank page
 
 ### chrome.closePageById(pageId)
 
 Closes the specified tab by pageId
 
-* `pageId` *String* the id of the page to delete
+- `pageId` _String_ The id of the page to delete
 
 ### chrome.createBrowserContext()
 
@@ -176,27 +166,25 @@ Creates a standalone browser environment that can only be run in incognito mode.
 
 Sends the original chrome devtools protocol message
 
-* `method` *String* method name
+- `method` _String_ method name
 
-* `params` *Object* parameters
+- `params` _Object_ parameters
 
 ### chrome.autoNav(time)
 
-* `time` *Number* wait timeout time
+- `time` _Number_ Wait timeout time
 
-Loop monitoring, autoNav
-
+Cyclic monitoring, automatic navigation
 
 ### chrome.close()
 
-Closes the browser
+Close the browser
 
-
-### class: Page
+## class: Page
 
 ### page.clicker
 
-mouse, touch event instances, use touch instance when autoChrome(options) config item emulate.viewport.mobile is true, otherwise use mouse instance
+mouse, touch event instances, use touch instance when autoChrome(options) configuration item emulate.viewport.mobile is true, otherwise use mouse instance
 
 ### page.keyboard
 
@@ -204,23 +192,23 @@ Keyboard instance
 
 ### page.emulate(options)
 
-Device emulation, calling this method directly may lead to confusion, it should normally be executed by the event driver at the creation of the label page.emulate(), calling it manually will suffer from delayed overwriting.
+Device emulation, direct calls to this method may cause confusion, the normal event-driven execution of page.emulate() should be done at the creation of the label, manual calls will have a delayed override problem.
 
-* `options` *Object* options
+- `options` _Object_ options
 
-    * `mobile` *Boolean* mobile device
+  - `mobile` _Boolean_ Mobile device
 
-    * `width` *Number* screen width
+  - `width` _Number_ screen width
 
-    * `width` *Number* screen height
+  - `width` _Number_ screen height
 
-    * `geolocation` *Object* geolocation
+  - `geolocation` _Object_ geolocation
 
-        * `longitude` *Number* longitude
+    - `longitude` _Number_ Longitude
 
-        * `latitude` *Number* latitude
+    - `latitude` _Number_ Latitude
 
-        * `accuracy` *Number* precision
+    - `accuracy` _Number_ precision
 
 ### page.goto(url)
 
@@ -228,82 +216,81 @@ Open a new page inside a tab
 
 ### page.run(pageFunction, ... .arg)
 
-Injects a js function into the page and gets the return value after execution
+Inject a js function into the page and get the return value after execution
 
-* `pageFunction` *Function* injects a function
+- `pageFunction` _Function_ injects the function
 
-* `arg` * serializable arguments, no function support
+- `arg` \* serializable arguments, no function support
 
-* `return` *Object* information about the remote resource, [RemoteObject](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#type-RemoteObject)
+- `return` _Object_ Information about the remote resource, [RemoteObject](https://chromedevtools.github.io/devtools-protocol/tot/Runtime#type-RemoteObject)
 
 ### page.$(selector)
 
-Selects a single element
+Select a single element
 
-* `selector` *String* CSS selector
+- `selector` _String_ CSS selector
 
-* `return` *Object* single Elment instance
+- `return` _Object_ Single Elment Instance
 
 ### page.$$(selector)
 
 Selects multiple elements
 
-* `selector` *String* CSS selector
+- `selector` _String_ CSS selector
 
-* `return` *Array* array of multiple Elment instances
+- `return` _Array_ Array of multiple Elment instances
 
 ### page.click(selector)
 
-Click on an element via CSS selector
+Click on an element with a CSS selector
 
 ### page.clickNav(selector)
 
-Clicking on elements via CSS selectors, built-in navigation
+Clicking on an element via CSS selector, built-in navigation
 
-* `selector` *String* CSS selector
+- `selector` _String_ CSS selector
 
 ### page.type(selector, text, options)
 
 Focus input with CSS selector, input text
 
-* `selector` *String* CSS selector
+- `selector` _String_ CSS selector
 
-* `text` *String* input text
+- `text` _String_ input text
 
-* `options` *Object* configuration information
+- `options` _Object_ configuration information
 
-    * `delay` *Number* input interval, ms
+  - `delay` _Number_ input interval, ms
 
 ### page.send(method, params)
 
-Sends the original chrome devtools protocol message containing the session
+Send the original chrome devtools protocol message containing the session
 
-* `method` *String* method name
+- `method` _String_ method name
 
-* `params` *Object* parameters
-
+- `params` _Object_ parameters
 
 ### page.scroll(selector)
 
-Scrolls to the visible area of the specified element, trying to centre it along the y-axis
+Scrolls to the viewable area of the specified element, trying to center it along the Y-axis
 
-* `selector` *String* CSS selector
+- `selector` _String_ CSS selector
 
 ### page.focus(selector)
 
 Focuses the element with a CSS selector
 
-* `selector` *String* CSS selector
+- `selector` _String_ CSS selector
 
 ### page.getBoundingRect(selector)
 
-Get the coordinates of the element by CSS selector, the value is obtained by the getBoundingClientRect() function
+Get the element coordinates by CSS selector, the value is obtained by the getBoundingClientRect() function
 
-* `selector` *String* CSS selector
+- `selector` _String_ CSS selector
 
 ### page.close()
 
-Closes the tag
+Close the tag
 
 ### page.prev()
 
@@ -313,56 +300,55 @@ Navigate to the previous history tab
 
 Navigate to the next history tab
 
-
 ### class: Element
 
-Used to implement traceable remote elment and avoid duplicate code commits and repeated executions.
+Used to implement traceable remote elment to avoid duplicate code commits and repeated executions.
 
-For large objects or DOM objects, it is not practical to return them directly, so an incremental mechanism for remote operations is needed. devtools implements state tracking by saving the execution results of the injected function and returning the reference id, so that incremental operations can be done on top of the existing remote results.
+For large objects or DOM objects, it is not practical to return them directly, so an incremental mechanism for remote operations is needed. devtools implements state tracking by saving the execution results of injected functions and returning the reference id, so that incremental operations can be done on top of existing remote results.
 
 ### elment.$(selector)
 
-* `selector` *String* 
+- `selector` _String_
 
-* `return` *Object* Elment instance
+- `return` _Object_ Elment Instance
 
 Selects a single element and generates a remote reference object
 
 ### elment.$$(selector)
 
-* `selector` *String* 
+- `selector` _String_
 
-* `return` *Array* Array of multiple Elment instances
+- `return` _Array_ Array of multiple Elment instances
 
 Selects multiple elements and generates a remote reference object
 
 ### elment.get(name)
 
-* `name` *String* 
+- `name` _String_
 
-Gets the value of the property specified in the elment
+Get the value of the property specified in elment
 
 ### elment.set(name, value)
 
-* `name` *String* The name of the attribute
+- `name` _String_ Attribute name
 
-* `value` * Attribute value
+- `value` \* property value
 
-Set the value of the attribute specified in elment
+Set the value of the attribute specified in the elment
 
 ### elment.value(value)
 
-* `value` *String* Assign a value
+- `value` _String_ Assignment
 
-Gets or sets a value, applies to form elements only
+Gets or sets the value, only for form elements
 
 ### elment.focus()
 
-Focuses the element
+Focus the element
 
 ### elment.getBoundingRect()
 
-Get the size and coordinates of the element with the getBoundingClientRect function
+Get the element size and coordinates with the getBoundingClientRect function
 
 ### elment.scrollIntoView()
 
@@ -372,67 +358,65 @@ Quickly switch the specified element to the viewable area
 
 ### mouse.click(x, y, options)
 
-Adds simulated mouse trajectory, the original click may only trigger a mousemoved once for efficiency reasons
+Add a new mousemoved track simulation, the original click may only trigger once for efficiency reasons
 
-The click action already includes the move action, so in most cases there is no need to simulate the move action separately, unless you only move the mouse and don't need to click
+The click operation already includes move, so in most cases it is no longer necessary to simulate a separate move operation, unless you only move the mouse and do not need to click
 
-* `options` *Object*
+- `options` _Object_
 
-   * `steps` *Number* number of times the mousemoved event is triggered, default 20
-
+  - `steps` _Number_ The number of times the mousemoved event is triggered, default 20
 
 ### mouse.move(x, y, options)
 
-Change the default value of steps to 20, the original value is 1, i.e. it is only triggered once. If the distance travelled is the same, the lower the number of triggers, the faster the corresponding movement
+Change the default value of steps to 20, the original value is 1, i.e. only triggered once. If the move distance is the same, the lower the number of triggers, the faster the corresponding move speed
 
-* `options` *Object* options
+- `options` _Object_ options
 
-   * `steps` *Number* The number of times the mousemoved event is triggered, default value is 20
-
+  - `steps` _Number_ The number of times the mousemoved event is triggered, the default value is 20
 
 ### mouse.scroll(x, y, step)
 
 Scroll to specified coordinates, currently only supports vertical scrolling
 
-* `x` *Number* horizontal coordinates, 0
+- `x` _Number_ horizontal coordinate, 0
 
-* `y` *Number* vertical coordinate
+- `y` _Number_ vertical coordinate
 
-* `step` *Number* step length
-
-
+- `step` _Number_ step length
 
 ## class: Touch
 
 ### touch.slide({start, end, steps})
 
-Simulates the touch single swipe gesture
+Simulate touch single swipe gesture
 
-* `start` *Object* Start coordinate
+- `start` _Object_ Start coordinates
 
-   * `x` *Number* touchstart x coordinate
+  - `x` _Number_ touchstart x-coordinate
 
-   * `y` *Number* touchstart y coordinate
+  - `y` _Number_ touchstart y coordinate
 
-* `end` *Object* end coordinate
+- `end` _Object_ end coordinates
 
-   * `x` *Number* touchend x coordinate
+  - `x` _Number_ touchend x coordinate
 
-   * `y` *Number* touchend y coordinate
+  - `y` _Number_ touchend y coordinate
 
-* `steps` *Number* the number of times touchmove has been triggered
+- `steps` _Number_ number of touchmove triggers
 
-* `delay` *Number* dwell time before touch release, used for slide inertia control
-
+- `delay` _Number_ dwell time before touch release, used for slide inertia control
 
 ### touch.scroll(x, y, options)
 
-Scrolls the page by touch to the specified visual coordinates
+Scrolls the page to the specified visual coordinates by touch
 
-* `x` *Number* target x coordinate
+- `x` _Number_ Target x coordinate
 
-* `y` *Number* target y coordinate
+- `y` _Number_ target y-coordinate
 
-* `options` *Object*
+- `options` _Object_
 
-   * `interval` *Number* the interval between successive swipes, default 2000, in ms
+  - `interval` _Number_ The interval between successive swipes, default 2000, in ms
+
+Translated with www.DeepL.com/Translator (free version)
+
