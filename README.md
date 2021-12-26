@@ -26,7 +26,7 @@ auto-chrome is designed with simplicity and ease of use in mind, focusing on sim
 
 ## Install
 
-npm install auto-chrome
+```
 npm install auto-chrome
 ```
 
