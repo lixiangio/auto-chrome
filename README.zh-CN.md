@@ -1,6 +1,6 @@
 # auto-chrome
 
-使用 Node.js 自动化控制 Chrome 或 Chromium，基于[chrome devtools](https://chromedevtools.github.io/devtools-protocol/)协议的高仿真用户行为模拟器。
+使用 Node.js 自动化控制 Chrome 或 Chromium，基于 [chrome devtools](https://chromedevtools.github.io/devtools-protocol/) 协议的高仿真用户行为模拟器。
 
 借鉴于 puppeteer，选择重写是因为在实际应用中 puppeteer 存在各种奇怪的 bug，导致线程持续阻塞且难以被修复，一些实现细节也不符合预期。
 
